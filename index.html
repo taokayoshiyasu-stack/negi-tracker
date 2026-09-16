@@ -266,6 +266,43 @@ textarea{padding:10px 12px;line-height:1.65;width:100%;resize:vertical;min-heigh
   .ev{min-width:14px;height:14px;font-size:9.5px}
   .cal-nav h2{min-width:6.5em;font-size:17px}
 }
+/* ---------- 病害虫センサー ---------- */
+:root{--z0:#7fb38f;--z1:#e0a42a;--z2:#d0542f;--zempty:#ebe6d3;--zrain:#2f6fc0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--z0:#5fa574;--z1:#e8b440;--z2:#ec7a5a;--zempty:#34311f;--zrain:#6aa2ec}}
+:root[data-theme="dark"]{--z0:#5fa574;--z1:#e8b440;--z2:#ec7a5a;--zempty:#34311f;--zrain:#6aa2ec}
+.zstrip{display:grid;grid-template-columns:84px repeat(14,minmax(34px,1fr));gap:3px;align-items:center;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:560px}
+.zstrip .lab{font-weight:700;color:var(--ink-2);font-size:12px}
+.zstrip span{text-align:center}.zstrip .lab{text-align:left}
+.zstrip .c{border-radius:5px;padding:3px 0;background:var(--raise);border:1px solid var(--rule)}
+.zstrip .c.rain{background:color-mix(in srgb,var(--zrain) 22%,transparent);color:var(--ink);border-color:transparent}
+.dz-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.dz-grid{grid-template-columns:1fr}}
+.dz{background:var(--raise);border:1px solid var(--rule);border-radius:14px;padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.dz.lv2{border-color:var(--z2);box-shadow:inset 4px 0 0 var(--z2)}
+.dz.lv1{box-shadow:inset 4px 0 0 var(--z1)}
+.dz .top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.dz .name{font-weight:700;font-size:17px}
+.zp{font-size:12.5px;font-weight:700;padding:2px 11px;border-radius:999px;white-space:nowrap}
+.zp.l0{background:var(--indigo-soft);color:var(--indigo-ink)} .zp.l1{background:color-mix(in srgb,var(--z1) 22%,transparent);color:var(--gold-ink)} .zp.l2{background:color-mix(in srgb,var(--z2) 18%,transparent);color:var(--z2)}
+.dz .cond{display:flex;flex-direction:column;gap:4px}
+.dz .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13px}
+.dz .row b{font-size:18px;font-variant-numeric:tabular-nums}
+.dz .row b small{font-size:12px;color:var(--ink-2);margin-left:1px}
+.sbar{display:grid;gap:3px;height:26px}
+.sbar .s{border-radius:4px;background:var(--zempty)}
+.sbar .s.f0{background:var(--z0)} .sbar .s.f1{background:var(--z1)} .sbar .s.f2{background:var(--z2)}
+.sbar .s.now{animation:zpulse 1.6s ease-in-out infinite}
+@keyframes zpulse{50%{filter:brightness(1.18)}}
+@media (prefers-reduced-motion:reduce){.sbar .s.now{animation:none}}
+.sticks{position:relative;height:16px;font-size:10.5px;color:var(--muted)}
+.sticks span{position:absolute;transform:translateX(-50%);white-space:nowrap}
+.sticks span::before{content:"";position:absolute;left:50%;top:-5px;width:2px;height:6px;background:currentColor}
+.sticks .t1{color:var(--gold-ink);font-weight:700} .sticks .t2{color:var(--z2);font-weight:700}
+.ztotal{display:flex;align-items:center;gap:10px;border-top:1px dashed var(--rule-strong);padding-top:8px;font-size:13px}
+.ztotal .meter{flex:1;height:10px;border-radius:999px;background:var(--zempty);overflow:hidden;position:relative}
+.ztotal .meter i{position:absolute;inset:0 auto 0 0;border-radius:999px}
+.dz .act{font-size:13px;color:var(--ink-2)}
+.rdot.high{background:var(--z2)!important} .rdot.mid{background:var(--z1)!important}
 /* ---------- charts ---------- */
 .chart-box{position:relative;width:100%}
 .chart-box svg{display:block;width:100%;overflow:visible;touch-action:pan-y}
@@ -489,9 +526,11 @@ fieldset.block legend{font-weight:700;font-size:14px;padding:0 6px;color:var(--i
     </div>
 
     <div class="card">
-      <div class="card-head"><h2>病害虫・気象リスク</h2><span class="hint" id="riskSpan">直近7日の相馬アメダスから判定</span></div>
-      <div id="riskList" class="risk-list"></div>
-      <p class="hint" style="margin:10px 0 0">気温・降水・日照からの簡易判定です。ネギ通信の発生予察情報や圃場の見回りと合わせて判断してください。</p>
+      <div class="card-head"><h2>病害虫センサー</h2><span class="hint" id="riskSpan">相馬アメダスから判定（1マス＝1日）</span></div>
+      <div style="overflow-x:auto;margin-bottom:12px"><div class="zstrip" id="riskStrip"></div></div>
+      <div class="legend" style="margin-bottom:10px"><span><i style="background:var(--z0);height:10px;border-radius:3px"></i>たまりはじめ</span><span><i style="background:var(--z1);height:10px;border-radius:3px"></i>注意ライン超え</span><span><i style="background:var(--z2);height:10px;border-radius:3px"></i>発生しやすい</span><span><i style="background:var(--zempty);height:10px;border-radius:3px"></i>まだ</span></div>
+      <div id="riskList" class="dz-grid"></div>
+      <p class="hint" style="margin:10px 0 0">条件を満たした日が続くほど、バーが右へ伸びます。日数・温度の区切りは仮の値です。ネギ通信の発生予察情報や圃場の見回りと合わせて判断してください。</p>
     </div>
 
     <div class="card">
@@ -526,7 +565,7 @@ fieldset.block legend{font-weight:700;font-size:14px;padding:0 6px;color:var(--i
       <div class="cal-sum" id="calSum"></div>
       <div class="cal-grid" id="calGrid" role="grid" aria-label="気象カレンダー"></div>
       <div class="legend" style="margin-top:10px">
-        <span><b class="ev ev-plant">定</b>定植</span><span><b class="ev ev-soil">寄</b>土寄せ（予測は点線）</span><span><b class="ev ev-harv">収</b>収穫開始</span><span><b class="ev ev-rep">記</b>作業記録</span><span><i class="rdot high"></i>病害リスク高</span><span><i class="rdot mid"></i>中</span>
+        <span><b class="ev ev-plant">定</b>定植</span><span><b class="ev ev-soil">寄</b>土寄せ（予測は点線）</span><span><b class="ev ev-harv">収</b>収穫開始</span><span><b class="ev ev-rep">記</b>作業記録</span><span><i class="rdot high"></i>発生しやすい病害虫あり</span><span><i class="rdot mid"></i>注意</span>
       </div>
       <p class="hint" style="margin:8px 0 0">日付を押すと、その日の詳しい値・作業・病害虫リスクを表示します。未来の日は平年の平均気温をうすく表示しています。</p>
     </div>
@@ -691,7 +730,7 @@ fieldset.block legend{font-weight:700;font-size:14px;padding:0 6px;color:var(--i
 
   <footer>
     <p><b>計算方法</b>　積算気温は、基準温度を引かずに日平均気温をそのまま足し上げています（定植日から）。生育ステージと土寄せ時期の区切りは、春まき秋冬どり（4月定植・8月〜翌2月収穫）を想定した予測用のモデル値です。収穫開始は「定植後の目安積算」または「止め土寄せ後の目安積算」で予測し、どちらも作付けグループごとに変更できます。実際の太さ・葉鞘の長さ・出荷規格を見て判断してください。</p>
-    <p><b>データ出典</b>　気象庁 過去の気象データ（相馬 アメダス、福島県 prec_no=36 / block_no=0285）。平年値は、7〜12月が相馬の2016〜2025年の同月同日平均、1〜6月が気象庁の平年値（1991〜2020年）。天気は降水量と日照時間からの推定です。病害虫リスクは一般的な発生しやすい気象条件に基づく目安です。</p>
+    <p><b>データ出典</b>　気象庁 過去の気象データ（相馬 アメダス、福島県 prec_no=36 / block_no=0285）。平年値は、7〜12月が相馬の2016〜2025年の同月同日平均、1〜6月が気象庁の平年値（1991〜2020年）。天気は降水量と日照時間からの推定です。病害虫センサーの日数・温度の区切りは、一般的な発生しやすい気象条件をもとにした仮の値です。</p>
   </footer>
 </div>
 
@@ -984,50 +1023,75 @@ function analyzePlot(p){
 }
 
 /* ================= 病害虫・気象リスク ================= */
+const rainyDay = x => (x.precip||0) >= 1;
+const DZ = [
+  {name:"さび病", act:"オレンジ色の斑点を見回り、発生前〜初期に予防散布",
+   conds:[{label:"適温の日が続く（平均10〜22℃）", f:x=>x.avg>=10&&x.avg<=22, kind:"run", t1:3, t2:5, max:10},
+          {label:"雨の日が続く（1mm以上）", f:rainyDay, kind:"run", t1:2, t2:4, max:7}]},
+  {name:"べと病", act:"雨の前に予防散布。畝間の排水を確保",
+   conds:[{label:"低めの気温の日が続く（平均10〜20℃）", f:x=>x.avg>=10&&x.avg<=20, kind:"run", t1:3, t2:5, max:10},
+          {label:"雨の日（直近7日のうち）", f:rainyDay, kind:"sum", win:7, t1:3, t2:5, max:7}]},
+  {name:"黒斑病・葉枯病", act:"古い葉の病斑を確認し、降雨前に散布",
+   conds:[{label:"暖かい日が続く（平均20℃以上）", f:x=>x.avg>=20, kind:"run", t1:5, t2:7, max:12},
+          {label:"雨の日が続く（1mm以上）", f:rainyDay, kind:"run", t1:2, t2:3, max:7}]},
+  {name:"軟腐病", act:"高温期の土寄せを控え、大雨後は速やかに排水",
+   conds:[{label:"暑い日（最高30℃以上・直近7日）", f:x=>x.max>=30, kind:"sum", win:7, t1:2, t2:4, max:7},
+          {label:"大雨の日（20mm以上・直近7日）", f:x=>(x.precip||0)>=20, kind:"sum", win:7, t1:1, t2:2, max:7}]},
+  {name:"ネギハモグリバエ", act:"白い線状の食害痕を確認し、発生初期に防除",
+   conds:[{label:"暖かい日が続く（平均20℃以上）", f:x=>x.avg>=20, kind:"run", t1:7, t2:10, max:14}]},
+  {name:"ネギアザミウマ", act:"カスリ状の食害を確認し、密度が上がる前に防除",
+   conds:[{label:"暑い日が続く（平均23℃以上）", f:x=>x.avg>=23, kind:"run", t1:5, t2:8, max:10},
+          {label:"雨の降らない日が続く", f:x=>!rainyDay(x), kind:"run", t1:3, t2:6, max:10}]}
+];
+function dzCount(days, c){
+  if(c.kind === "sum") return days.slice(-c.win).filter(x => x && c.f(x)).length;
+  let n = 0; for(let i=days.length-1; i>=0 && days[i] && c.f(days[i]); i--) n++; return n;
+}
 function riskAssess(endDate){
-  const end = endDate || S.lastObs; if(!end) return null;
-  const days = []; for(let i=6;i>=0;i--){ const r = S.byDate[addDays(end,-i)]; if(isValid(r)) days.push(r); }
-  if(days.length < 4) return null;
-  const avg = days.reduce((s,r)=>s+r.avg,0)/days.length;
-  const maxAvg = days.reduce((s,r)=>s+r.max,0)/days.length;
-  const rainDays = days.filter(r => (r.precip||0) >= 1).length;
-  const rainSum = days.reduce((s,r)=>s+(r.precip||0),0);
-  const heavy = days.filter(r => (r.precip||0) >= 20).length;
-  const hot = days.filter(r => r.max >= 30).length;
-  const sunAvg = days.filter(r=>r.sun!=null).reduce((s,r,_,a)=>s+r.sun/a.length,0);
-  const last3 = [0,1,2].reduce((s,i)=>{ const r=S.byDate[addDays(end,-i)]; return s + (r&&r.precip||0); },0);
-  const lv = (hi, mid) => hi ? "high" : mid ? "mid" : "low";
-  const hv = days.filter(r=>r.hum!=null);
-  const humAvg = hv.length ? hv.reduce((s,r)=>s+r.hum,0)/hv.length : null;
-  const W = "平均"+f1(avg)+"℃・雨の日"+rainDays+"日（計"+f1(rainSum)+"mm）"+(humAvg!=null?"・湿度"+Math.round(humAvg)+"%":"");
-  const list = [
-    {name:"さび病", level: lv(avg>=10&&avg<=22&&rainDays>=3, avg>=10&&avg<=22&&rainDays>=2), why:W+"。15〜20℃前後で雨が続くと多発", act:"オレンジ色の斑点を見回り、発生前〜初期に予防散布"},
-    {name:"べと病", level: lv(avg>=10&&avg<=20&&rainDays>=3&&sunAvg<4, avg>=10&&avg<=20&&(rainDays>=2||sunAvg<3)), why:W+"・日照"+f1(sunAvg)+"h。低めの気温と多湿で発生", act:"雨の前に予防散布。畝間の排水を確保"},
-    {name:"黒斑病・葉枯病", level: lv(avg>=20&&rainDays>=3, avg>=18&&rainDays>=2), why:W+"。高温多湿・長雨で増加", act:"古い葉の病斑を確認し、降雨前に散布"},
-    {name:"軟腐病", level: lv(hot>=1&&heavy>=1 || (avg>=25&&rainSum>=50), avg>=23&&rainDays>=2), why:"最高30℃以上 "+hot+"日・20mm以上の雨 "+heavy+"日。高温期の大雨・土寄せ後の傷口から感染", act:"高温期の土寄せを控え、大雨後は速やかに排水。予防に銅剤等"},
-    {name:"白絹病", level: lv(avg>=25&&rainDays>=3, avg>=24&&rainDays>=2), why:W+"。夏の高温多湿で株元に発生", act:"株元の白い菌糸を確認。発病株は早めに抜き取り"},
-    {name:"ネギアザミウマ", level: lv(avg>=23&&rainDays<=1, avg>=18&&rainDays<=2), why:W+"。高温・乾燥で急増", act:"葉のカスリ状の食害を確認し、密度が上がる前に防除"},
-    {name:"ネギハモグリバエ", level: lv(avg>=25, avg>=18), why:"平均"+f1(avg)+"℃。初夏〜秋の高温期に多い", act:"白い線状の食害痕を確認し、発生初期に防除"},
-    {name:"湿害・根傷み", level: lv(last3>=50, last3>=30 || rainSum>=80), why:"直近3日の雨 "+f1(last3)+"mm", act:"畝間・明渠の水はけを確認。過湿時の土寄せは避ける"},
-    {name:"高温障害", level: lv(maxAvg>=32, maxAvg>=30), why:"最高気温の平均 "+f1(maxAvg)+"℃", act:"日中の作業・土寄せを避け、乾燥時はかん水を検討"}
-  ];
-  const order = {high:0, mid:1, low:2};
-  list.sort((a,b) => order[a.level]-order[b.level]);
-  return {end, list, n:days.length};
+  const end = endDate || S.lastObs; if(!end || !isValid(S.byDate[end])) return null;
+  const days = []; for(let i=29;i>=0;i--){ const r = S.byDate[addDays(end,-i)]; days.push(isValid(r) ? r : null); }
+  const LV = ["low","mid","high"];
+  const list = DZ.map(z => {
+    const cs = z.conds.map(c => ({c, n: dzCount(days, c)}));
+    const ratio = Math.min(...cs.map(o => o.n / o.c.t2));
+    const lv = cs.every(o => o.n >= o.c.t2) ? 2 : cs.every(o => o.n >= o.c.t1) ? 1 : 0;
+    return {name:z.name, act:z.act, cs, ratio, level:LV[lv], lv, why: cs.map(o => o.c.label.replace(/（.*?）/,"")+" "+o.n+"日").join("・")};
+  }).sort((a,b) => b.lv - a.lv || b.ratio - a.ratio);
+  return {end, list, days};
+}
+function dzBar(c, n){
+  let cells = "";
+  for(let i=1;i<=c.max;i++){ let cls = "s"; if(i <= n) cls += i >= c.t2 ? " f2" : i >= c.t1 ? " f1" : " f0"; if(i === Math.min(n, c.max)) cls += " now"; cells += '<span class="'+cls+'"></span>'; }
+  const pos = v => ((v - .5) / c.max * 100) + "%";
+  return '<div class="sbar" style="grid-template-columns:repeat('+c.max+',1fr)" role="img" aria-label="'+esc(c.label)+' '+n+'日（注意'+c.t1+'日・発生'+c.t2+'日）">'+cells+'</div>' +
+    '<div class="sticks"><span class="t1" style="left:'+pos(c.t1)+'">注意 '+c.t1+'日</span><span class="t2" style="left:'+pos(c.t2)+'">発生 '+c.t2+'日</span></div>';
+}
+function dzCards(list){
+  const L = {low:["低","l0"], mid:["注意","l1"], high:["発生しやすい","l2"]};
+  return list.map(x => {
+    const pct = Math.min(100, Math.round(x.ratio*100)), col = x.lv === 2 ? "var(--z2)" : x.lv === 1 ? "var(--z1)" : "var(--z0)";
+    return '<article class="dz lv'+x.lv+'"><div class="top"><span class="name">'+esc(x.name)+'</span><span class="zp '+L[x.level][1]+'">'+L[x.level][0]+'</span></div>' +
+      x.cs.map(({c, n}) => '<div class="cond"><div class="row"><span>'+esc(c.label)+'</span><b>'+n+'<small>日</small></b></div>'+dzBar(c, n)+'</div>').join("") +
+      '<div class="ztotal"><span>発生しやすさ</span><div class="meter"><i style="width:'+pct+'%;background:'+col+'"></i></div><b>'+pct+'%</b></div>' +
+      (x.lv ? '<div class="act">対策：'+esc(x.act)+'</div>' : '') + '</article>';
+  }).join("");
 }
 function renderRisk(){
   const box = $("riskList"); if(!box) return;
   const r = riskAssess();
-  if(!r){ box.innerHTML = '<div class="empty">直近の気温データが揃うと表示します</div>'; $("mP").textContent="—"; $("mPs").textContent=""; return; }
-  $("riskSpan").textContent = md(addDays(r.end,-6))+"〜"+md(r.end)+"の相馬アメダスから判定";
-  const lab = {high:["高","crit"], mid:["中","warn"], low:["低","idle"]};
-  box.innerHTML = r.list.map(x => '<div class="risk '+x.level+'"><div class="top"><span class="t">'+esc(x.name)+'</span><span class="pill '+lab[x.level][1]+'">'+lab[x.level][0]+'</span></div><div class="why">'+esc(x.why)+'</div>'+(x.level!=="low"?'<div class="act">'+esc(x.act)+'</div>':'')+'</div>').join("");
+  if(!r){ box.innerHTML = '<div class="empty">直近の気温データが揃うと表示します</div>'; $("mP").textContent="—"; $("mPs").textContent=""; if($("riskStrip")) $("riskStrip").innerHTML=""; return; }
+  $("riskSpan").textContent = md(r.end)+"時点の相馬アメダス（1マス＝1日）";
+  const d14 = []; for(let i=13;i>=0;i--) d14.push(addDays(r.end,-i));
+  $("riskStrip").innerHTML = '<span class="lab">日付</span>' + d14.map(d => '<span>'+md(d)+'</span>').join("") +
+    '<span class="lab">平均気温</span>' + d14.map(d => { const x = S.byDate[d]; return '<span class="c">'+(isValid(x)?Math.round(x.avg):"–")+'</span>'; }).join("") +
+    '<span class="lab">雨 mm</span>' + d14.map(d => { const x = S.byDate[d]; return '<span class="c'+(isValid(x)&&rainyDay(x)?' rain':'')+'">'+(isValid(x)&&rainyDay(x)?Math.round(x.precip):"–")+'</span>'; }).join("");
+  box.innerHTML = dzCards(r.list);
   const hi = r.list.filter(x=>x.level==="high"), mid = r.list.filter(x=>x.level==="mid");
   const v = $("mP"); v.className = "value";
-  if(hi.length){ v.innerHTML = hi.length+'<small>件 高</small>'; v.classList.add("late"); }
-  else if(mid.length){ v.innerHTML = mid.length+'<small>件 中</small>'; }
+  if(hi.length){ v.innerHTML = hi.length+'<small>件 発生しやすい</small>'; v.classList.add("late"); }
+  else if(mid.length){ v.innerHTML = mid.length+'<small>件 注意</small>'; }
   else v.innerHTML = '<small>目立つリスクなし</small>';
-  $("mPs").textContent = hi.concat(mid).slice(0,3).map(x=>x.name).join("・") || "直近7日の気象から判定";
+  $("mPs").textContent = hi.concat(mid).slice(0,3).map(x=>x.name).join("・") || "直近の気象から判定";
 }
 
 /* ================= 描画: 共通 ================= */
@@ -1303,7 +1367,7 @@ function renderCalendar(a){
       body = '<div class="m" style="margin-top:2px">平年 '+f1(n)+'℃</div>';
     } else body = '<div class="m" style="color:var(--crit)">未取得</div>';
     let dot = "";
-    if(inMonth && ok){ const ra = riskAssess(d); const lv = ra ? (ra.list.some(x=>x.level==="high") ? "high" : ra.list.some(x=>x.level==="mid") ? "mid" : "") : ""; if(lv) dot = '<i class="rdot '+lv+'" title="病害リスク'+(lv==="high"?"高":"中")+'"></i>'; }
+    if(inMonth && ok){ const ra = riskAssess(d); const lv = ra ? (ra.list.some(x=>x.level==="high") ? "high" : ra.list.some(x=>x.level==="mid") ? "mid" : "") : ""; if(lv) dot = '<i class="rdot '+lv+'" title="病害虫センサー'+(lv==="high"?"発生しやすい":"注意")+'"></i>'; }
     const ev = inMonth ? calEvents(a, d) : [];
     const bar = ok ? '<span class="bar" style="background:'+tempTint(r.avg)+'"></span>' : '';
     const label = jd(d)+"（"+wd(d)+"）"+(ok ? " "+(r.weather||"")+" 最高"+f1(r.max)+"℃ 最低"+f1(r.min)+"℃" : "") + (ev.length ? " "+ev.map(e=>e.n).join("、") : "");
@@ -1357,10 +1421,8 @@ function renderCalDetail(a){
   if(ok){
     const ra = riskAssess(d);
     if(ra){
-      const lab = {high:["高","crit"], mid:["中","warn"]};
       const hi = ra.list.filter(x => x.level !== "low");
-      html += '<h3 style="font-size:15px;margin:14px 0 6px">病害虫・気象リスク（'+md(addDays(d,-6))+'〜'+md(d)+'の気象）</h3>' +
-        (hi.length ? '<div class="risk-list">'+hi.map(x => '<div class="risk '+x.level+'"><div class="top"><span class="t">'+esc(x.name)+'</span><span class="pill '+lab[x.level][1]+'">'+lab[x.level][0]+'</span></div><div class="why">'+esc(x.why)+'</div><div class="act">'+esc(x.act)+'</div></div>').join("")+'</div>' : '<p class="hint" style="margin:0">目立つリスクはありません</p>');
+      html += '<h3 style="font-size:15px;margin:14px 0 6px">病害虫センサー（'+md(d)+'時点）</h3>' + (hi.length ? '<div class="dz-grid">'+dzCards(hi)+'</div>' : '<p class="hint" style="margin:0">目立つリスクはありません</p>');
     }
   }
   box.innerHTML = html;
