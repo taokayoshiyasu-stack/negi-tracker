@@ -1,0 +1,10 @@
+name: その他のご意見・要望
+description: 画面の使いやすさ、追加してほしい機能など
+title: "[ご意見] "
+body:
+  - type: textarea
+    id: body
+    attributes:
+      label: 内容
+    validations:
+      required: true
