@@ -1,0 +1,2114 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style></head><body>
+<script>
+/* ===== デモ用の簡易データベース（ブラウザ内だけで動作・この端末に保存） ===== */
+(function(){
+const SEED = {"readings": [{"avg_temp": 7.8, "date": "2026-03-01", "max_temp": 12.8, "min_temp": 3.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.7, "weather": "晴れ", "wind": 4.6}, {"avg_temp": 5.4, "date": "2026-03-02", "max_temp": 11.1, "min_temp": -1.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.3, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 2.7, "date": "2026-03-03", "max_temp": 5.5, "min_temp": 1, "precip": 12.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.4}, {"avg_temp": 3, "date": "2026-03-04", "max_temp": 7.3, "min_temp": 0.3, "precip": 13.5, "source": "jma_soma_amedas", "sunshine": 1.3, "weather": "雨", "wind": 3.1}, {"avg_temp": 6.8, "date": "2026-03-05", "max_temp": 10.9, "min_temp": 0.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.8, "weather": "晴れ", "wind": 6.2}, {"avg_temp": 5, "date": "2026-03-06", "max_temp": 8.8, "min_temp": -1.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.3, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 7.6, "date": "2026-03-07", "max_temp": 12.5, "min_temp": 4.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 8.1, "weather": "晴れ", "wind": 4.8}, {"avg_temp": 4.8, "date": "2026-03-08", "max_temp": 9.1, "min_temp": 0.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.7, "weather": "晴れ", "wind": 5.7}, {"avg_temp": 4.6, "date": "2026-03-09", "max_temp": 11.4, "min_temp": -1.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.9, "weather": "晴れ", "wind": 2.6}, {"avg_temp": 3, "date": "2026-03-10", "max_temp": 7.4, "min_temp": -1.7, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 2, "weather": "晴れ時々曇り", "wind": 2}, {"avg_temp": 2.6, "date": "2026-03-11", "max_temp": 8.7, "min_temp": -3.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 3.8, "date": "2026-03-12", "max_temp": 12.1, "min_temp": -3.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.7, "weather": "晴れ", "wind": 2.9}, {"avg_temp": 4.1, "date": "2026-03-13", "max_temp": 9.7, "min_temp": -4.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.4, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 4.4, "date": "2026-03-14", "max_temp": 12.1, "min_temp": -3.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.1, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 6.6, "date": "2026-03-15", "max_temp": 13.3, "min_temp": -2.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.5, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 7.4, "date": "2026-03-16", "max_temp": 13.8, "min_temp": -0.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.4, "weather": "晴れ", "wind": 4}, {"avg_temp": 5.1, "date": "2026-03-17", "max_temp": 14.7, "min_temp": -2.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.7, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 4.6, "date": "2026-03-18", "max_temp": 9.5, "min_temp": -4.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.1, "weather": "晴れ時々曇り", "wind": 1.6}, {"avg_temp": 9, "date": "2026-03-19", "max_temp": 16.9, "min_temp": 4.6, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 3.6, "weather": "晴れ時々曇り", "wind": 3.7}, {"avg_temp": 6, "date": "2026-03-20", "max_temp": 10.6, "min_temp": -0.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.1, "weather": "晴れ", "wind": 2.4}, {"avg_temp": 5.5, "date": "2026-03-21", "max_temp": 11.5, "min_temp": -2.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.5, "weather": "晴れ", "wind": 6.5}, {"avg_temp": 5.1, "date": "2026-03-22", "max_temp": 10.4, "min_temp": -4.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.8, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 8.9, "date": "2026-03-23", "max_temp": 13.5, "min_temp": 0.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 8.1, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 9, "date": "2026-03-24", "max_temp": 14.2, "min_temp": 3.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.4, "weather": "晴れ", "wind": 2.6}, {"avg_temp": 7.3, "date": "2026-03-25", "max_temp": 12.1, "min_temp": 0.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.6, "weather": "晴れ時々曇り", "wind": 1.9}, {"avg_temp": 7.7, "date": "2026-03-26", "max_temp": 9.2, "min_temp": 5.8, "precip": 11.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.2}, {"avg_temp": 7, "date": "2026-03-27", "max_temp": 10.5, "min_temp": 1.9, "precip": 2.5, "source": "jma_soma_amedas", "sunshine": 3, "weather": "雨", "wind": 1.5}, {"avg_temp": 6.7, "date": "2026-03-28", "max_temp": 11.6, "min_temp": 1.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.3, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 7.8, "date": "2026-03-29", "max_temp": 13, "min_temp": 2.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.7, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 8, "date": "2026-03-30", "max_temp": 11.9, "min_temp": 3.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4.9, "weather": "晴れ時々曇り", "wind": 1.2}, {"avg_temp": 11.5, "date": "2026-03-31", "max_temp": 17.1, "min_temp": 6.1, "precip": 2, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 9.5, "date": "2026-04-01", "max_temp": 16.6, "min_temp": 6.8, "precip": 6, "source": "jma_soma_amedas", "sunshine": 0.2, "weather": "雨", "wind": 1.7}, {"avg_temp": 6.7, "date": "2026-04-02", "max_temp": 9.9, "min_temp": 2.3, "precip": 27.5, "source": "jma_soma_amedas", "sunshine": 0.6, "weather": "雨", "wind": 3.1}, {"avg_temp": 11.8, "date": "2026-04-03", "max_temp": 19, "min_temp": 2.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.8, "weather": "晴れ", "wind": 3.6}, {"avg_temp": 11.8, "date": "2026-04-04", "max_temp": 18, "min_temp": 3.8, "precip": 7, "source": "jma_soma_amedas", "sunshine": 0.3, "weather": "雨", "wind": 1.8}, {"avg_temp": 16.7, "date": "2026-04-05", "max_temp": 22.4, "min_temp": 12, "precip": 3.5, "source": "jma_soma_amedas", "sunshine": 2.8, "weather": "雨", "wind": 2}, {"avg_temp": 13.1, "date": "2026-04-06", "max_temp": 17.7, "min_temp": 10.7, "precip": 2.5, "source": "jma_soma_amedas", "sunshine": 7.6, "weather": "雨", "wind": 1.9}, {"avg_temp": 10.4, "date": "2026-04-07", "max_temp": 18.6, "min_temp": 6.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 3.8}, {"avg_temp": 9.2, "date": "2026-04-08", "max_temp": 15.8, "min_temp": 4.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12, "weather": "晴れ", "wind": 4.1}, {"avg_temp": 13.6, "date": "2026-04-09", "max_temp": 22.6, "min_temp": 1.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.5, "weather": "晴れ", "wind": 1.9}, {"avg_temp": 13.4, "date": "2026-04-10", "max_temp": 15.7, "min_temp": 12, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 17, "date": "2026-04-11", "max_temp": 22.4, "min_temp": 10.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.4, "weather": "晴れ", "wind": 5.1}, {"avg_temp": 12.8, "date": "2026-04-12", "max_temp": 19.2, "min_temp": 5.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.5, "weather": "晴れ", "wind": 5.5}, {"avg_temp": 10.6, "date": "2026-04-13", "max_temp": 19, "min_temp": 2.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.7, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 10.8, "date": "2026-04-14", "max_temp": 15.5, "min_temp": 3.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.1, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 11.3, "date": "2026-04-15", "max_temp": 14.8, "min_temp": 7.8, "precip": 8, "source": "jma_soma_amedas", "sunshine": 2.7, "weather": "雨", "wind": 1.5}, {"avg_temp": 10.5, "date": "2026-04-16", "max_temp": 14.2, "min_temp": 6.2, "precip": 15.5, "source": "jma_soma_amedas", "sunshine": 0.4, "weather": "雨", "wind": 2.4}, {"avg_temp": 9.7, "date": "2026-04-17", "max_temp": 15.2, "min_temp": 3.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11, "weather": "晴れ", "wind": 1.9}, {"avg_temp": 13.8, "date": "2026-04-18", "max_temp": 21.9, "min_temp": 5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 14.2, "date": "2026-04-19", "max_temp": 20.7, "min_temp": 7.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.2, "weather": "晴れ", "wind": 2}, {"avg_temp": 13.8, "date": "2026-04-20", "max_temp": 20.1, "min_temp": 7.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 8.1, "weather": "晴れ", "wind": 2.2}, {"avg_temp": 15.1, "date": "2026-04-21", "max_temp": 19.2, "min_temp": 8.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.4, "weather": "晴れ", "wind": 4.3}, {"avg_temp": 17.8, "date": "2026-04-22", "max_temp": 25.3, "min_temp": 7.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5, "weather": "晴れ時々曇り", "wind": 3.1}, {"avg_temp": 12.6, "date": "2026-04-23", "max_temp": 19.5, "min_temp": 8.4, "precip": 2, "source": "jma_soma_amedas", "sunshine": 4.2, "weather": "雨", "wind": 1.9}, {"avg_temp": 10, "date": "2026-04-24", "max_temp": 14.9, "min_temp": 4.9, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 11.4, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 8.8, "date": "2026-04-25", "max_temp": 13.3, "min_temp": 3.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.4, "weather": "晴れ", "wind": 2}, {"avg_temp": 13.4, "date": "2026-04-26", "max_temp": 20.6, "min_temp": 4.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 13.3, "date": "2026-04-27", "max_temp": 16.1, "min_temp": 11.2, "precip": 23, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.1}, {"avg_temp": 17, "date": "2026-04-28", "max_temp": 25.6, "min_temp": 9.6, "precip": 1, "source": "jma_soma_amedas", "sunshine": 9, "weather": "雨", "wind": 2.2}, {"avg_temp": 10.3, "date": "2026-04-29", "max_temp": 12.4, "min_temp": 8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.1, "weather": "曇り", "wind": 1.4}, {"avg_temp": 11.2, "date": "2026-04-30", "max_temp": 16.4, "min_temp": 4.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4.5, "weather": "晴れ時々曇り", "wind": 1.5}, {"avg_temp": 14, "date": "2026-05-01", "max_temp": 18.7, "min_temp": 9.9, "precip": 31.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.2}, {"avg_temp": 16.8, "date": "2026-05-02", "max_temp": 22.1, "min_temp": 10.6, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 10.1, "weather": "晴れ", "wind": 6.2}, {"avg_temp": 16.7, "date": "2026-05-03", "max_temp": 23.5, "min_temp": 8.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4.3, "weather": "晴れ時々曇り", "wind": 2.3}, {"avg_temp": 18.6, "date": "2026-05-04", "max_temp": 24.5, "min_temp": 11.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.2, "weather": "晴れ時々曇り", "wind": 6.1}, {"avg_temp": 14.8, "date": "2026-05-05", "max_temp": 21.2, "min_temp": 9.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.5, "weather": "晴れ", "wind": 3.7}, {"avg_temp": 18.1, "date": "2026-05-06", "max_temp": 24.5, "min_temp": 7.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.9, "weather": "晴れ", "wind": 2}, {"avg_temp": 17.8, "date": "2026-05-07", "max_temp": 24.2, "min_temp": 11.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.2, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 18.1, "date": "2026-05-08", "max_temp": 23.9, "min_temp": 13.5, "precip": 3.5, "source": "jma_soma_amedas", "sunshine": 4, "weather": "雨", "wind": 2.1}, {"avg_temp": 15.4, "date": "2026-05-09", "max_temp": 19.5, "min_temp": 9.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.5, "weather": "晴れ", "wind": 5.5}, {"avg_temp": 16.2, "date": "2026-05-10", "max_temp": 23.9, "min_temp": 7.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.3, "weather": "晴れ", "wind": 2.7}, {"avg_temp": 18.4, "date": "2026-05-11", "max_temp": 25.9, "min_temp": 10.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.6, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 17.8, "date": "2026-05-12", "max_temp": 24.2, "min_temp": 11.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.4, "weather": "晴れ", "wind": 1.8}, {"avg_temp": 16.5, "date": "2026-05-13", "max_temp": 21.1, "min_temp": 11.8, "precip": 2, "source": "jma_soma_amedas", "sunshine": 6.5, "weather": "雨", "wind": 1.3}, {"avg_temp": 11.7, "date": "2026-05-14", "max_temp": 14.1, "min_temp": 9.9, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.4}, {"avg_temp": 13.2, "date": "2026-05-15", "max_temp": 19.2, "min_temp": 8.1, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 7.9, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 14.9, "date": "2026-05-16", "max_temp": 22, "min_temp": 8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.6, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 16.8, "date": "2026-05-17", "max_temp": 25.3, "min_temp": 11.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.7, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 17.3, "date": "2026-05-18", "max_temp": 24.7, "min_temp": 10.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.7, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 20.3, "date": "2026-05-19", "max_temp": 31.1, "min_temp": 13, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 20, "date": "2026-05-20", "max_temp": 26.3, "min_temp": 14.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 8.9, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 13.2, "date": "2026-05-21", "max_temp": 16.5, "min_temp": 12.1, "precip": 56, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.1}, {"avg_temp": 11.5, "date": "2026-05-22", "max_temp": 13, "min_temp": 10, "precip": 18.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 4}, {"avg_temp": 11.2, "date": "2026-05-23", "max_temp": 13.7, "min_temp": 9.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 1.9, "weather": "晴れ時々曇り", "wind": 1.7}, {"avg_temp": 13.8, "date": "2026-05-24", "max_temp": 16.1, "min_temp": 10.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.2, "weather": "曇り", "wind": 1}, {"avg_temp": 17.2, "date": "2026-05-25", "max_temp": 23.1, "min_temp": 11.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 19.7, "date": "2026-05-26", "max_temp": 24.6, "min_temp": 16.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.8, "weather": "晴れ", "wind": 1.8}, {"avg_temp": 19.8, "date": "2026-05-27", "max_temp": 25.2, "min_temp": 16.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.5, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 20.7, "date": "2026-05-28", "max_temp": 25.1, "min_temp": 18.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4, "weather": "晴れ時々曇り", "wind": 1.5}, {"avg_temp": 22, "date": "2026-05-29", "max_temp": 27.3, "min_temp": 16.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.8, "weather": "晴れ", "wind": 3.5}, {"avg_temp": 23.3, "date": "2026-05-30", "max_temp": 30.5, "min_temp": 13, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.8, "weather": "晴れ", "wind": 3.3}, {"avg_temp": 21.4, "date": "2026-05-31", "max_temp": 27.8, "min_temp": 14.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.7, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 22.4, "date": "2026-06-01", "max_temp": 31.2, "min_temp": 14.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.4, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 22.2, "date": "2026-06-02", "max_temp": 27.6, "min_temp": 16.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 3.8, "weather": "晴れ時々曇り", "wind": 1.3}, {"avg_temp": 16.8, "date": "2026-06-03", "max_temp": 20.2, "min_temp": 15.3, "precip": 67.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 3.1}, {"avg_temp": 16.9, "date": "2026-06-04", "max_temp": 19.6, "min_temp": 15.6, "precip": 5.5, "source": "jma_soma_amedas", "sunshine": 0.6, "weather": "雨", "wind": 3.1}, {"avg_temp": 14.5, "date": "2026-06-05", "max_temp": 16.7, "min_temp": 13.1, "precip": 2.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 3.1}, {"avg_temp": 14, "date": "2026-06-06", "max_temp": 15.6, "min_temp": 12.7, "precip": 3, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.6}, {"avg_temp": 15.4, "date": "2026-06-07", "max_temp": 18.5, "min_temp": 13.7, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 1.1}, {"avg_temp": 18, "date": "2026-06-08", "max_temp": 21.1, "min_temp": 15.6, "precip": 8, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.1}, {"avg_temp": 19.5, "date": "2026-06-09", "max_temp": 24.4, "min_temp": 16.4, "precip": 5.5, "source": "jma_soma_amedas", "sunshine": 6.3, "weather": "雨", "wind": 2.5}, {"avg_temp": 17.3, "date": "2026-06-10", "max_temp": 22.3, "min_temp": 13.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.9, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 17.3, "date": "2026-06-11", "max_temp": 21.8, "min_temp": 12.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.2, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 18, "date": "2026-06-12", "max_temp": 23.1, "min_temp": 14, "precip": 11.5, "source": "jma_soma_amedas", "sunshine": 6.4, "weather": "雨", "wind": 1.5}, {"avg_temp": 19.5, "date": "2026-06-13", "max_temp": 26.1, "min_temp": 14, "precip": 1, "source": "jma_soma_amedas", "sunshine": 9.9, "weather": "雨", "wind": 1.4}, {"avg_temp": 19.2, "date": "2026-06-14", "max_temp": 24.4, "min_temp": 14.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.5, "weather": "晴れ", "wind": 1.4}, {"avg_temp": 19.5, "date": "2026-06-15", "max_temp": 24.4, "min_temp": 15.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.6, "weather": "晴れ時々曇り", "wind": 1.6}, {"avg_temp": 21, "date": "2026-06-16", "max_temp": 28, "min_temp": 13.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.4, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 21.9, "date": "2026-06-17", "max_temp": 29.1, "min_temp": 16.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.4, "weather": "晴れ", "wind": 2.1}, {"avg_temp": 19.6, "date": "2026-06-18", "max_temp": 26, "min_temp": 17.2, "precip": 2, "source": "jma_soma_amedas", "sunshine": 1.9, "weather": "雨", "wind": 1.5}, {"avg_temp": 20.2, "date": "2026-06-19", "max_temp": 24.8, "min_temp": 17.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 3, "weather": "晴れ時々曇り", "wind": 1.5}, {"avg_temp": 19.2, "date": "2026-06-20", "max_temp": 21.2, "min_temp": 18.3, "precip": 9, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.4}, {"avg_temp": 18.5, "date": "2026-06-21", "max_temp": 19.2, "min_temp": 17.6, "precip": 80, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.7}, {"avg_temp": 17.2, "date": "2026-06-22", "max_temp": 18.7, "min_temp": 16.1, "precip": 44.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 3.1}, {"avg_temp": 15.8, "date": "2026-06-23", "max_temp": 16.7, "min_temp": 15, "precip": 16, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.7}, {"avg_temp": 18.3, "date": "2026-06-24", "max_temp": 23.1, "min_temp": 13.1, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 13.5, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 19.7, "date": "2026-06-25", "max_temp": 22.7, "min_temp": 17.5, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 21, "date": "2026-06-26", "max_temp": 23.3, "min_temp": 19.3, "precip": 12.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 0.9}, {"avg_temp": 23.5, "date": "2026-06-27", "max_temp": 29.4, "min_temp": 19.8, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 7.6, "weather": "晴れ", "wind": 1.9}, {"avg_temp": 21.4, "date": "2026-06-28", "max_temp": 24.9, "min_temp": 18.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 8.2, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 21.3, "date": "2026-06-29", "max_temp": 25.7, "min_temp": 18.4, "precip": 2, "source": "jma_soma_amedas", "sunshine": 8.5, "weather": "雨", "wind": 1.7}, {"avg_temp": 21.4, "date": "2026-06-30", "max_temp": 25, "min_temp": 19.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 3.5, "weather": "晴れ時々曇り", "wind": 1.4}, {"avg_temp": 22.4, "date": "2026-07-01", "max_temp": 25.6, "min_temp": 20.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.7, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 20.3, "date": "2026-07-02", "max_temp": 22.1, "min_temp": 19.5, "precip": 33.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.6}, {"avg_temp": 19.6, "date": "2026-07-03", "max_temp": 21.2, "min_temp": 18.9, "precip": 6.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.5}, {"avg_temp": 19.8, "date": "2026-07-04", "max_temp": 21.7, "min_temp": 18.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 1.3}, {"avg_temp": 21.3, "date": "2026-07-05", "max_temp": 24.3, "min_temp": 19.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 1.4}, {"avg_temp": 21.9, "date": "2026-07-06", "max_temp": 26.8, "min_temp": 19.2, "precip": 1, "source": "jma_soma_amedas", "sunshine": 3.9, "weather": "雨", "wind": 1.8}, {"avg_temp": 22.3, "date": "2026-07-07", "max_temp": 26.3, "min_temp": 18.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.5, "weather": "晴れ", "wind": 1.7}, {"avg_temp": 22.5, "date": "2026-07-08", "max_temp": 27.5, "min_temp": 17.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.5, "weather": "晴れ", "wind": 1.8}, {"avg_temp": 23.6, "date": "2026-07-09", "max_temp": 28.8, "min_temp": 19.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.2, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 25.3, "date": "2026-07-10", "max_temp": 31.7, "min_temp": 20.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 13.4, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 25.3, "date": "2026-07-11", "max_temp": 29.2, "min_temp": 22.4, "precip": 11.5, "source": "jma_soma_amedas", "sunshine": 4.9, "weather": "雨", "wind": 1.3}, {"avg_temp": 24.3, "date": "2026-07-12", "max_temp": 26.6, "min_temp": 22.3, "precip": 7, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.4}, {"avg_temp": 25.1, "date": "2026-07-13", "max_temp": 29.8, "min_temp": 22.5, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0.1, "weather": "雨", "wind": 1.3}, {"avg_temp": 26.5, "date": "2026-07-14", "max_temp": 31.8, "min_temp": 21.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4.2, "weather": "晴れ時々曇り", "wind": 1.2}, {"avg_temp": 28, "date": "2026-07-15", "max_temp": 34.2, "min_temp": 23.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.2, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 27.6, "date": "2026-07-16", "max_temp": 32.6, "min_temp": 24, "precip": 6, "source": "jma_soma_amedas", "sunshine": 1.9, "weather": "雨", "wind": 1.1}, {"avg_temp": 23.9, "date": "2026-07-17", "max_temp": 26.7, "min_temp": 22.4, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.4}, {"avg_temp": 24.6, "date": "2026-07-18", "max_temp": 28.2, "min_temp": 22.4, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.2, "weather": "曇り", "wind": 1.9}, {"avg_temp": 26.7, "date": "2026-07-19", "max_temp": 32.2, "min_temp": 22, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.1, "weather": "晴れ", "wind": 1.1}, {"avg_temp": 28.3, "date": "2026-07-20", "max_temp": 35.1, "min_temp": 23.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.4, "weather": "晴れ", "wind": 1.2}, {"avg_temp": 29.1, "date": "2026-07-21", "max_temp": 35.5, "min_temp": 24.3, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.8, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 28.7, "date": "2026-07-22", "max_temp": 34.2, "min_temp": 23.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.8, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 25.2, "date": "2026-07-23", "max_temp": 30.2, "min_temp": 22.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.9, "weather": "晴れ時々曇り", "wind": 1.4}, {"avg_temp": 23.5, "date": "2026-07-24", "max_temp": 25.1, "min_temp": 22.2, "precip": 14.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 22.7, "date": "2026-07-25", "max_temp": 24.1, "min_temp": 21.9, "precip": 23, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.5}, {"avg_temp": 22.1, "date": "2026-07-26", "max_temp": 23.5, "min_temp": 19.9, "precip": 37, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.6}, {"avg_temp": 21.3, "date": "2026-07-27", "max_temp": 23.8, "min_temp": 19.5, "precip": 5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.8}, {"avg_temp": 23.1, "date": "2026-07-28", "max_temp": 26, "min_temp": 20.6, "precip": 3.5, "source": "jma_soma_amedas", "sunshine": 0.1, "weather": "雨", "wind": 1.2}, {"avg_temp": 24.9, "date": "2026-07-29", "max_temp": 29.7, "min_temp": 21.7, "precip": 7, "source": "jma_soma_amedas", "sunshine": 2.4, "weather": "雨", "wind": 2.1}, {"avg_temp": 26.1, "date": "2026-07-30", "max_temp": 32.5, "min_temp": 21.4, "precip": 3.5, "source": "jma_soma_amedas", "sunshine": 6.8, "weather": "雨", "wind": 2.4}, {"avg_temp": 24.8, "date": "2026-07-31", "max_temp": 30.4, "min_temp": 22.4, "precip": 38, "source": "jma_soma_amedas", "sunshine": 1.8, "weather": "雨", "wind": 1.3}, {"avg_temp": 24.5, "date": "2026-08-01", "max_temp": 27.8, "min_temp": 22.5, "precip": 0.5, "source": "jma_soma_amedas", "sunshine": 0.6, "weather": "曇り", "wind": 1.4}, {"avg_temp": 21.1, "date": "2026-08-02", "max_temp": 22.9, "min_temp": 19.5, "precip": 15, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 2.2}, {"avg_temp": 20.7, "date": "2026-08-03", "max_temp": 23.2, "min_temp": 19.2, "precip": 3.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.7}, {"avg_temp": 21.8, "date": "2026-08-04", "max_temp": 25.2, "min_temp": 17.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.7, "weather": "晴れ", "wind": 1.2}, {"avg_temp": 22.3, "date": "2026-08-05", "max_temp": 26.3, "min_temp": 18.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6, "weather": "晴れ", "wind": 1.1}, {"avg_temp": 24.5, "date": "2026-08-06", "max_temp": 28.8, "min_temp": 20, "precip": 0, "source": "jma_soma_amedas", "sunshine": 5.9, "weather": "晴れ時々曇り", "wind": 1.1}, {"avg_temp": 27.4, "date": "2026-08-07", "max_temp": 34.9, "min_temp": 23.1, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.8, "weather": "晴れ", "wind": 1.2}, {"avg_temp": 26.8, "date": "2026-08-08", "max_temp": 31.5, "min_temp": 23.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6.8, "weather": "晴れ", "wind": 1.2}, {"avg_temp": 24.8, "date": "2026-08-09", "max_temp": 27.4, "min_temp": 22.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 1.8}, {"avg_temp": 22.5, "date": "2026-08-10", "max_temp": 23.9, "min_temp": 20.8, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.8}, {"avg_temp": 22, "date": "2026-08-11", "max_temp": 23.9, "min_temp": 19.1, "precip": 14.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 4.5}, {"avg_temp": 22.8, "date": "2026-08-12", "max_temp": 25, "min_temp": 22, "precip": 5.5, "source": "jma_soma_amedas", "sunshine": 0.1, "weather": "雨", "wind": 1}, {"avg_temp": 23.4, "date": "2026-08-13", "max_temp": 25.5, "min_temp": 22.6, "precip": 55.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 23.7, "date": "2026-08-14", "max_temp": 26, "min_temp": 22.6, "precip": 22.5, "source": "jma_soma_amedas", "sunshine": 0.2, "weather": "雨", "wind": 1.1}, {"avg_temp": 24.2, "date": "2026-08-15", "max_temp": 28.1, "min_temp": 20.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 9.8, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 23.4, "date": "2026-08-16", "max_temp": 27.6, "min_temp": 20, "precip": 0, "source": "jma_soma_amedas", "sunshine": 7.2, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 23.5, "date": "2026-08-17", "max_temp": 27.2, "min_temp": 19.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 1.2, "weather": "晴れ時々曇り", "wind": 1.2}, {"avg_temp": 24.7, "date": "2026-08-18", "max_temp": 29.5, "min_temp": 20.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 3.8, "weather": "晴れ時々曇り", "wind": 1.3}, {"avg_temp": 25.2, "date": "2026-08-19", "max_temp": 31.2, "min_temp": 20.2, "precip": 0, "source": "jma_soma_amedas", "sunshine": 12.5, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 25.9, "date": "2026-08-20", "max_temp": 29.6, "min_temp": 22.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4.5, "weather": "晴れ時々曇り", "wind": 0.9}, {"avg_temp": 25.2, "date": "2026-08-21", "max_temp": 28.7, "min_temp": 23, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.8, "weather": "曇り", "wind": 1}, {"avg_temp": 24.7, "date": "2026-08-22", "max_temp": 28.4, "min_temp": 22.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 4, "weather": "晴れ時々曇り", "wind": 1}, {"avg_temp": 24.9, "date": "2026-08-23", "max_temp": 27.8, "min_temp": 22.5, "precip": 0, "source": "jma_soma_amedas", "sunshine": 2.2, "weather": "晴れ時々曇り", "wind": 1.2}, {"avg_temp": 27.1, "date": "2026-08-24", "max_temp": 33.4, "min_temp": 21.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.3, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 29.3, "date": "2026-08-25", "max_temp": 36, "min_temp": 22.7, "precip": 0, "source": "jma_soma_amedas", "sunshine": 11.7, "weather": "晴れ", "wind": 1.6}, {"avg_temp": 27.8, "date": "2026-08-26", "max_temp": 32.2, "min_temp": 23.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 6, "weather": "晴れ", "wind": 1.3}, {"avg_temp": 25, "date": "2026-08-27", "max_temp": 29, "min_temp": 21.6, "precip": 3, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.5}, {"avg_temp": 24, "date": "2026-08-28", "max_temp": 30.9, "min_temp": 19.6, "precip": 0, "source": "jma_soma_amedas", "sunshine": 3.8, "weather": "晴れ時々曇り", "wind": 2}, {"avg_temp": 20.3, "date": "2026-08-29", "max_temp": 22.7, "min_temp": 18.1, "precip": 6.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1}, {"avg_temp": 20, "date": "2026-08-30", "max_temp": 21.8, "min_temp": 18.2, "precip": 18, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.7}, {"avg_temp": 21.5, "date": "2026-08-31", "max_temp": 24.5, "min_temp": 19.2, "precip": 3, "source": "jma_soma_amedas", "sunshine": 1.1, "weather": "雨", "wind": 1.7}, {"avg_temp": 21.5, "date": "2026-09-01", "max_temp": 22.9, "min_temp": 20.5, "precip": 6, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 0.8}, {"avg_temp": 25.2, "date": "2026-09-02", "max_temp": 32.3, "min_temp": 21.3, "precip": 5.5, "source": "jma_soma_amedas", "sunshine": 7.6, "weather": "雨", "wind": 1}, {"avg_temp": 23.1, "date": "2026-09-03", "max_temp": 27.6, "min_temp": 20.9, "precip": 38, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.2}, {"avg_temp": 22.9, "date": "2026-09-04", "max_temp": 26.5, "min_temp": 19.8, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.3, "weather": "曇り", "wind": 1.5}, {"avg_temp": 21.8, "date": "2026-09-05", "max_temp": 25.7, "min_temp": 19, "precip": 0, "source": "jma_soma_amedas", "sunshine": 10.5, "weather": "晴れ", "wind": 1.5}, {"avg_temp": 22, "date": "2026-09-06", "max_temp": 24.5, "min_temp": 19.3, "precip": 1.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.9}, {"avg_temp": 22.2, "date": "2026-09-07", "max_temp": 23.5, "min_temp": 20.6, "precip": 130.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 3.7}, {"avg_temp": 22.7, "date": "2026-09-08", "max_temp": 25.9, "min_temp": 20, "precip": 11.5, "source": "jma_soma_amedas", "sunshine": 3.5, "weather": "雨", "wind": 1}, {"avg_temp": 21.4, "date": "2026-09-09", "max_temp": 23.8, "min_temp": 18.3, "precip": 21.5, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.3}, {"avg_temp": 19.1, "date": "2026-09-10", "max_temp": 21.5, "min_temp": 17, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0.2, "weather": "曇り", "wind": 1.1}, {"avg_temp": 18.7, "date": "2026-09-11", "max_temp": 20.7, "min_temp": 17.2, "precip": 4, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1}, {"avg_temp": 19.7, "date": "2026-09-12", "max_temp": 22.1, "min_temp": 17.9, "precip": 0, "source": "jma_soma_amedas", "sunshine": 0, "weather": "曇り", "wind": 0.9}, {"avg_temp": 20.3, "date": "2026-09-13", "max_temp": 22.7, "min_temp": 18.3, "precip": 1, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 0.9}, {"avg_temp": 24.4, "date": "2026-09-14", "max_temp": 29.7, "min_temp": 19, "precip": 1.5, "source": "jma_soma_amedas", "sunshine": 9.2, "weather": "雨", "wind": 1.4}, {"avg_temp": 20.3, "date": "2026-09-15", "max_temp": 22.4, "min_temp": 19.7, "precip": 17, "source": "jma_soma_amedas", "sunshine": 0, "weather": "雨", "wind": 1.1}], "plots": [{"id": "g1", "name": "秋冬どり 3月下旬定植（デモ）", "variety": "品種A", "transplant": "2026-03-25", "transplantEnd": "2026-04-05", "tomeDate": "2026-07-20", "harvestStart": "2026-08-20", "order": 1, "notes": {}}, {"id": "g2", "name": "秋冬どり 4月中旬定植（デモ）", "variety": "品種B", "transplant": "2026-04-15", "transplantEnd": "2026-04-25", "tomeDate": "", "harvestStart": "", "order": 2, "notes": {}}], "fields": [{"id": "d-001", "no": 1, "area": "デモ地区A", "name": "東の畑（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 3200, "plotId": "g1", "status": "収穫中"}, {"id": "d-002", "no": 2, "area": "デモ地区A", "name": "西の畑（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 2800, "plotId": "g1", "status": "収穫中"}, {"id": "d-003", "no": 3, "area": "デモ地区A", "name": "川沿い1（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 4500, "plotId": "g1", "status": "収穫中"}, {"id": "d-004", "no": 4, "area": "デモ地区A", "name": "川沿い2（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 1500, "plotId": "g1", "status": "収穫中"}, {"id": "d-005", "no": 5, "area": "デモ地区B", "name": "北の畑（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 6000, "plotId": "g2", "status": "生育中"}, {"id": "d-006", "no": 6, "area": "デモ地区B", "name": "南の畑（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 2200, "plotId": "g2", "status": "生育中"}, {"id": "d-007", "no": 7, "area": "デモ地区B", "name": "丘の上（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 3800, "plotId": "g2", "status": "生育中"}, {"id": "d-008", "no": 8, "area": "デモ地区B", "name": "集落前（デモ）", "type": "畑作", "crop": "長ネギ（秋冬）", "crop2": "", "chiban": "—", "gyosei": "—", "district": "—", "m2": 2500, "plotId": "g2", "status": "生育中"}], "pesticides": [{"id": "p1", "name": "（例）殺菌剤A", "ratio": 1000, "unit": "L", "note": "さび病・べと病（デモ用の架空の名前）"}], "reports": []};
+const KEY = "negi-demo-db-v1";
+let DB; try{ DB = JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){}
+if(!DB) DB = JSON.parse(JSON.stringify(SEED));
+const toMap = arr => { const m={}; arr.forEach(d=>{ const id=d.id||d.date; const c={...d}; delete c.id; m[id]=c; }); return m; };
+Object.keys(DB).forEach(k => { if(Array.isArray(DB[k])) DB[k] = toMap(DB[k]); });
+const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(DB)); }catch(e){} };
+const subs = [];
+const emit = () => { save(); subs.forEach(s => s()); };
+const deepMerge = (a,b) => { const o={...a}; Object.keys(b).forEach(k => { o[k] = (b[k] && typeof b[k]==="object" && !Array.isArray(b[k]) && a[k] && typeof a[k]==="object") ? deepMerge(a[k], b[k]) : b[k]; }); return o; };
+function docRef(col, id){
+  return { id,
+    async set(v){ (DB[col] = DB[col]||{})[id] = JSON.parse(JSON.stringify(v)); emit(); },
+    async update(v){ (DB[col] = DB[col]||{})[id] = deepMerge(DB[col][id]||{}, JSON.parse(JSON.stringify(v))); emit(); },
+    async delete(){ if(DB[col]) delete DB[col][id]; emit(); },
+    onSnapshot(cb){ const run = () => { const d = DB[col] && DB[col][id]; cb({exists:!!d, data:()=>d}); }; subs.push(run); setTimeout(run, 30); return () => {}; }
+  };
+}
+function collection(col){
+  let field=null, dir="asc", lim=1e9;
+  const q = {
+    orderBy(f, d){ field=f; dir=d||"asc"; return q; }, limit(n){ lim=n; return q; },
+    doc(id){ return docRef(col, id || ("id"+Date.now().toString(36)+Math.random().toString(36).slice(2,6))); },
+    onSnapshot(cb){ const run = () => { let docs = Object.entries(DB[col]||{}).map(([id,d]) => ({id, data:()=>d, _d:d}));
+        if(field) docs.sort((a,b) => { const x=a._d[field], y=b._d[field]; return (x>y?1:x<y?-1:0) * (dir==="desc"?-1:1); });
+        cb({docs: docs.slice(0,lim)}); }; subs.push(run); setTimeout(run, 30); return () => {}; }
+  };
+  return q;
+}
+const db = { collection, doc(path){ const [c,id] = path.split("/"); return docRef(c,id); } };
+const downloads = { async save({filename, data}){ const blob = data instanceof Blob ? data : new Blob([data]); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = filename; document.body.appendChild(a); a.click(); a.remove(); } };
+window.claude = { use: async n => n==="db" ? db : n==="downloads" ? downloads : null };
+window.negiDemoReset = () => { try{ localStorage.removeItem(KEY); }catch(e){} location.reload(); };
+})();
+</script>
+<div style="background:#2f6b45;color:#fff;font:600 13.5px/1.6 system-ui,sans-serif;padding:8px 16px;text-align:center">
+  デモ版：圃場・グループ・農薬は架空のデータです。気温は相馬アメダスの実測値（2026年3月1日〜9月15日時点）。入力した内容はこの端末のブラウザにだけ保存されます。
+  <button type="button" onclick="negiDemoReset()" style="margin-left:8px;border:1px solid #fff;background:transparent;color:#fff;border-radius:6px;padding:2px 10px;cursor:pointer">初期状態に戻す</button>
+</div>
+
+<title>長ねぎ 生育トラッカー（デモ）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme: light;
+  --paper:#f1efe0;
+  --sheet:#faf8ee;
+  --raise:#fffdf6;
+  --ink:#1b2436;
+  --ink-2:#565144;
+  --muted:#8a846f;
+  --rule:#e2dcc7;
+  --rule-strong:#cdc5a8;
+  --indigo:#2f6b45;
+  --indigo-ink:#1b3f28;
+  --indigo-soft:rgba(47,107,69,.10);
+  --on-indigo:#fbfaf3;
+  --gold:#b9862c;
+  --gold-ink:#6a4a12;
+  --gold-soft:rgba(185,134,44,.16);
+  --gold-band:rgba(185,134,44,.10);
+  --good:#2e7d3a;
+  --good-soft:rgba(46,125,58,.12);
+  --warn:#a86d00;
+  --warn-soft:rgba(214,150,20,.18);
+  --crit:#c0392f;
+  --crit-soft:rgba(192,57,47,.12);
+  --s-max:#d4602a;
+  --s-avg:#2f8a5e;
+  --s-min:#2f6fc0;
+  --shadow:0 1px 2px rgba(27,36,54,.05),0 8px 24px rgba(27,36,54,.06);
+  --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",system-ui,sans-serif;
+  --tabbar-h:64px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --paper:#15150d; --sheet:#1e1e15; --raise:#26261b;
+    --ink:#f3efdf; --ink-2:#c9c2a6; --muted:#918b74;
+    --rule:#34311f; --rule-strong:#4a4630;
+    --indigo:#85c89a; --indigo-ink:#d6f0de; --indigo-soft:rgba(133,200,154,.16); --on-indigo:#0f1f14;
+    --gold:#dcaa48; --gold-ink:#f4d69a; --gold-soft:rgba(220,170,72,.18); --gold-band:rgba(220,170,72,.12);
+    --good:#63c46f; --good-soft:rgba(99,196,111,.16);
+    --warn:#f0b53a; --warn-soft:rgba(240,181,58,.18);
+    --crit:#ec7a70; --crit-soft:rgba(236,122,112,.16);
+    --s-max:#e8804c; --s-avg:#4fbf88; --s-min:#6aa2ec;
+    --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --paper:#15150d; --sheet:#1e1e15; --raise:#26261b;
+  --ink:#f3efdf; --ink-2:#c9c2a6; --muted:#918b74;
+  --rule:#34311f; --rule-strong:#4a4630;
+  --indigo:#85c89a; --indigo-ink:#d6f0de; --indigo-soft:rgba(133,200,154,.16); --on-indigo:#0f1f14;
+  --gold:#dcaa48; --gold-ink:#f4d69a; --gold-soft:rgba(220,170,72,.18); --gold-band:rgba(220,170,72,.12);
+  --good:#63c46f; --good-soft:rgba(99,196,111,.16);
+  --warn:#f0b53a; --warn-soft:rgba(240,181,58,.18);
+  --crit:#ec7a70; --crit-soft:rgba(236,122,112,.16);
+  --s-max:#e8804c; --s-avg:#4fbf88; --s-min:#6aa2ec;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:15px;line-height:1.6;
+  padding-inline:20px;padding-block:14px calc(var(--tabbar-h) + 28px + env(safe-area-inset-bottom,0px));
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.num{font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;text-wrap:balance}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap;padding-block:4px 2px}
+.brand{display:flex;flex-direction:column;line-height:1.1;margin-right:auto}
+.brand small{font-size:11px;letter-spacing:.14em;color:var(--gold-ink);font-weight:700}
+.brand h1{font-family:var(--serif);font-weight:700;font-size:28px;letter-spacing:.08em}
+.plot-switch{display:flex;align-items:center;gap:8px}
+.plot-switch label{font-size:12px;color:var(--muted);font-weight:700;letter-spacing:.04em}
+select,input[type=text],input[type=date],input[type=number],textarea{
+  background:var(--raise);border:1px solid var(--rule-strong);border-radius:10px;
+  padding:0 12px;min-height:46px;font-size:16px;color:var(--ink);
+}
+select{padding-right:34px;appearance:none;-webkit-appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);
+  background-position:calc(100% - 17px) 20px,calc(100% - 12px) 20px;background-size:5px 5px;background-repeat:no-repeat}
+#plotSelect{min-width:200px;font-weight:700}
+textarea{padding:10px 12px;line-height:1.65;width:100%;resize:vertical;min-height:120px}
+:focus-visible{outline:3px solid var(--indigo);outline-offset:2px}
+.freshness{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--muted);flex:none}
+.dot.ok{background:var(--good)} .dot.stale{background:var(--warn)} .dot.off{background:var(--crit)}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:4px;background:var(--sheet);border:1px solid var(--rule);border-radius:14px;padding:4px}
+.tab{flex:1;border:0;background:transparent;border-radius:10px;min-height:46px;font-weight:700;font-size:15px;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.tab svg{width:20px;height:20px;flex:none}
+.tab[aria-selected="true"]{background:var(--indigo);color:var(--on-indigo)}
+@media (max-width:899px){
+  .tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;border-radius:0;border:0;border-top:1px solid var(--rule);
+    padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));background:var(--sheet);gap:2px}
+  .tab{flex-direction:column;gap:2px;font-size:11.5px;min-height:52px}
+  .tab[aria-selected="true"]{background:var(--indigo-soft);color:var(--indigo-ink)}
+}
+
+/* ---------- common blocks ---------- */
+.panel{display:flex;flex-direction:column;gap:16px}
+.card{background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:18px 20px}
+.card-head{display:flex;align-items:baseline;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:10px}
+.card-head h2{font-family:var(--serif);font-size:19px;font-weight:700;letter-spacing:.03em}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.55}
+.label{font-size:11.5px;font-weight:700;letter-spacing:.06em;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;padding:3px 11px;border-radius:999px;white-space:nowrap}
+.pill.good{background:var(--good-soft);color:var(--good)}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.crit{background:var(--crit-soft);color:var(--crit)}
+.pill.info{background:var(--indigo-soft);color:var(--indigo-ink)}
+.pill.idle{background:var(--rule);color:var(--ink-2)}
+.btn{border:1px solid transparent;background:var(--indigo);color:var(--on-indigo);border-radius:11px;min-height:46px;padding:0 18px;font-weight:700;font-size:15px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.ghost{background:transparent;border-color:var(--rule-strong);color:var(--ink)}
+.btn.gold{background:var(--gold);color:#1e1606}
+.btn.danger{background:transparent;border-color:var(--crit);color:var(--crit)}
+.btn.small{min-height:38px;padding:0 12px;font-size:13.5px;border-radius:9px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.seg{display:inline-flex;border:1px solid var(--rule-strong);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;min-height:38px;padding:0 14px;font-size:13.5px;font-weight:700;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--indigo);color:var(--on-indigo)}
+.field{display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:700;color:var(--ink-2);min-width:0}
+.field input,.field select{width:100%}
+.banner{border-radius:12px;padding:10px 14px;font-size:13.5px;background:var(--warn-soft);color:var(--ink)}
+.banner.crit{background:var(--crit-soft)}
+.empty{padding:28px 12px;text-align:center;color:var(--ink-2)}
+
+/* ---------- now: hero ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:899px){.hero{grid-template-columns:1fr}}
+.hero-main{background:var(--sheet);border:1px solid var(--rule);border-radius:18px;padding:20px 22px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 18px;box-shadow:var(--shadow)}
+.hero-context{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;font-size:13px;color:var(--ink-2)}
+.hero-context b{color:var(--ink)}
+.hero-stage{display:flex;flex-direction:column;gap:6px;align-self:center}
+.hero-stage h2{font-family:var(--serif);font-size:30px;line-height:1.3;letter-spacing:.04em}
+.hero-art{width:132px;height:112px;object-fit:contain;align-self:center}
+.harvest{grid-column:1 / -1;border-top:1px solid var(--rule);margin-top:10px;padding-top:14px;display:flex;flex-direction:column;gap:8px}
+.harvest-row{display:flex;align-items:baseline;gap:6px 16px;flex-wrap:wrap}
+.harvest-date{font-family:var(--serif);font-size:40px;font-weight:700;letter-spacing:.03em;line-height:1.15;color:var(--indigo-ink)}
+.harvest-left{font-size:15px;font-weight:700;color:var(--gold-ink)}
+.gauge{position:relative;height:30px;margin-top:6px}
+.gauge-track{position:absolute;left:0;right:0;top:8px;height:12px;border-radius:999px;background:var(--rule)}
+.gauge-band{position:absolute;top:8px;height:12px;background:var(--gold-soft)}
+.gauge-ideal{position:absolute;top:8px;height:12px;background:var(--gold);opacity:.45}
+.gauge-fill{position:absolute;left:0;top:8px;height:12px;border-radius:999px 0 0 999px;background:var(--indigo)}
+.gauge-tick{position:absolute;top:22px;transform:translateX(-50%);font-size:10.5px;color:var(--muted);white-space:nowrap}
+.gauge-cap{display:flex;flex-wrap:wrap;gap:2px 12px;justify-content:space-between;font-size:12.5px;color:var(--ink-2);margin-top:8px}
+.metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.metric{background:var(--sheet);padding:16px 18px;display:flex;flex-direction:column;gap:3px;min-width:0}
+.metric .value{font-size:28px;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+.metric .value small{font-size:14px;font-weight:700;color:var(--ink-2);margin-left:3px}
+.metric .sub{font-size:12.5px;color:var(--ink-2);overflow-wrap:anywhere}
+.metric .value.early{color:var(--good)} .metric .value.late{color:var(--warn)}
+.advice{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:start}
+.advice-mark{font-family:var(--serif);font-size:13px;font-weight:700;writing-mode:vertical-rl;letter-spacing:.2em;color:var(--gold-ink);border-left:2px solid var(--gold);padding-left:8px;min-height:80px}
+.advice p{margin:0 0 8px;max-width:68ch;white-space:pre-line}
+
+.risk-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.risk{border:1px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--raise);display:flex;flex-direction:column;gap:4px;min-width:0}
+.risk.high{border-color:var(--crit);box-shadow:inset 3px 0 0 var(--crit)}
+.risk.mid{box-shadow:inset 3px 0 0 var(--warn)}
+.risk .top{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.risk .t{font-weight:700;font-size:15px}
+.risk .why{font-size:12.5px;color:var(--ink-2)}
+.risk .act{font-size:13px}
+/* ---------- charts ---------- */
+.chart-box{position:relative;width:100%}
+.chart-box svg{display:block;width:100%;overflow:visible;touch-action:pan-y}
+.axis{font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.grid-line{stroke:var(--rule);stroke-width:1}
+.tip{position:absolute;pointer-events:none;background:var(--raise);border:1px solid var(--rule-strong);border-radius:10px;padding:7px 11px;font-size:12.5px;box-shadow:var(--shadow);white-space:nowrap;transform:translate(-50%,calc(-100% - 12px));z-index:5;line-height:1.55}
+.tip b{font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--ink-2)}
+.legend i{display:inline-block;width:16px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.legend i.dash{height:0;border-top:3px dashed var(--indigo);background:none}
+.legend i.band{height:10px;background:var(--gold-soft);border-radius:2px}
+.stage-strip{display:flex;gap:10px;overflow-x:auto;padding:10px 2px 4px;scroll-snap-type:x proximity}
+.stage-chip{flex:none;scroll-snap-align:start;display:flex;align-items:center;gap:10px;border:1px solid var(--rule);border-radius:12px;padding:6px 12px 6px 6px;background:var(--raise)}
+.stage-chip img{width:56px;height:46px;object-fit:contain}
+.stage-chip .t{font-size:13px;font-weight:700;line-height:1.3}
+.stage-chip .d{font-size:12px;color:var(--ink-2)}
+.stage-chip.forecast{border-style:dashed}
+
+/* ---------- stages ---------- */
+.stage-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;list-style:none;margin:0;padding:0}
+@media (max-width:899px){.stage-list{grid-template-columns:1fr}}
+.stage{background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:14px 16px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:4px 14px}
+.stage.current{border-color:var(--indigo);box-shadow:inset 0 0 0 1px var(--indigo),var(--shadow)}
+.stage.past{background:transparent}
+.stage.past .stage-title,.stage.past .stage-art{opacity:.62}
+.stage-art{grid-row:span 2;width:72px;height:60px;display:grid;place-items:center;border-radius:10px;background:var(--raise);border:1px solid var(--rule);overflow:hidden}
+.stage-art img{width:100%;height:100%;object-fit:contain}
+.stage-art span{font-family:var(--serif);font-size:24px;color:var(--gold-ink)}
+.stage-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;flex-wrap:wrap}
+.stage-title{font-weight:700;font-size:16px;line-height:1.4}
+.stage-meta{font-size:13px;color:var(--ink-2);display:flex;flex-direction:column;gap:1px}
+.stage-meta b{color:var(--ink);font-variant-numeric:tabular-nums}
+.stage details{grid-column:1 / -1;margin-top:6px;border-top:1px dashed var(--rule-strong);padding-top:8px}
+.stage summary{cursor:pointer;font-size:13.5px;font-weight:700;color:var(--indigo-ink);min-height:36px;display:flex;align-items:center;list-style:none}
+.stage summary::-webkit-details-marker{display:none}
+.stage summary::before{content:"＋";margin-right:6px;color:var(--gold-ink)}
+.stage details[open] summary::before{content:"－"}
+.note-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;font-size:12px;color:var(--muted);flex-wrap:wrap}
+
+/* ---------- weather ---------- */
+.two-col{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+@media (max-width:899px){.two-col{grid-template-columns:1fr}}
+.calc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.calc-out{margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
+.calc-out b{color:var(--ink);font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--rule);border-radius:999px;overflow:hidden}
+.bar > span{display:block;height:100%;background:var(--gold)}
+.table-wrap{overflow-x:auto;border:1px solid var(--rule);border-radius:12px;background:var(--raise)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+th,td{padding:10px 10px;border-bottom:1px solid var(--rule);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+th{font-size:12px;color:var(--muted);font-weight:700;background:var(--sheet);position:sticky;top:0}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+tr.missing td{background:var(--crit-soft)}
+.src{font-size:11.5px;font-weight:700;color:var(--muted)}
+.src.manual{color:var(--gold-ink)}
+.src.none{color:var(--crit)}
+.table-foot{display:flex;justify-content:center;padding-top:10px;gap:8px;flex-wrap:wrap}
+
+/* ---------- plots ---------- */
+.plot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.plot-card{background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.plot-card.active{border-color:var(--indigo);box-shadow:inset 0 0 0 1px var(--indigo)}
+.plot-card h3{font-family:var(--serif);font-size:20px}
+.plot-card dl{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:0;font-size:13.5px}
+.plot-card dt{color:var(--muted)} .plot-card dd{margin:0;font-variant-numeric:tabular-nums}
+.plot-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+
+/* ---------- dialog ---------- */
+dialog{border:0;border-radius:18px;padding:0;background:var(--sheet);color:var(--ink);width:min(560px,calc(100vw - 32px));box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(20,22,30,.45)}
+.dlg{padding:20px;display:flex;flex-direction:column;gap:14px}
+.dlg h2{font-family:var(--serif);font-size:20px}
+.dlg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.dlg-grid .wide{grid-column:1 / -1}
+@media (max-width:520px){.dlg-grid,.calc-grid{grid-template-columns:1fr}}
+.dlg-foot{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.dlg-foot .left{margin-right:auto}
+
+.toast{position:fixed;left:50%;bottom:calc(var(--tabbar-h) + 22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-size:14px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50;max-width:calc(100vw - 32px)}
+.toast.show{opacity:1}
+@media (min-width:900px){.toast{bottom:28px}}
+footer{font-size:12px;color:var(--muted);line-height:1.8;border-top:1px solid var(--rule);padding-top:14px}
+footer p{margin:0 0 6px;max-width:90ch}
+@media (max-width:560px){
+  body{padding-inline:16px}
+  .brand h1{font-size:24px}
+  .plot-switch{width:100%} #plotSelect{flex:1;min-width:0}
+  .hero-main{grid-template-columns:1fr;padding:16px}
+  .hero-art{display:none!important}
+  .hero-stage h2{font-size:25px}
+  .harvest-date{font-size:32px}
+  .metric .value{font-size:23px}
+  .card{padding:14px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- report ---------- */
+.report-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:16px;align-items:start}
+@media (max-width:1023px){.report-layout{grid-template-columns:1fr}}
+.report-form{display:flex;flex-direction:column;gap:14px}
+.report-preview{position:sticky;top:12px}
+.report-preview canvas{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--rule-strong);border-radius:6px;box-shadow:var(--shadow)}
+.seg-wide{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg-wide button{min-height:46px;font-size:14.5px}
+@media (max-width:520px){.seg-wide{grid-template-columns:repeat(2,1fr)}}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.form-grid .wide{grid-column:1 / -1}
+@media (max-width:520px){.form-grid{grid-template-columns:1fr}}
+.auto-line{margin:-4px 0 0}
+fieldset.block{border:1px solid var(--rule);border-radius:14px;padding:12px 14px 14px;margin:0;display:flex;flex-direction:column;gap:10px;min-width:0}
+fieldset.block legend{font-weight:700;font-size:14px;padding:0 6px;color:var(--ink)}
+.photo-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.photo-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.photo{position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:var(--raise);border:1px solid var(--rule);max-width:100%}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .no{position:absolute;left:6px;top:6px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700;border-radius:999px;padding:0 8px}
+.photo .ctl{position:absolute;right:4px;bottom:4px;display:flex;gap:4px}
+.photo .ctl button{width:34px;height:34px;border-radius:8px;border:0;background:rgba(20,22,30,.7);color:#fff;font-size:15px;cursor:pointer}
+.photo-empty{grid-column:1 / -1;border:1.5px dashed var(--rule-strong);border-radius:10px;padding:18px;text-align:center;color:var(--ink-2);font-size:13.5px}
+.item-row{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:end;padding-bottom:10px;border-bottom:1px dashed var(--rule)}
+.item-row:last-of-type{border-bottom:0}
+.item-row .unit-pair{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:4px}
+@media (max-width:620px){.item-row{grid-template-columns:1fr 1fr}.item-row .field:first-child{grid-column:1 / -1}}
+.icon-btn{width:46px;height:46px;border-radius:10px;border:1px solid var(--rule-strong);background:transparent;color:var(--crit);font-size:18px;cursor:pointer}
+#rMic[aria-pressed="true"]{background:var(--crit);border-color:var(--crit);color:#fff}
+.send-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;border-top:1px solid var(--rule);padding-top:14px}
+.send-bar #rClear{margin-right:auto}
+.history{display:flex;flex-direction:column}
+.h-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--rule)}
+.h-row:last-child{border-bottom:0}
+.h-row .t{font-weight:700}
+.h-row .s{font-size:12.5px;color:var(--ink-2)}
+.h-row a{color:var(--indigo-ink);font-weight:700;font-size:14px}
+.pest-form{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.4fr);gap:10px;align-items:end;margin-bottom:10px}
+.pest-form .wide{grid-column:auto}
+.pest-actions{grid-column:1 / -1;justify-content:flex-end}
+@media (max-width:760px){.pest-form{grid-template-columns:1fr 1fr}.pest-form .wide{grid-column:1 / -1}}
+.pest-row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--rule)}
+.pest-row:last-child{border-bottom:0}
+.pest-row .t{font-weight:700}.pest-row .s{font-size:12.5px;color:var(--ink-2)}
+.spray-row{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr) auto}
+.spray-row .field:first-child{grid-column:1 / -1}
+.spray-row .unit-pair{grid-template-columns:minmax(0,1fr) 76px auto;align-items:center}
+.per10a{font-size:14px;font-weight:700;color:var(--ink-2);padding-left:2px}
+.fert-row{grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto}
+@media (max-width:620px){.fert-row{grid-template-columns:1fr 1fr}.spray-row{grid-template-columns:1fr auto}.spray-row .field:nth-child(2),.spray-row .field:nth-child(3){grid-column:1 / -1}}
+.field-table{min-width:900px}
+.field-table select{min-height:38px;font-size:14px;padding:0 30px 0 10px;background-position:calc(100% - 15px) 16px,calc(100% - 10px) 16px}
+.type-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:620px){.type-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.type-card{border:1px solid var(--rule);border-radius:12px;padding:10px 12px;background:var(--raise);display:flex;flex-direction:column;gap:2px}
+.type-card .n{font-weight:700;font-size:15px}
+.type-card .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.type-card .v small{font-size:12px;color:var(--ink-2);margin-left:2px}
+.type-card .s{font-size:12px;color:var(--ink-2)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.field-table td:nth-child(7){white-space:normal;min-width:150px;color:var(--ink-2);font-size:13px}
+.field-table th,.field-table td{text-align:left}
+.field-table td:last-child,.field-table th:last-child{text-align:right}
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <div class="brand"><small>南相馬ねぎ出荷組合</small><h1>長ねぎ 生育トラッカー</h1></div>
+    <div class="plot-switch">
+      <label for="plotSelect">作付け</label>
+      <select id="plotSelect" aria-label="表示する圃場"></select>
+    </div>
+    <div class="freshness" id="freshness"><span class="dot"></span><span>データベースに接続中…</span></div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="画面の切り替え">
+    <button class="tab" role="tab" id="tab-now" data-tab="now" aria-selected="true" aria-controls="panel-now">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 21V10c0-3-1-5-3-7"/><path d="M12 21V8c0-2 1-4 2-5"/><path d="M15 21V11c0-2 2-4 4-5"/><path d="M5 21h14"/></svg>いま</button>
+    <button class="tab" role="tab" id="tab-report" data-tab="report" aria-selected="false" aria-controls="panel-report">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>レポート</button>
+    <button class="tab" role="tab" id="tab-stages" data-tab="stages" aria-selected="false" aria-controls="panel-stages">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><path d="M5 8v8"/><path d="M10 6h10M10 18h10M10 12h7"/></svg>生育ステージ</button>
+    <button class="tab" role="tab" id="tab-weather" data-tab="weather" aria-selected="false" aria-controls="panel-weather">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M10 14V5a2 2 0 1 1 4 0v9a4 4 0 1 1-4 0z"/><path d="M12 10v6"/></svg>気温データ</button>
+    <button class="tab" role="tab" id="tab-plots" data-tab="plots" aria-selected="false" aria-controls="panel-plots">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="8" height="7" rx="1"/><rect x="13" y="4" width="8" height="7" rx="1"/><rect x="3" y="13" width="8" height="7" rx="1"/><path d="M17 14v6M14 17h6"/></svg>圃場</button>
+  </nav>
+
+  <!-- いま -->
+  <section class="panel" id="panel-now" role="tabpanel" aria-labelledby="tab-now">
+    <div id="nowBanner"></div>
+    <div class="hero">
+      <div class="hero-main">
+        <div class="hero-context" id="heroContext"><span class="label">読み込み中</span></div>
+        <div class="hero-stage">
+          <span class="label">いまの生育ステージ</span>
+          <h2 id="heroStage">—</h2>
+          <div id="heroStatus"></div>
+        </div>
+        <img class="hero-art" id="heroArt" alt="" hidden>
+        <div class="harvest">
+          <span class="label" id="harvestLabel">収穫開始の予測</span>
+          <div class="harvest-row"><span class="harvest-date num" id="harvestDate">—</span><span class="harvest-left" id="harvestLeft"></span></div>
+          <div class="gauge" id="gauge" aria-hidden="true"></div>
+          <div class="gauge-cap"><span id="gaugeNow">出穂後 —</span><span class="hint" id="gaugeCap">帯＝収穫開始の目安</span></div>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><span class="label">定植後 積算気温</span><span class="value" id="mT">—</span><span class="sub" id="mTs"></span></div>
+        <div class="metric"><span class="label">次の作業</span><span class="value" id="mH">—</span><span class="sub" id="mHs"></span></div>
+        <div class="metric"><span class="label">平年との差</span><span class="value" id="mN">—</span><span class="sub" id="mNs"></span></div>
+        <div class="metric"><span class="label">病害虫の警戒</span><span class="value" id="mP">—</span><span class="sub" id="mPs"></span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head">
+        <h2>定植からの積算気温</h2>
+        <div class="legend"><span><i style="background:var(--indigo)"></i>実測</span><span><i class="dash"></i>予測（平年値）</span><span><i class="band"></i>収穫開始の目安</span><span><i style="background:var(--gold)"></i>土寄せの目安</span></div>
+      </div>
+      <div class="chart-box" id="harvestChart"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>病害虫・気象リスク</h2><span class="hint" id="riskSpan">直近7日の相馬アメダスから判定</span></div>
+      <div id="riskList" class="risk-list"></div>
+      <p class="hint" style="margin:10px 0 0">気温・降水・日照からの簡易判定です。ネギ通信の発生予察情報や圃場の見回りと合わせて判断してください。</p>
+    </div>
+
+    <div class="card">
+      <div class="advice">
+        <div class="advice-mark">管理のポイント</div>
+        <div>
+          <div class="card-head" style="margin-bottom:6px"><h2 id="adviceTitle">—</h2><button class="btn ghost small" type="button" data-goto="stages">すべてのステージを見る</button></div>
+          <div id="adviceBody" class="hint">定植日を入力すると表示されます。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- レポート -->
+  <section class="panel" id="panel-report" role="tabpanel" aria-labelledby="tab-report" hidden>
+    <div class="report-layout">
+      <div class="card report-form">
+        <div class="card-head"><h2>現場レポート</h2><span class="hint" id="rTo">宛先 —</span></div>
+        <div class="seg seg-wide" role="group" aria-label="レポートの種類" id="rTypes">
+          <button type="button" data-rtype="spray" aria-pressed="true">防除</button>
+          <button type="button" data-rtype="top" aria-pressed="false">追肥</button>
+          <button type="button" data-rtype="soil" aria-pressed="false">土寄せ</button>
+          <button type="button" data-rtype="harvest" aria-pressed="false">収穫</button>
+        </div>
+
+        <div class="form-grid">
+          <label class="field" for="rDate">日付<input type="date" id="rDate"></label>
+          <label class="field" for="rPlot">圃場（農地一覧）<select id="rPlot"></select></label>
+        </div>
+        <p class="hint auto-line" id="rAuto">—</p>
+
+        <fieldset class="block">
+          <legend>写真（1〜4枚）</legend>
+          <div class="photo-grid" id="rPhotos"></div>
+          <div class="toolbar">
+            <label class="btn gold" for="rCamera"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>カメラで撮影</label>
+            <input type="file" id="rCamera" accept="image/*" capture="environment" hidden>
+            <label class="btn ghost" for="rPick">写真を選ぶ</label>
+            <input type="file" id="rPick" accept="image/*" multiple hidden>
+            <span class="hint">1枚目が一番大きく載ります。← → で順番を変えられます。</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="block" id="rFields"></fieldset>
+
+        <fieldset class="block">
+          <legend>コメント</legend>
+          <textarea id="rComment" placeholder="音声入力ボタンを押して話すと、ここに文字が入ります。手で直すこともできます。"></textarea>
+          <div class="toolbar" style="margin-top:8px">
+            <button class="btn ghost" type="button" id="rMic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg><span>音声入力</span></button>
+            <span class="hint" id="rMicHint">使えない場合は、キーボードのマイクボタンで話してください。</span>
+          </div>
+        </fieldset>
+
+        <div class="send-bar">
+          <button class="btn ghost" type="button" id="rClear">入力をクリア</button>
+          <button class="btn ghost" type="button" id="rSavePdf">PDFを保存</button>
+          <button class="btn" type="button" id="rSend">PDFをメールで送信</button>
+        </div>
+        <div id="rStatus" class="hint" role="status" aria-live="polite"></div>
+      </div>
+
+      <div class="card report-preview">
+        <div class="card-head"><h2>A4 プレビュー</h2><span class="hint">この内容がそのままPDFになります</span></div>
+        <canvas id="rCanvas" width="1240" height="1754" aria-label="レポートのプレビュー"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>登録農薬</h2><span class="hint">ここに登録した農薬が、防除の入力で選べます</span></div>
+      <form id="pestForm" class="pest-form">
+        <label class="field wide" for="pestName">農薬名<input type="text" id="pestName" required placeholder="例：アミスター20フロアブル"></label>
+        <label class="field" for="pestRatio">標準の希釈倍率（倍）<input type="number" id="pestRatio" step="1" inputmode="numeric" placeholder="不要なら空欄"></label>
+        <label class="field" for="pestUnit">使用量の単位<select id="pestUnit"><option>L</option><option>mL</option><option>kg</option><option>g</option></select></label>
+        <label class="field" for="pestNote">メモ（任意）<input type="text" id="pestNote" placeholder="例：さび病・べと病"></label>
+        <div class="toolbar pest-actions"><button class="btn ghost" type="button" id="pestCancel" hidden>キャンセル</button><button class="btn" type="submit" id="pestSave">登録</button></div>
+      </form>
+      <div id="pestList" class="history"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><h2>送信したレポート</h2><span class="hint">PDFはここから開けます</span></div>
+      <div id="rHistory" class="history"></div>
+    </div>
+  </section>
+
+  <!-- 生育ステージ -->
+  <section class="panel" id="panel-stages" role="tabpanel" aria-labelledby="tab-stages" hidden>
+    <div class="card">
+      <div class="card-head"><h2 id="stagesTitle">生育ステージ</h2><span class="hint">到達日は実測、未到達は平年値で予測。管理メモは作付けグループごとに保存され、iPadとMacで共有されます。</span></div>
+      <ol class="stage-list" id="stageList"></ol>
+    </div>
+  </section>
+
+  <!-- 気温データ -->
+  <section class="panel" id="panel-weather" role="tabpanel" aria-labelledby="tab-weather" hidden>
+    <div class="card">
+      <div class="card-head">
+        <h2>気温の推移</h2>
+        <div class="seg" role="group" aria-label="表示期間">
+          <button type="button" data-range="60" aria-pressed="true">60日</button>
+          <button type="button" data-range="season" aria-pressed="false">定植から</button>
+          <button type="button" data-range="all" aria-pressed="false">全期間</button>
+        </div>
+      </div>
+      <div class="legend" style="margin-bottom:6px"><span><i style="background:var(--s-max)"></i>最高</span><span><i style="background:var(--s-avg)"></i>平均</span><span><i style="background:var(--s-min)"></i>最低</span><span class="hint">グラフを指でなぞると各日の値が出ます</span></div>
+      <div class="chart-box" id="tempChart"></div>
+      <div class="stage-strip" id="stageStrip"></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <div class="card-head"><h2>日別データ</h2>
+          <div class="toolbar"><button class="btn ghost small" type="button" id="csvBtn">CSV書き出し</button><button class="btn small" type="button" id="addDayBtn">手入力で追加・修正</button></div>
+        </div>
+        <p class="hint" style="margin:0 0 10px">気象庁 相馬アメダスの値を毎朝自動で取り込みます。赤い行は未取得の日です。手入力した日は自動更新で上書きされません。</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>日付</th><th>天気</th><th>平均</th><th>最高</th><th>最低</th><th>降水 mm</th><th>風速 m/s</th><th>日照 h</th><th>出典</th><th></th></tr></thead>
+          <tbody id="dayRows"></tbody>
+        </table></div>
+        <div class="table-foot"><button class="btn ghost small" type="button" id="moreRowsBtn">さらに30日表示</button></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h2>積算気温カリキュレーター</h2></div>
+        <p class="hint" style="margin:0 0 10px">定植日や土寄せ日など、任意の開始日から日平均気温を足し上げます。目標に届いていない場合は、平年値で到達日を予測します。</p>
+        <div class="calc-grid">
+          <label class="field" for="calcStart">開始日<input type="date" id="calcStart"></label>
+          <label class="field" for="calcTarget">目標 積算気温（℃）<input type="number" id="calcTarget" min="1" step="10" inputmode="numeric"></label>
+        </div>
+        <div class="calc-out" id="calcOut"></div>
+        <div class="chart-box" id="calcChart" style="margin-top:10px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 圃場 -->
+  <section class="panel" id="panel-plots" role="tabpanel" aria-labelledby="tab-plots" hidden>
+    <div class="card">
+      <div class="card-head"><h2>作付けグループ</h2>
+        <div class="toolbar">
+          <button class="btn ghost small" type="button" id="importBtn">バックアップを読み込む</button>
+          <input type="file" id="importFile" accept="application/json,.json" hidden>
+          <button class="btn small" type="button" id="addPlotBtn">グループを追加</button>
+        </div>
+      </div>
+      <p class="hint" style="margin:0 0 12px">同じ時期に定植した圃場をひとつの「作付けグループ」にまとめ、定植日・止め土寄せ日・収穫開始日を登録します。下の農地一覧で、各圃場をグループに割り当てます。iPad miniでもMacでも同じ内容が表示されます。</p>
+      <div class="plot-grid" id="plotGrid"></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><h2>農地一覧（作型・状態）</h2><span class="hint" id="fieldSum">—</span></div>
+      <p class="hint" style="margin:0 0 10px">作型・状態・作付けグループはその場で変更でき、iPhone・iPad・Macで共有されます。長ネギの圃場は、割り当てた作付けグループの積算気温で生育ステージを計算します。</p>
+      <div class="type-cards" id="typeCards"></div>
+      <div class="toolbar" style="margin:10px 0">
+        <div class="seg" role="group" aria-label="作型で絞り込み" id="typeFilter">
+          <button type="button" data-ctype="" aria-pressed="false">すべて</button>
+          <button type="button" data-ctype="長ネギ" aria-pressed="true">長ネギ</button>
+          <button type="button" data-ctype="ブロッコリー" aria-pressed="false">ブロッコリー</button>
+          <button type="button" data-ctype="その他" aria-pressed="false">その他</button>
+        </div>
+        <label class="field" for="fieldFilter" style="flex:1;min-width:200px;max-width:360px"><span class="visually-hidden">絞り込み</span><input type="text" id="fieldFilter" placeholder="呼称・エリア・作物・地番で検索"></label>
+      </div>
+      <div class="table-wrap"><table class="field-table">
+        <thead><tr><th>No</th><th>エリア</th><th>呼称</th><th>作型</th><th>状態</th><th>作付けグループ</th><th>作物（表）</th><th>面積 a</th></tr></thead>
+        <tbody id="fieldRows"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>計算方法</b>　積算気温は、基準温度を引かずに日平均気温をそのまま足し上げています（定植日から）。生育ステージと土寄せ時期の区切りは、春まき秋冬どり（4月定植・8月〜翌2月収穫）を想定した予測用のモデル値です。収穫開始は「定植後の目安積算」または「止め土寄せ後の目安積算」で予測し、どちらも作付けグループごとに変更できます。実際の太さ・葉鞘の長さ・出荷規格を見て判断してください。</p>
+    <p><b>データ出典</b>　気象庁 過去の気象データ（相馬 アメダス、福島県 prec_no=36 / block_no=0285）。平年値は、7〜12月が相馬の2016〜2025年の同月同日平均、1〜6月が気象庁の平年値（1991〜2020年）。天気は降水量と日照時間からの推定です。病害虫リスクは一般的な発生しやすい気象条件に基づく目安です。</p>
+  </footer>
+</div>
+
+<dialog id="dayDialog" aria-labelledby="dayDlgTitle">
+  <form class="dlg" method="dialog" id="dayForm">
+    <h2 id="dayDlgTitle">日別データの手入力</h2>
+    <div class="dlg-grid">
+      <label class="field wide" for="fDate">日付<input type="date" id="fDate" required></label>
+      <label class="field" for="fAvg">平均気温 ℃<input type="number" step="0.1" id="fAvg" inputmode="decimal" required></label>
+      <label class="field" for="fMax">最高気温 ℃<input type="number" step="0.1" id="fMax" inputmode="decimal" required></label>
+      <label class="field" for="fMin">最低気温 ℃<input type="number" step="0.1" id="fMin" inputmode="decimal" required></label>
+      <label class="field" for="fPrecip">降水量 mm<input type="number" step="0.5" id="fPrecip" inputmode="decimal"></label>
+      <label class="field" for="fWind">平均風速 m/s<input type="number" step="0.1" id="fWind" inputmode="decimal"></label>
+      <label class="field" for="fSun">日照時間 h<input type="number" step="0.1" id="fSun" inputmode="decimal"></label>
+    </div>
+    <p class="hint" id="dayHint" style="margin:0">保存した日は「手入力」になり、自動更新で上書きされません。</p>
+    <div class="dlg-foot">
+      <button class="btn ghost" type="button" data-close>キャンセル</button>
+      <button class="btn" type="submit" id="daySave">保存</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="plotDialog" aria-labelledby="plotDlgTitle">
+  <form class="dlg" method="dialog" id="plotForm">
+    <h2 id="plotDlgTitle">作付けグループを編集</h2>
+    <div class="dlg-grid">
+      <label class="field wide" for="pName">グループ名<input type="text" id="pName" required placeholder="例：秋冬どり 4月上旬定植"></label>
+      <label class="field wide" for="pVariety">品種<input type="text" id="pVariety" placeholder="例：夏扇パワー"></label>
+      <label class="field" for="pTrans">定植日（計算の基準）<input type="date" id="pTrans"></label>
+      <label class="field" for="pTransEnd">定植終了日（参考）<input type="date" id="pTransEnd"></label>
+      <label class="field" for="pTome">止め土寄せ日<input type="date" id="pTome"></label>
+      <label class="field" for="pHarv">収穫開始日（実際）<input type="date" id="pHarv"></label>
+      <label class="field" for="pTarget">収穫開始の目安（定植後 ℃）<input type="number" id="pTarget" step="50" inputmode="numeric" placeholder="2600"></label>
+      <label class="field" for="pTomeT">止め土寄せ後の目安（℃）<input type="number" id="pTomeT" step="50" inputmode="numeric" placeholder="650"></label>
+    </div>
+    <p class="hint" style="margin:0">止め土寄せ日を入れると、収穫開始はその日からの積算で予測します。収穫開始日を入れると「収穫期」になります。</p>
+    <div class="dlg-foot">
+      <button class="btn danger left" type="button" id="plotDelete">このグループを削除</button>
+      <button class="btn ghost" type="button" data-close>キャンセル</button>
+      <button class="btn" type="submit">保存</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script>
+const NORMAL_H1={"01-01": 3.1, "01-02": 3.0, "01-03": 2.9, "01-04": 2.8, "01-05": 2.7, "01-06": 2.6, "01-07": 2.5, "01-08": 2.5, "01-09": 2.4, "01-10": 2.3, "01-11": 2.2, "01-12": 2.1, "01-13": 2.1, "01-14": 2.1, "01-15": 2.0, "01-16": 2.0, "01-17": 2.0, "01-18": 2.0, "01-19": 2.0, "01-20": 2.0, "01-21": 2.0, "01-22": 2.0, "01-23": 1.9, "01-24": 1.9, "01-25": 1.9, "01-26": 1.9, "01-27": 1.9, "01-28": 1.9, "01-29": 1.9, "01-30": 1.9, "01-31": 1.9, "02-01": 1.9, "02-02": 1.9, "02-03": 2.0, "02-04": 2.0, "02-05": 2.0, "02-06": 2.0, "02-07": 2.1, "02-08": 2.1, "02-09": 2.2, "02-10": 2.2, "02-11": 2.3, "02-12": 2.4, "02-13": 2.4, "02-14": 2.5, "02-15": 2.5, "02-16": 2.6, "02-17": 2.7, "02-18": 2.7, "02-19": 2.8, "02-20": 2.9, "02-21": 2.9, "02-22": 3.0, "02-23": 3.1, "02-24": 3.2, "02-25": 3.2, "02-26": 3.3, "02-27": 3.4, "02-28": 3.5, "02-29": 3.6, "03-01": 3.6, "03-02": 3.7, "03-03": 3.8, "03-04": 3.9, "03-05": 4.0, "03-06": 4.1, "03-07": 4.2, "03-08": 4.3, "03-09": 4.4, "03-10": 4.5, "03-11": 4.7, "03-12": 4.8, "03-13": 5.0, "03-14": 5.1, "03-15": 5.3, "03-16": 5.4, "03-17": 5.6, "03-18": 5.7, "03-19": 5.8, "03-20": 6.0, "03-21": 6.1, "03-22": 6.2, "03-23": 6.3, "03-24": 6.4, "03-25": 6.6, "03-26": 6.7, "03-27": 6.8, "03-28": 7.0, "03-29": 7.2, "03-30": 7.4, "03-31": 7.5, "04-01": 7.7, "04-02": 7.9, "04-03": 8.1, "04-04": 8.3, "04-05": 8.5, "04-06": 8.7, "04-07": 8.9, "04-08": 9.1, "04-09": 9.2, "04-10": 9.4, "04-11": 9.6, "04-12": 9.8, "04-13": 10.0, "04-14": 10.2, "04-15": 10.4, "04-16": 10.5, "04-17": 10.7, "04-18": 10.9, "04-19": 11.1, "04-20": 11.3, "04-21": 11.5, "04-22": 11.7, "04-23": 11.9, "04-24": 12.1, "04-25": 12.3, "04-26": 12.5, "04-27": 12.7, "04-28": 13.0, "04-29": 13.2, "04-30": 13.4, "05-01": 13.6, "05-02": 13.7, "05-03": 13.9, "05-04": 14.1, "05-05": 14.2, "05-06": 14.3, "05-07": 14.4, "05-08": 14.5, "05-09": 14.6, "05-10": 14.7, "05-11": 14.8, "05-12": 14.9, "05-13": 15.0, "05-14": 15.1, "05-15": 15.2, "05-16": 15.3, "05-17": 15.5, "05-18": 15.6, "05-19": 15.8, "05-20": 16.0, "05-21": 16.1, "05-22": 16.3, "05-23": 16.4, "05-24": 16.6, "05-25": 16.7, "05-26": 16.8, "05-27": 17.0, "05-28": 17.1, "05-29": 17.2, "05-30": 17.3, "05-31": 17.4, "06-01": 17.5, "06-02": 17.6, "06-03": 17.7, "06-04": 17.7, "06-05": 17.8, "06-06": 17.9, "06-07": 18.0, "06-08": 18.1, "06-09": 18.2, "06-10": 18.3, "06-11": 18.4, "06-12": 18.5, "06-13": 18.7, "06-14": 18.8, "06-15": 18.9, "06-16": 19.0, "06-17": 19.2, "06-18": 19.3, "06-19": 19.4, "06-20": 19.5, "06-21": 19.6, "06-22": 19.8, "06-23": 19.9, "06-24": 20.1, "06-25": 20.2, "06-26": 20.3, "06-27": 20.5, "06-28": 20.6, "06-29": 20.8, "06-30": 20.9};
+const NORMAL={
+    "07-01":24.57,"07-02":24.59,"07-03":24.08,"07-04":23.04,"07-05":22.8,"07-06":22.59,"07-07":23.32,"07-08":22.56,
+    "07-09":23.27,"07-10":23.38,"07-11":23.26,"07-12":22.97,"07-13":23.29,"07-14":23.08,"07-15":22.79,"07-16":23.68,
+    "07-17":24.72,"07-18":24.76,"07-19":24.58,"07-20":24.67,"07-21":24.45,"07-22":25.25,"07-23":24.9,"07-24":24.64,
+    "07-25":24.98,"07-26":25.05,"07-27":24.84,"07-28":25.53,"07-29":25.87,"07-30":25.93,"07-31":26.02,"08-01":25.97,
+    "08-02":26.1,"08-03":26.15,"08-04":25.85,"08-05":26.69,"08-06":26.04,"08-07":25.74,"08-08":25.27,"08-09":26.43,
+    "08-10":25.67,"08-11":25.27,"08-12":24.7,"08-13":25.0,"08-14":24.23,"08-15":25.42,"08-16":25.12,"08-17":25.49,
+    "08-18":25.1,"08-19":25.32,"08-20":25.26,"08-21":25.59,"08-22":25.78,"08-23":26.88,"08-24":26.16,"08-25":26.04,
+    "08-26":25.89,"08-27":24.87,"08-28":24.38,"08-29":24.89,"08-30":24.53,"08-31":24.14,"09-01":24.09,"09-02":23.71,
+    "09-03":23.55,"09-04":22.9,"09-05":23.63,"09-06":23.73,"09-07":23.94,"09-08":23.59,"09-09":23.71,"09-10":23.73,
+    "09-11":22.77,"09-12":22.69,"09-13":22.28,"09-14":22.3,"09-15":22.3,"09-16":21.9,"09-17":23.03,"09-18":23.09,
+    "09-19":22.05,"09-20":20.96,"09-21":19.63,"09-22":19.53,"09-23":20.35,"09-24":20.39,"09-25":19.21,"09-26":19.67,
+    "09-27":19.52,"09-28":20.14,"09-29":19.75,"09-30":19.24,"10-01":19.65,"10-02":20.12,"10-03":19.57,"10-04":19.87,
+    "10-05":19.15,"10-06":17.95,"10-07":17.34,"10-08":17.92,"10-09":16.98,"10-10":17.26,"10-11":17.17,"10-12":16.8,
+    "10-13":15.85,"10-14":15.34,"10-15":15.75,"10-16":15.28,"10-17":15.46,"10-18":14.73,"10-19":15.06,"10-20":14.89,
+    "10-21":13.72,"10-22":13.92,"10-23":14.86,"10-24":13.66,"10-25":13.57,"10-26":14.52,"10-27":14.23,"10-28":12.89,
+    "10-29":12.62,"10-30":12.1,"10-31":12.34,"11-01":13.27,"11-02":13.52,"11-03":13.08,"11-04":11.91,"11-05":12.16,
+    "11-06":12.23,"11-07":12.3,"11-08":12.08,"11-09":11.7,"11-10":11.36,"11-11":10.56,"11-12":10.32,"11-13":10.74,
+    "11-14":10.88,"11-15":10.37,"11-16":10.08,"11-17":10.44,"11-18":9.24,"11-19":9.73,"11-20":9.38,"11-21":8.87,
+    "11-22":9.66,"11-23":8.75,"11-24":8.08,"11-25":7.75,"11-26":8.74,"11-27":8.87,"11-28":8.5,"11-29":7.95,
+    "11-30":7.04,"12-01":7.27,"12-02":5.86,"12-03":7.42,"12-04":6.81,"12-05":6.19,"12-06":5.3,"12-07":6.42,
+    "12-08":6.01,"12-09":5.18,"12-10":5.59,"12-11":5.96,"12-12":5.34,"12-13":5.03,"12-14":4.77,"12-15":3.84,
+    "12-16":4.44,"12-17":4.16,"12-18":4.08,"12-19":3.45,"12-20":4.85,"12-21":5.53,"12-22":5.24,"12-23":4.78,
+    "12-24":4.8,"12-25":4.92,"12-26":4.08,"12-27":3.15,"12-28":2.64,"12-29":3.41,"12-30":3.92,"12-31":3.36
+  };
+Object.assign(NORMAL, NORMAL_H1);
+const PREV={
+    "07-01":26.8,"07-02":26.6,"07-03":26.4,"07-04":26.6,"07-05":27.3,"07-06":28.0,"07-07":28.6,"07-08":26.9,
+    "07-09":27.0,"07-10":21.5,"07-11":20.0,"07-12":19.8,"07-13":22.7,"07-14":24.1,"07-15":25.5,"07-16":26.0,
+    "07-17":26.7,"07-18":26.7,"07-19":25.9,"07-20":27.5,"07-21":28.2,"07-22":28.5,"07-23":29.0,"07-24":28.2,
+    "07-25":27.7,"07-26":27.7,"07-27":27.9,"07-28":28.9,"07-29":27.6,"07-30":25.4,"07-31":25.2,"08-01":24.7,
+    "08-02":27.0,"08-03":27.3,"08-04":27.1,"08-05":29.5,"08-06":27.3,"08-07":26.3,"08-08":26.4,"08-09":25.3,
+    "08-10":23.8,"08-11":26.4,"08-12":24.0,"08-13":24.9,"08-14":24.9,"08-15":26.2,"08-16":25.0,"08-17":27.1,
+    "08-18":26.9,"08-19":27.8,"08-20":29.3,"08-21":28.1,"08-22":25.8,"08-23":28.1,"08-24":28.0,"08-25":26.6,
+    "08-26":27.6,"08-27":27.8,"08-28":25.4,"08-29":26.1,"08-30":28.7,"08-31":26.7,"09-01":28.5,"09-02":29.5,
+    "09-03":26.7,"09-04":23.2,"09-05":23.8,"09-06":24.1,"09-07":27.3,"09-08":26.0,"09-09":25.3,"09-10":23.1,
+    "09-11":22.7,"09-12":23.6,"09-13":24.0,"09-14":26.4,"09-15":23.8,"09-16":25.3,"09-17":26.1,"09-18":23.1,
+    "09-19":20.8,"09-20":21.8,"09-21":22.5,"09-22":18.4,"09-23":19.0,"09-24":19.1,"09-25":21.7,"09-26":22.2,
+    "09-27":20.7,"09-28":21.7,"09-29":22.2,"09-30":19.8,"10-01":18.5,"10-02":20.5,"10-03":19.8,"10-04":19.4,
+    "10-05":22.0,"10-06":21.1,"10-07":18.7,"10-08":20.2,"10-09":16.7,"10-10":16.2,"10-11":14.5,"10-12":17.3,
+    "10-13":18.8,"10-14":15.9,"10-15":16.0,"10-16":15.5,"10-17":17.1,"10-18":19.4,"10-19":16.5,"10-20":14.6,
+    "10-21":13.0,"10-22":11.3,"10-23":10.8,"10-24":11.4,"10-25":12.4,"10-26":14.8,"10-27":16.6,"10-28":11.1,
+    "10-29":10.2,"10-30":9.5,"10-31":12.6,"11-01":15.8,"11-02":14.5,"11-03":10.5,"11-04":8.5,"11-05":9.5,
+    "11-06":11.4,"11-07":13.1,"11-08":9.2,"11-09":10.6,"11-10":11.8,"11-11":10.1,"11-12":8.0,"11-13":10.6,
+    "11-14":11.0,"11-15":7.8,"11-16":7.8,"11-17":14.4,"11-18":6.7,"11-19":5.6,"11-20":7.5,"11-21":9.2,
+    "11-22":7.1,"11-23":8.8,"11-24":10.2,"11-25":10.4,"11-26":9.9,"11-27":10.0,"11-28":10.5,"11-29":7.6,
+    "11-30":8.3,"12-01":11.5,"12-02":9.4,"12-03":7.8,"12-04":2.0,"12-05":4.3,"12-06":5.0,"12-07":7.4,
+    "12-08":10.5,"12-09":5.6,"12-10":3.9,"12-11":8.0,"12-12":2.7,"12-13":2.5,"12-14":4.9,"12-15":7.2,
+    "12-16":6.6,"12-17":5.6,"12-18":4.5,"12-19":4.1,"12-20":10.4,"12-21":14.5,"12-22":5.6,"12-23":2.0,
+    "12-24":5.6,"12-25":7.8,"12-26":5.6,"12-27":1.1,"12-28":2.4,"12-29":3.2,"12-30":7.8,"12-31":6.7
+  };
+const DEFAULT_NOTES={"planting": "定植直後から根が活着するまでの時期です。植え溝の乾燥が続く場合はかん水し、活着を促します。風で苗が倒れやすいので、植え溝の土が崩れていないか確認します。定植後早めに土壌処理除草剤を散布します。", "early": "新しい葉が増え、生育が本格化する時期です。除草と中耕を兼ねて株元に軽く土を寄せます（寄せすぎると生育が止まるので注意）。1回目の追肥を行い、アザミウマ・ハモグリバエの初発を見回ります。", "soil1": "1回目の土寄せ適期の目安です。葉の分岐点（葉鞘の上端）を埋めない高さまでにとどめます。土寄せと合わせて追肥を行います。梅雨入り前に畝間の排水路を整え、滞水しないようにします。", "rainy": "梅雨期は、さび病・べと病・黒斑病が出やすくなります。降雨が続く前後に予防散布を計画します。2回目の土寄せは、土が過湿でない日を選び、土寄せ直後の大雨による軟腐病に注意します。", "summer": "高温期（夏越し）です。3回目の土寄せは、猛暑日や大雨の直後を避けて軽めに行います。高温時の深い土寄せは根を傷め、軟腐病・白絹病の原因になるため控えめにします。アザミウマ・ハモグリバエの密度が上がりやすく、乾燥が続く場合はかん水も検討します。大雨の後は排水を最優先にします。", "fattening": "収穫予定の30〜40日前（秋は40〜50日前）に止め土寄せを行い、白い部分（軟白部）を確保する時期です。止め土寄せ後は太りが進みます。止め土寄せ日を記録すると、収穫開始日の予測が止め土寄せ基準に切り替わります。", "harvest": "収穫開始の目安に到達しました。太さ・軟白部の長さ・葉の状態を確認し、出荷規格に合わせて収穫を始めます。収穫前の防除は、各農薬の収穫前日数を必ず確認してください。", "winter": "在圃のまま順次収穫する時期です。気温が下がると生育はほぼ止まります。凍結した朝の収穫は品質低下の原因になるため、日中の気温が上がってから行います。雪や強い霜の前に収穫量を調整し、葉枯病・さび病の発生も見回ります。"};
+const ART={};
+
+</script>
+<script>
+(function(){
+"use strict";
+
+/* ================= 定数 ================= */
+const STAGES = [
+  {key:"planting",  label:"定植・活着期"},
+  {key:"early",     label:"初期生育期（中耕・追肥①）"},
+  {key:"soil1",     label:"土寄せ①・追肥②", soil:"土寄せ①"},
+  {key:"rainy",     label:"梅雨期（土寄せ②・病害予防）", soil:"土寄せ②"},
+  {key:"summer",    label:"高温期（夏越し・土寄せ③）", soil:"土寄せ③"},
+  {key:"fattening", label:"止め土寄せ・肥大期", soil:"止め土寄せ"},
+  {key:"harvest",   label:"収穫開始期"},
+  {key:"winter",    label:"収穫期（在圃・冬どり）"}
+];
+const HARV_DEF = {target:2600, tome:650};
+const harvTarget = p => (p && +p.harvestTarget > 0) ? +p.harvestTarget : HARV_DEF.target;
+const tomeTarget = p => (p && +p.tomeTarget > 0) ? +p.tomeTarget : HARV_DEF.tome;
+const LS_PLOT = "negi.activePlot", LS_TAB = "negi.tab";
+
+/* ================= 状態 ================= */
+const S = {
+  db:null, connected:false,
+  readings:[], byDate:{}, lastObs:null,
+  plots:[], activeId:null, fields:[],
+  gdd:{startDate:"", targetTemp:null},
+  range:"60", rowLimit:30,
+  editingDate:null, editingPlotId:null, deleteArmed:false
+};
+
+/* ================= ユーティリティ ================= */
+const $ = id => document.getElementById(id);
+const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = n => String(n).padStart(2,"0");
+function todayStr(){ const d = new Date(); return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()); }
+function addDays(s,n){ const d = new Date(s+"T00:00:00Z"); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); }
+function daysBetween(a,b){ return Math.round((Date.parse(b+"T00:00:00Z") - Date.parse(a+"T00:00:00Z"))/86400000); }
+function md(s){ if(!s) return "—"; const p=s.split("-"); return (+p[1])+"/"+(+p[2]); }
+function jd(s){ if(!s) return "—"; const p=s.split("-"); const y = p[0]===todayStr().slice(0,4) ? "" : p[0]+"年"; return y+(+p[1])+"月"+(+p[2])+"日"; }
+function wd(s){ return "日月火水木金土"[new Date(s+"T00:00:00Z").getUTCDay()]; }
+const f1 = n => (Math.round(n*10)/10).toFixed(1);
+const fInt = n => Math.round(n).toLocaleString("ja-JP");
+const numOrNull = v => (v === "" || v == null || isNaN(+v)) ? null : +v;
+const tryLS = (fn, fb) => { try { return fn(); } catch(e){ return fb; } };
+
+let toastTimer;
+function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove("show"),2600); }
+
+/* ================= 気象データ ================= */
+function normalizeReading(id, d){
+  return {date:d.date||id, avg:numOrNull(d.avg_temp), max:numOrNull(d.max_temp), min:numOrNull(d.min_temp),
+    precip:numOrNull(d.precip), wind:numOrNull(d.wind), sun:numOrNull(d.sunshine),
+    weather:d.weather||"", source:d.source||""};
+}
+function isValid(d){
+  if(!d || d.avg==null || d.max==null || d.min==null) return false;
+  if(d.min > d.max + .05) return false;
+  if(d.avg < d.min - .5 || d.avg > d.max + .5) return false;
+  if(d.max > 50 || d.min < -40) return false;
+  return true;
+}
+function setReadings(list){
+  S.readings = list.sort((a,b)=> a.date < b.date ? -1 : 1);
+  S.byDate = {}; S.lastObs = null;
+  S.readings.forEach(d => { S.byDate[d.date]=d; if(isValid(d)) S.lastObs = d.date; });
+}
+function recentRate(){
+  const v = S.readings.filter(isValid).slice(-14);
+  return v.length ? v.reduce((s,d)=>s+d.avg,0)/v.length : 15;
+}
+function forecastTemp(date){ const n = NORMAL[date.slice(5)]; return n != null ? n : recentRate(); }
+
+/* start〜end の実測積算。未取得・異常値の日は足さずに記録 */
+function cumThrough(start, end){
+  let cum=0, days=0; const missing=[];
+  if(!start || !end || start > end) return {cum:0, days:0, missing};
+  for(let d=start, g=0; d<=end && g<4000; d=addDays(d,1), g++){
+    const r = S.byDate[d];
+    if(isValid(r)){ cum += r.avg; days++; } else missing.push(d);
+  }
+  return {cum, days, missing};
+}
+/* 目標積算に届く日。最新観測日までは実測、それ以降は平年値で予測 */
+function reachDate(start, target){
+  if(!start || !S.lastObs) return null;
+  let cum=0; const missing=[];
+  for(let d=start, g=0; g<500; d=addDays(d,1), g++){
+    if(d <= S.lastObs){
+      const r = S.byDate[d];
+      if(isValid(r)) cum += r.avg; else missing.push(d);
+    } else cum += forecastTemp(d);
+    if(cum >= target) return {date:d, actual:d <= S.lastObs, missing};
+  }
+  return null;
+}
+/* 出穂後の進み具合を平年・前年と比較 */
+function compareWith(h, table){
+  if(!h || !S.lastObs || h > S.lastObs) return null;
+  const actual = cumThrough(h, S.lastObs);
+  let ref=0, refAtObs=null, match=null;
+  for(let d=h, g=0; g<500; d=addDays(d,1), g++){
+    const v = table[d.slice(5)];
+    if(v == null) break;
+    ref += v;
+    if(d === S.lastObs) refAtObs = ref;
+    if(match === null && ref >= actual.cum) match = d;
+    if(refAtObs !== null && match !== null) break;
+  }
+  if(refAtObs === null) return null;
+  return {diffTemp: actual.cum - refAtObs, diffDays: match ? daysBetween(S.lastObs, match) : null, missing: actual.missing};
+}
+
+/* ================= 生育ステージ判定 ================= */
+function analyzePlot(p){
+  const t = p && p.transplant, obs = S.lastObs, tome = p && p.tomeDate, hs = p && p.harvestStart;
+  const cumT = (t && obs && t <= obs) ? cumThrough(t, obs) : null;
+  const cumTome = (tome && obs && tome <= obs) ? cumThrough(tome, obs) : null;
+  const target = harvTarget(p);
+  // ステージ境界：収穫開始の目安・止め土寄せ後の目安から後半を決める
+  const tomeStart = target - tomeTarget(p);
+  const bounds = [0, 250, 700, 1100, Math.min(1500, tomeStart - 150), tomeStart, target, target + 600, 99999];
+  for(let i=1;i<bounds.length;i++) if(bounds[i] <= bounds[i-1]) bounds[i] = bounds[i-1] + 50;
+  const stg = STAGES.map((s,i) => ({...s, lower:bounds[i], upper:bounds[i+1]}));
+  const out = stg.map(s => ({...s, state:"future", status:"", pill:"idle", reach:null}));
+  const by = k => out.find(s => s.key === k);
+
+  // 収穫開始の予測
+  let harvest = null, harvestBasis = "planting";
+  if(hs) harvest = {date:hs, actual:true, observed:true};
+  else if(tome){ harvest = reachDate(tome, tomeTarget(p)); harvestBasis = "tome"; }
+  else if(t) harvest = reachDate(t, target);
+
+  out.forEach(s => {
+    if(!t) return;
+    if(s.key === "planting"){ s.reach = {date:t, actual:true}; return; }
+    if(s.key === "harvest"){ s.reach = harvest; return; }
+    if(s.key === "winter") return;
+    s.reach = reachDate(t, s.lower);
+  });
+
+  let currentKey = null;
+  if(!t){
+    out.forEach(s => { s.status = "定植日を入力"; });
+  } else if(!cumT){
+    out.forEach(s => { s.status = "気温データ待ち"; });
+    currentKey = "planting"; by("planting").status = "定植直後"; by("planting").pill = "info"; by("planting").state = "current";
+  } else {
+    const c = cumT.cum;
+    const inHarvest = hs ? hs <= obs : (harvest && harvest.actual);
+    out.forEach(o => {
+      if(o.key === "harvest" || o.key === "winter") return;
+      if(inHarvest || c >= o.upper){ o.state="past"; o.status="完了"; }
+      else if(c >= o.lower){ o.state="current"; currentKey=o.key; o.status="進行中 " + Math.round((c-o.lower)/(o.upper-o.lower)*100) + "%"; o.pill = o.key==="summer"||o.key==="rainy" ? "warn" : "info"; }
+      else o.status = "あと " + fInt(o.lower - c) + "℃";
+    });
+    const hv = by("harvest"), wt = by("winter");
+    if(inHarvest){
+      const winterNow = obs.slice(5,7) >= "12" || obs.slice(5,7) <= "02";
+      if(winterNow){ hv.state="past"; hv.status = hs ? "開始 "+md(hs) : "到達済み"; wt.state="current"; currentKey="winter"; wt.status = "収穫中"; wt.pill="good"; }
+      else { hv.state="current"; currentKey="harvest"; hv.status = hs ? "収穫中（開始 "+md(hs)+"）" : "収穫できる時期・太さを確認"; hv.pill = hs ? "good" : "warn"; wt.status = "12月以降"; }
+    } else {
+      hv.status = harvest ? (harvestBasis==="tome" ? "止め土寄せ後 あと " + fInt(Math.max(0, tomeTarget(p) - (cumTome?cumTome.cum:0))) + "℃" : "あと " + fInt(Math.max(0, target - c)) + "℃") : "—";
+      if(harvestBasis === "tome" && currentKey !== "fattening"){ /* 止め土寄せ済みなら肥大期扱い */
+        out.forEach(o => { if(o.key!=="harvest" && o.key!=="winter" && o.key!=="fattening"){ if(o.state==="current"){ o.state="past"; o.status="完了"; } } });
+        const ft = by("fattening"); ft.state="current"; currentKey="fattening"; ft.status="止め土寄せ済み "+md(tome); ft.pill="info";
+      }
+      wt.status = "12月以降";
+    }
+  }
+  // 次の作業（未来の土寄せ）
+  let next = null;
+  if(t && cumT){
+    const c = cumT.cum;
+    if(!tome && !hs){
+      const up = out.find(s => s.soil && (c < s.lower + (s.upper - s.lower) * 0.6));
+      if(up){ const d = c >= up.lower ? null : up.reach; next = {label: up.soil, date: d ? d.date : null, now: c >= up.lower}; }
+      else if(c < target){ const tomeDate = reachDate(t, Math.max(c, target - tomeTarget(p))); next = {label:"止め土寄せ", date: tomeDate && !tomeDate.actual ? tomeDate.date : null, now: !tomeDate || tomeDate.actual}; }
+    }
+    if(!next && !hs && harvest) next = {label: harvest.actual ? "収穫・出荷" : "収穫開始", date: harvest.actual ? null : harvest.date, now: harvest.actual};
+  }
+  return {plot:p, stages:out, currentKey, cumT, cumTome, cumH:null, harvest, harvestBasis, next, target,
+    normal: compareWith(t, NORMAL), prev: null};
+}
+
+/* ================= 病害虫・気象リスク ================= */
+function riskAssess(endDate){
+  const end = endDate || S.lastObs; if(!end) return null;
+  const days = []; for(let i=6;i>=0;i--){ const r = S.byDate[addDays(end,-i)]; if(isValid(r)) days.push(r); }
+  if(days.length < 4) return null;
+  const avg = days.reduce((s,r)=>s+r.avg,0)/days.length;
+  const maxAvg = days.reduce((s,r)=>s+r.max,0)/days.length;
+  const rainDays = days.filter(r => (r.precip||0) >= 1).length;
+  const rainSum = days.reduce((s,r)=>s+(r.precip||0),0);
+  const heavy = days.filter(r => (r.precip||0) >= 20).length;
+  const hot = days.filter(r => r.max >= 30).length;
+  const sunAvg = days.filter(r=>r.sun!=null).reduce((s,r,_,a)=>s+r.sun/a.length,0);
+  const last3 = [0,1,2].reduce((s,i)=>{ const r=S.byDate[addDays(end,-i)]; return s + (r&&r.precip||0); },0);
+  const lv = (hi, mid) => hi ? "high" : mid ? "mid" : "low";
+  const W = "平均"+f1(avg)+"℃・雨の日"+rainDays+"日（計"+f1(rainSum)+"mm）";
+  const list = [
+    {name:"さび病", level: lv(avg>=10&&avg<=22&&rainDays>=3, avg>=10&&avg<=22&&rainDays>=2), why:W+"。15〜20℃前後で雨が続くと多発", act:"オレンジ色の斑点を見回り、発生前〜初期に予防散布"},
+    {name:"べと病", level: lv(avg>=10&&avg<=20&&rainDays>=3&&sunAvg<4, avg>=10&&avg<=20&&(rainDays>=2||sunAvg<3)), why:W+"・日照"+f1(sunAvg)+"h。低めの気温と多湿で発生", act:"雨の前に予防散布。畝間の排水を確保"},
+    {name:"黒斑病・葉枯病", level: lv(avg>=20&&rainDays>=3, avg>=18&&rainDays>=2), why:W+"。高温多湿・長雨で増加", act:"古い葉の病斑を確認し、降雨前に散布"},
+    {name:"軟腐病", level: lv(hot>=1&&heavy>=1 || (avg>=25&&rainSum>=50), avg>=23&&rainDays>=2), why:"最高30℃以上 "+hot+"日・20mm以上の雨 "+heavy+"日。高温期の大雨・土寄せ後の傷口から感染", act:"高温期の土寄せを控え、大雨後は速やかに排水。予防に銅剤等"},
+    {name:"白絹病", level: lv(avg>=25&&rainDays>=3, avg>=24&&rainDays>=2), why:W+"。夏の高温多湿で株元に発生", act:"株元の白い菌糸を確認。発病株は早めに抜き取り"},
+    {name:"ネギアザミウマ", level: lv(avg>=23&&rainDays<=1, avg>=18&&rainDays<=2), why:W+"。高温・乾燥で急増", act:"葉のカスリ状の食害を確認し、密度が上がる前に防除"},
+    {name:"ネギハモグリバエ", level: lv(avg>=25, avg>=18), why:"平均"+f1(avg)+"℃。初夏〜秋の高温期に多い", act:"白い線状の食害痕を確認し、発生初期に防除"},
+    {name:"湿害・根傷み", level: lv(last3>=50, last3>=30 || rainSum>=80), why:"直近3日の雨 "+f1(last3)+"mm", act:"畝間・明渠の水はけを確認。過湿時の土寄せは避ける"},
+    {name:"高温障害", level: lv(maxAvg>=32, maxAvg>=30), why:"最高気温の平均 "+f1(maxAvg)+"℃", act:"日中の作業・土寄せを避け、乾燥時はかん水を検討"}
+  ];
+  const order = {high:0, mid:1, low:2};
+  list.sort((a,b) => order[a.level]-order[b.level]);
+  return {end, list, n:days.length};
+}
+function renderRisk(){
+  const box = $("riskList"); if(!box) return;
+  const r = riskAssess();
+  if(!r){ box.innerHTML = '<div class="empty">直近の気温データが揃うと表示します</div>'; $("mP").textContent="—"; $("mPs").textContent=""; return; }
+  $("riskSpan").textContent = md(addDays(r.end,-6))+"〜"+md(r.end)+"の相馬アメダスから判定";
+  const lab = {high:["高","crit"], mid:["中","warn"], low:["低","idle"]};
+  box.innerHTML = r.list.map(x => '<div class="risk '+x.level+'"><div class="top"><span class="t">'+esc(x.name)+'</span><span class="pill '+lab[x.level][1]+'">'+lab[x.level][0]+'</span></div><div class="why">'+esc(x.why)+'</div>'+(x.level!=="low"?'<div class="act">'+esc(x.act)+'</div>':'')+'</div>').join("");
+  const hi = r.list.filter(x=>x.level==="high"), mid = r.list.filter(x=>x.level==="mid");
+  const v = $("mP"); v.className = "value";
+  if(hi.length){ v.innerHTML = hi.length+'<small>件 高</small>'; v.classList.add("late"); }
+  else if(mid.length){ v.innerHTML = mid.length+'<small>件 中</small>'; }
+  else v.innerHTML = '<small>目立つリスクなし</small>';
+  $("mPs").textContent = hi.concat(mid).slice(0,3).map(x=>x.name).join("・") || "直近7日の気象から判定";
+}
+
+/* ================= 描画: 共通 ================= */
+function activePlot(){ return S.plots.find(p => p.id === S.activeId) || S.plots[0] || null; }
+
+function renderPlotSelect(){
+  const sel = $("plotSelect");
+  if(!S.plots.length){ sel.innerHTML = '<option>圃場が未登録です</option>'; sel.disabled = true; return; }
+  sel.disabled = false;
+  sel.innerHTML = S.plots.map(p => '<option value="'+esc(p.id)+'"'+(p.id===S.activeId?" selected":"")+'>'+esc(p.name||"名称未設定")+'</option>').join("");
+}
+function renderFreshness(){
+  const el = $("freshness");
+  if(!S.connected){ el.innerHTML = '<span class="dot off"></span><span>データベースに接続できません</span>'; return; }
+  if(!S.lastObs){ el.innerHTML = '<span class="dot"></span><span>気温データを読み込み中…</span>'; return; }
+  const lag = daysBetween(S.lastObs, todayStr());
+  const cls = "ok";
+  const txt = "デモ用の固定データ";
+  el.innerHTML = '<span class="dot '+cls+'"></span><span>最新観測 <b class="num">'+md(S.lastObs)+'</b>（'+wd(S.lastObs)+'）・'+txt+'</span>';
+}
+
+function renderAll(){
+  renderPlotSelect(); renderFreshness();
+  const a = analyzePlot(activePlot());
+  renderNow(a); renderStages(a); renderWeather(a); renderPlots();
+  renderReportMeta();
+}
+
+/* ================= いま ================= */
+function renderNow(a){
+  const p = a.plot;
+  const banner = $("nowBanner");
+  if(!p){
+    banner.innerHTML = '<div class="banner">作付けグループが登録されていません。「圃場」タブから追加してください。</div>';
+  } else if(!p.transplant){
+    banner.innerHTML = '<div class="banner">このグループの定植日が未入力です。「圃場」タブで入力すると生育ステージを計算します。</div>';
+  } else {
+    const miss = a.cumT ? a.cumT.missing.length : 0;
+    banner.innerHTML = miss ? '<div class="banner crit">定植日以降に気温データが取れていない日が '+miss+' 日あります（'+a.cumT.missing.slice(0,4).map(md).join("、")+(miss>4?" ほか":"")+'）。積算は取れた日だけの合計です。</div>' : "";
+  }
+
+  $("heroContext").innerHTML = p ?
+    '<b>'+esc(p.name||"名称未設定")+'</b>'+(p.variety?'<span>'+esc(p.variety)+'</span>':'')+'<span>定植 '+(p.transplant?jd(p.transplant)+(p.transplantEnd?"〜"+md(p.transplantEnd):""):"未入力")+'</span><span>止め土寄せ '+(p.tomeDate?jd(p.tomeDate):"未入力")+'</span><span>圃場 '+S.fields.filter(f=>f.plotId===p.id).length+'</span>'
+    : '<span class="label">グループ未登録</span>';
+
+  const cur = a.stages.find(s => s.key === a.currentKey);
+  $("heroStage").textContent = cur ? cur.label : "—";
+  $("heroStatus").innerHTML = cur ? '<span class="pill '+cur.pill+'">'+esc(cur.status)+'</span>' : "";
+  $("heroArt").hidden = true;
+
+  // 収穫開始予測
+  const hv = a.harvest, today = todayStr();
+  $("harvestLabel").textContent = p && p.harvestStart ? "収穫開始日（実績）" : a.harvestBasis === "tome" ? "収穫開始の予測（止め土寄せ後 積算"+fInt(tomeTarget(p))+"℃）" : "収穫開始の予測（定植後 積算"+fInt(a.target)+"℃）";
+  if(hv){
+    $("harvestDate").textContent = jd(hv.date) + (hv.actual ? "" : "頃");
+    const left = daysBetween(today, hv.date);
+    $("harvestLeft").textContent = hv.observed ? "収穫中" : hv.actual ? "目安に到達済み・太さを確認" : (left > 0 ? "あと " + left + " 日" : "まもなく");
+  } else {
+    $("harvestDate").textContent = "—";
+    $("harvestLeft").textContent = p && p.transplant ? "気温データを待っています" : "";
+  }
+  // ゲージ（定植後 0〜目安×1.3）
+  const T = a.target, MAX = Math.round(T*1.3/100)*100, pct = v => (Math.max(0,Math.min(v,MAX))/MAX*100) + "%";
+  const hc = a.cumT ? a.cumT.cum : 0;
+  const soilTicks = a.stages.filter(s => s.soil).map(s => s.lower);
+  $("gauge").innerHTML =
+    '<div class="gauge-track"></div>' +
+    '<div class="gauge-band" style="left:'+pct(T)+';width:'+pct(MAX-T)+'"></div>' +
+    '<div class="gauge-fill" style="width:'+pct(hc)+'"></div>' +
+    '<div class="gauge-ideal" style="left:'+pct(T)+';width:'+pct(T*0.1)+'"></div>' +
+    [0].concat(soilTicks.slice(0,2), [T]).map(v => '<span class="gauge-tick" style="left:'+pct(v)+'">'+fInt(v)+'</span>').join("");
+  $("gaugeCap").textContent = "帯＝収穫開始の目安 "+fInt(T)+"℃〜";
+  $("gaugeNow").innerHTML = a.cumT ? '定植後 <b class="num">'+fInt(hc)+'℃</b>（目安の '+Math.min(100,Math.round(hc/T*100))+'%）' : "定植後 —";
+
+  // 指標
+  $("mT").innerHTML = a.cumT ? fInt(a.cumT.cum)+'<small>℃</small>' : "—";
+  $("mTs").textContent = a.cumT ? md(p.transplant)+"〜"+md(S.lastObs)+"・"+a.cumT.days+"日間" : "定植日を入力してください";
+  const nx = a.next, mH = $("mH"); mH.className = "value";
+  if(nx){ mH.innerHTML = esc(nx.label); $("mHs").textContent = nx.now ? "いまが目安の時期です" : nx.date ? jd(nx.date)+"頃（あと "+Math.max(0,daysBetween(today, nx.date))+" 日）" : "—"; if(nx.now) mH.classList.add("late"); }
+  else { mH.textContent = "—"; $("mHs").textContent = p && p.harvestStart ? "収穫中" : "定植日を入力してください"; }
+  const nm = $("mN"); nm.className = "value";
+  if(!p || !p.transplant){ nm.textContent = "—"; $("mNs").textContent = "定植日を入力してください"; }
+  else if(!a.normal){ nm.textContent = "—"; $("mNs").textContent = "比較できるデータがありません"; }
+  else {
+    const c = a.normal;
+    if(c.diffDays === null) nm.textContent = "算定中";
+    else if(c.diffDays > 0){ nm.innerHTML = c.diffDays+'<small>日早い</small>'; nm.classList.add("early"); }
+    else if(c.diffDays < 0){ nm.innerHTML = (-c.diffDays)+'<small>日遅い</small>'; nm.classList.add("late"); }
+    else nm.innerHTML = '平年<small>並み</small>';
+    $("mNs").textContent = "積算 " + (c.diffTemp>=0?"+":"") + fInt(c.diffTemp) + "℃（平年の同じ日と比べて）";
+  }
+  renderRisk();
+
+  // 管理のポイント
+  if(cur){
+    $("adviceTitle").textContent = cur.label;
+    const note = (p.notes && p.notes[cur.key]) || DEFAULT_NOTES[cur.key] || "";
+    $("adviceBody").innerHTML = '<p>'+esc(note)+'</p>' + (p.notes && p.notes[cur.key] ? '<span class="hint">このグループ用に書き換えた内容です</span>' : '');
+    $("adviceBody").className = "";
+  } else {
+    $("adviceTitle").textContent = "—";
+    $("adviceBody").textContent = "定植日を入力すると表示されます。"; $("adviceBody").className="hint";
+  }
+  drawHarvestChart(a);
+}
+function compareMetric(vId, sId, c, name, hasHeading){
+  const v=$(vId), s=$(sId);
+  v.className = "value";
+  if(!hasHeading){ v.textContent="—"; s.textContent="出穂確認日を入力してください"; return; }
+  if(!c){ v.textContent="—"; s.textContent=name+"値は7〜12月の出穂のみ比較できます"; return; }
+  if(c.diffDays === null){ v.textContent="算定中"; }
+  else if(c.diffDays > 0){ v.innerHTML = c.diffDays+'<small>日早い</small>'; v.classList.add("early"); }
+  else if(c.diffDays < 0){ v.innerHTML = (-c.diffDays)+'<small>日遅い</small>'; v.classList.add("late"); }
+  else v.innerHTML = name+'<small>並み</small>';
+  s.textContent = "積算 " + (c.diffTemp>=0?"+":"") + fInt(c.diffTemp) + "℃（"+name+"の同じ日と比べて）";
+}
+
+/* ================= グラフ ================= */
+function svgEl(box, h){
+  const w = Math.max(300, box.clientWidth || 600);
+  return {w, h};
+}
+function niceTicks(min, max, count){
+  const span = max - min || 1, step0 = span / count, mag = Math.pow(10, Math.floor(Math.log10(step0)));
+  const step = [1,2,2.5,5,10].map(m=>m*mag).find(s => s >= step0) || step0;
+  const out = []; for(let v = Math.ceil(min/step)*step; v <= max + 1e-9; v += step) out.push(+v.toFixed(6));
+  return out;
+}
+function attachTip(box, svg, n, xAt, htmlAt, yAt, cross){
+  let tip = box.querySelector(".tip"); if(!tip){ tip = document.createElement("div"); tip.className="tip"; tip.hidden=true; box.appendChild(tip); }
+  const move = clientX => {
+    const r = svg.getBoundingClientRect(); const vbW = +svg.getAttribute("data-w");
+    const x = (clientX - r.left) / r.width * vbW;
+    let best=0, bd=Infinity; for(let i=0;i<n;i++){ const d=Math.abs(xAt(i)-x); if(d<bd){bd=d;best=i;} }
+    const px = xAt(best) / vbW * r.width;
+    tip.innerHTML = htmlAt(best); tip.hidden = false;
+    tip.style.left = Math.max(70, Math.min(r.width-70, px)) + "px"; tip.style.top = (yAt(best) / (+svg.getAttribute("data-h")) * r.height) + "px";
+    if(cross){ cross.setAttribute("x1", xAt(best)); cross.setAttribute("x2", xAt(best)); cross.style.display="block"; }
+  };
+  svg.onpointermove = e => move(e.clientX);
+  svg.onpointerdown = e => move(e.clientX);
+  svg.onpointerleave = () => { tip.hidden = true; if(cross) cross.style.display="none"; };
+}
+
+function drawHarvestChart(a){
+  const box = $("harvestChart"); const p = a.plot;
+  const narrow = box.clientWidth < 560;
+  const {w} = svgEl(box); const h = narrow ? 250 : 300;
+  if(!p || !p.transplant || !a.cumT){
+    box.innerHTML = '<div class="empty">'+(p && p.transplant ? "定植後の気温データを待っています" : "定植日を入力すると、収穫までの積算気温の推移を表示します")+'</div>'; return;
+  }
+  const L=52, R=18, T=16, B=34, TG = a.target;
+  const t0 = p.transplant, obs = S.lastObs;
+  const endReach = reachDate(t0, TG*1.25);
+  let end = endReach ? endReach.date : addDays(obs, 30);
+  if(end < addDays(obs,3)) end = addDays(obs,3);
+  const pts=[]; let cum=0;
+  for(let d=t0, g=0; d<=end && g<400; d=addDays(d,1), g++){
+    if(d <= obs){ const r=S.byDate[d]; if(isValid(r)) cum+=r.avg; pts.push({d, cum, act:true, r}); }
+    else { cum += forecastTemp(d); pts.push({d, cum, act:false}); }
+  }
+  const total = Math.max(1, daysBetween(t0, end));
+  const yMax = Math.max(TG*1.3, Math.ceil(cum/100)*100);
+  const x = d => L + (w-L-R) * daysBetween(t0, d) / total;
+  const y = v => T + (h-T-B) * (1 - v / yMax);
+  const act = pts.filter(q=>q.act), fut = pts.filter(q=>!q.act);
+  const path = arr => arr.map((q,i)=>(i?"L":"M")+x(q.d).toFixed(1)+","+y(q.cum).toFixed(1)).join("");
+  let s = '<svg viewBox="0 0 '+w+' '+h+'" height="'+h+'" data-w="'+w+'" data-h="'+h+'" role="img" aria-label="定植からの積算気温の推移">';
+  s += '<rect x="'+L+'" y="'+y(yMax)+'" width="'+(w-L-R)+'" height="'+(y(TG)-y(yMax))+'" fill="var(--gold-band)"/>';
+  niceTicks(0, yMax, narrow?4:6).forEach(v => { s += '<line class="grid-line" x1="'+L+'" x2="'+(w-R)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="axis" x="'+(L-8)+'" y="'+(y(v)+4)+'" text-anchor="end">'+fInt(v)+'</text>'; });
+  s += '<line x1="'+L+'" x2="'+(w-R)+'" y1="'+y(TG)+'" y2="'+y(TG)+'" stroke="var(--gold)" stroke-width="2"/>';
+  s += '<text class="axis" x="'+(L+6)+'" y="'+(y(TG)-6)+'" text-anchor="start" style="fill:var(--gold-ink);font-weight:700">収穫開始の目安 '+fInt(TG)+'℃</text>';
+  a.stages.filter(st => st.soil).forEach(st => {
+    s += '<line x1="'+L+'" x2="'+(w-R)+'" y1="'+y(st.lower)+'" y2="'+y(st.lower)+'" stroke="var(--gold)" stroke-dasharray="3 5" opacity=".7"/>';
+    s += '<text class="axis" x="'+(w-R-4)+'" y="'+(y(st.lower)-5)+'" text-anchor="end" style="fill:var(--gold-ink)">'+st.soil+' '+fInt(st.lower)+'℃</text>';
+  });
+  const step = total > 150 ? 30 : total > 70 ? 14 : 7;
+  for(let i=0;i<=total;i+=step){ const d=addDays(t0,i); s += '<text class="axis" x="'+x(d)+'" y="'+(h-10)+'" text-anchor="middle">'+md(d)+'</text>'; }
+  if(act.length){
+    const last = act[act.length-1];
+    s += '<path d="'+path(act)+'L'+x(last.d)+','+y(0)+'L'+x(act[0].d)+','+y(0)+'Z" fill="var(--indigo-soft)"/>';
+    s += '<path d="'+path(act)+'" fill="none" stroke="var(--indigo)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';
+  }
+  if(fut.length){ const join = act.length ? [act[act.length-1]].concat(fut) : fut; s += '<path d="'+path(join)+'" fill="none" stroke="var(--indigo)" stroke-width="2.5" stroke-dasharray="6 6" opacity=".8"/>'; }
+  if(p.tomeDate && p.tomeDate >= t0 && p.tomeDate <= end){
+    const tx = x(p.tomeDate); s += '<line x1="'+tx+'" x2="'+tx+'" y1="'+T+'" y2="'+(h-B)+'" stroke="var(--gold)" stroke-width="1.5"/><text class="axis" x="'+(tx-4)+'" y="'+(T+12)+'" text-anchor="end" style="fill:var(--gold-ink);font-weight:700">止め土寄せ '+md(p.tomeDate)+'</text>';
+  }
+  const lastA = act[act.length-1];
+  if(lastA){ s += '<line x1="'+x(lastA.d)+'" x2="'+x(lastA.d)+'" y1="'+T+'" y2="'+(h-B)+'" stroke="var(--rule-strong)" stroke-dasharray="2 4"/><circle cx="'+x(lastA.d)+'" cy="'+y(lastA.cum)+'" r="6" fill="var(--indigo)" stroke="var(--sheet)" stroke-width="2.5"/>';
+    const anchor = x(lastA.d) > w*0.7 ? "end" : "start", tx2 = anchor==="end" ? x(lastA.d)-10 : Math.min(w-R-6, x(lastA.d)+10);
+    s += '<text x="'+tx2+'" y="'+(y(lastA.cum)+22)+'" text-anchor="'+anchor+'" font-size="14" font-weight="700" fill="var(--ink)" class="num">'+md(lastA.d)+'　'+fInt(lastA.cum)+'℃</text>'; }
+  if(a.harvest && a.harvest.date >= t0 && a.harvest.date <= end){
+    const hx = x(a.harvest.date), q = pts.find(z => z.d === a.harvest.date), hy = q ? y(q.cum) : y(TG);
+    s += '<circle cx="'+hx+'" cy="'+hy+'" r="6" fill="var(--gold)" stroke="var(--sheet)" stroke-width="2.5"/>';
+    s += '<text x="'+Math.max(L+40, Math.min(w-R-40, hx))+'" y="'+(hy+24)+'" text-anchor="middle" font-size="13" font-weight="700" fill="var(--gold-ink)">収穫 '+md(a.harvest.date)+(a.harvest.actual?"":"頃")+'</text>';
+  }
+  s += '<line id="hcCross" x1="0" x2="0" y1="'+T+'" y2="'+(h-B)+'" stroke="var(--muted)" style="display:none"/>';
+  s += '<line x1="'+L+'" x2="'+(w-R)+'" y1="'+(h-B)+'" y2="'+(h-B)+'" stroke="var(--rule-strong)"/>';
+  s += '</svg>';
+  box.innerHTML = s;
+  const svg = box.querySelector("svg");
+  attachTip(box, svg, pts.length, i => x(pts[i].d), i => {
+    const q = pts[i];
+    return '<b>'+jd(q.d)+'（'+wd(q.d)+'）</b><br>定植後 <b>'+fInt(q.cum)+'℃</b>' + (q.act ? (q.r && isValid(q.r) ? '<br>平均 '+f1(q.r.avg)+'℃' : '<br>データ未取得') : '<br>平年値による予測');
+  }, i => y(pts[i].cum), svg.querySelector("#hcCross"));
+}
+
+/* ================= 生育ステージ ================= */
+function stageArt(key, idx){
+  const k = ART[key] ? key : null;
+  return k ? '<img src="'+ART[k]+'" alt="">' : '<span>'+(idx+1)+'</span>';
+}
+function renderStages(a){
+  const list = $("stageList"), p = a.plot;
+  if(list.contains(document.activeElement) && document.activeElement.tagName === "TEXTAREA"){ S.stagesDirty = true; return; }
+  S.stagesDirty = false;
+  $("stagesTitle").textContent = p ? "生育ステージ　" + (p.name || "") : "生育ステージ";
+  if(!p){ list.innerHTML = '<li class="empty">作付けグループを登録してください</li>'; return; }
+  const openKeys = new Set([...list.querySelectorAll("details[open]")].map(d => d.dataset.key));
+  list.innerHTML = a.stages.map((s,i) => {
+    const custom = p.notes && p.notes[s.key];
+    const note = custom || DEFAULT_NOTES[s.key] || "";
+    const basis = s.key==="harvest" ? (a.harvestBasis==="tome" ? "止め土寄せ後 "+fInt(tomeTarget(p))+"℃" : "定植後 "+fInt(s.lower)+"℃〜") : s.key==="winter" ? "12月〜翌2月（気温が下がり生育がほぼ止まる時期）" : "定植後 " + fInt(s.lower) + "〜" + fInt(s.upper) + "℃";
+    const reach = s.reach ? (s.reach.actual ? '<b>'+jd(s.reach.date)+'</b>'+(s.reach.observed?"（実測で確認）":"（実績）") : '<b>'+jd(s.reach.date)+'頃</b>（予測）') : "—";
+    return '<li class="stage '+s.state+'">' +
+      '<div class="stage-art">'+stageArt(s.key,i)+'</div>' +
+      '<div class="stage-top"><span class="stage-title">'+esc(s.label)+'</span><span class="pill '+s.pill+'">'+esc(s.state==="current" ? "いまここ・"+s.status : s.status)+'</span></div>' +
+      '<div class="stage-meta"><span>到達日 '+reach+'</span><span>目安 '+basis+'</span></div>' +
+      '<details data-key="'+s.key+'"'+(openKeys.has(s.key) || (s.state==="current" && !openKeys.size) ? " open" : "")+'><summary>管理のポイント・メモ</summary>' +
+        '<textarea class="note" id="note-'+s.key+'" data-key="'+s.key+'" aria-label="'+esc(s.label)+'の管理メモ">'+esc(note)+'</textarea>' +
+        '<div class="note-foot"><span class="save-state" id="ns-'+s.key+'">'+(custom ? "このグループ用に編集済み" : "標準の内容")+'</span>'+(custom ? '<button class="btn ghost small" type="button" data-reset-note="'+s.key+'">標準の内容に戻す</button>' : '')+'</div>' +
+      '</details></li>';
+  }).join("");
+}
+const noteTimers = {};
+function onNoteInput(ta){
+  const key = ta.dataset.key, p = activePlot(); if(!p || !S.db) return;
+  $("ns-"+key).textContent = "入力中…";
+  clearTimeout(noteTimers[key]);
+  noteTimers[key] = setTimeout(async () => {
+    try{
+      await S.db.doc("plots/"+p.id).update({notes:{[key]: ta.value}});
+      const el = $("ns-"+key); if(el) el.textContent = "保存しました";
+    }catch(e){ const el = $("ns-"+key); if(el) el.textContent = "保存できませんでした。通信状態を確認してください"; }
+  }, 900);
+}
+
+/* ================= 気温データ ================= */
+function renderWeather(a){
+  drawTempChart(a); renderStrip(a); renderTable(); renderCalc();
+}
+function drawTempChart(a){
+  const box = $("tempChart");
+  let rows = S.readings.filter(isValid);
+  if(!rows.length){ box.innerHTML = '<div class="empty">気温データを読み込み中です</div>'; return; }
+  const p = a.plot;
+  if(S.range === "60") rows = rows.filter(r => r.date > addDays(S.lastObs, -60));
+  else if(S.range === "season" && p && p.transplant) rows = rows.filter(r => r.date >= addDays(p.transplant,-7));
+  const narrow = box.clientWidth < 560;
+  const {w} = svgEl(box), h = narrow ? 240 : 300, L=36, R=12, T=12, B=30, n=rows.length;
+  let lo = Math.min(...rows.map(r=>r.min)), hi = Math.max(...rows.map(r=>r.max));
+  lo = Math.floor(lo/5)*5; hi = Math.ceil(hi/5)*5; if(hi-lo<10) hi = lo+10;
+  const x = i => L + (w-L-R) * (n<=1 ? 0 : i/(n-1));
+  const y = v => T + (h-T-B) * (1 - (v-lo)/(hi-lo));
+  const line = (k,c,wid) => '<path d="'+rows.map((r,i)=>(i?"L":"M")+x(i).toFixed(1)+","+y(r[k]).toFixed(1)).join("")+'" fill="none" stroke="'+c+'" stroke-width="'+wid+'" stroke-linejoin="round"/>';
+  let s = '<svg viewBox="0 0 '+w+' '+h+'" height="'+h+'" data-w="'+w+'" data-h="'+h+'" role="img" aria-label="日別の最高・平均・最低気温">';
+  niceTicks(lo, hi, narrow?4:6).forEach(v => { s += '<line class="grid-line" x1="'+L+'" x2="'+(w-R)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="axis" x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>'; });
+  // 月初 or 週の目盛り
+  const every = n > 120 ? "month" : (n > 45 ? 14 : 7);
+  rows.forEach((r,i) => {
+    const show = every === "month" ? r.date.endsWith("-01") : (i % every === 0);
+    if(show) s += '<text class="axis" x="'+x(i)+'" y="'+(h-9)+'" text-anchor="middle">'+(every==="month" ? (+r.date.slice(5,7))+"月" : md(r.date))+'</text>';
+  });
+  // ステージの到達日
+  a.stages.forEach(st => {
+    if(!st.reach) return;
+    const i = rows.findIndex(r => r.date === st.reach.date); if(i<0) return;
+    s += '<line x1="'+x(i)+'" x2="'+x(i)+'" y1="'+T+'" y2="'+(h-B)+'" stroke="var(--gold)" stroke-dasharray="3 4" opacity=".8"/>';
+  });
+  s += line("max","var(--s-max)",1.6) + line("min","var(--s-min)",1.6) + line("avg","var(--s-avg)",2.4);
+  s += '<line id="tcCross" x1="0" x2="0" y1="'+T+'" y2="'+(h-B)+'" stroke="var(--muted)" style="display:none"/>';
+  s += '<line x1="'+L+'" x2="'+(w-R)+'" y1="'+(h-B)+'" y2="'+(h-B)+'" stroke="var(--rule-strong)"/></svg>';
+  box.innerHTML = s;
+  const svg = box.querySelector("svg");
+  attachTip(box, svg, n, x, i => { const r=rows[i];
+    return '<b>'+jd(r.date)+'（'+wd(r.date)+'）'+(r.weather?" "+esc(r.weather):"")+'</b><br><span style="color:var(--s-max)">最高</span> <b>'+f1(r.max)+'</b>　<span style="color:var(--s-avg)">平均</span> <b>'+f1(r.avg)+'</b>　<span style="color:var(--s-min)">最低</span> <b>'+f1(r.min)+'</b> ℃' + (r.precip!=null ? '<br>降水 '+f1(r.precip)+'mm' : '') + (r.sun!=null ? '　日照 '+f1(r.sun)+'h' : '');
+  }, i => y(rows[i].max), svg.querySelector("#tcCross"));
+}
+function renderStrip(a){
+  const items = a.stages.filter(s => s.reach);
+  $("stageStrip").innerHTML = items.map(s => {
+    const k = ART[s.key] ? s.key : null;
+    return '<div class="stage-chip'+(s.reach.actual?"":" forecast")+'">'+(k?'<img src="'+ART[k]+'" alt="">':'')+'<div><div class="t">'+esc(s.label)+'</div><div class="d num">'+md(s.reach.date)+(s.reach.actual?"":" 予測")+'</div></div></div>';
+  }).join("");
+}
+function renderTable(){
+  const body = $("dayRows");
+  if(!S.readings.length){ body.innerHTML = '<tr><td colspan="10" class="empty">読み込み中…</td></tr>'; return; }
+  const first = S.readings[0].date, end = addDays(todayStr(), -1);
+  const rows = []; let d = end > S.readings[S.readings.length-1].date ? end : S.readings[S.readings.length-1].date;
+  while(d >= first && rows.length < S.rowLimit){
+    const r = S.byDate[d];
+    const v = k => r && r[k] != null ? f1(r[k]) : "—";
+    if(r && isValid(r)){
+      rows.push('<tr><td>'+md(d)+'（'+wd(d)+'）</td><td>'+esc(r.weather||"—")+'</td><td><b>'+v("avg")+'</b></td><td>'+v("max")+'</td><td>'+v("min")+'</td><td>'+v("precip")+'</td><td>'+v("wind")+'</td><td>'+v("sun")+'</td><td><span class="src'+(r.source==="manual"?" manual":"")+'">'+(r.source==="manual"?"手入力":"気象庁")+'</span></td><td><button class="btn ghost small" type="button" data-edit-day="'+d+'">修正</button></td></tr>');
+    } else {
+      rows.push('<tr class="missing"><td>'+md(d)+'（'+wd(d)+'）</td><td colspan="7" style="text-align:center;color:var(--ink-2)">'+(r?"要確認の値":"未取得")+'</td><td><span class="src none">'+(r?"要確認":"なし")+'</span></td><td><button class="btn ghost small" type="button" data-edit-day="'+d+'">入力</button></td></tr>');
+    }
+    d = addDays(d,-1);
+  }
+  body.innerHTML = rows.join("");
+  $("moreRowsBtn").hidden = d < first;
+}
+function renderCalc(){
+  const out = $("calcOut"), box = $("calcChart");
+  const start = $("calcStart").value, target = numOrNull($("calcTarget").value);
+  if(!start || !S.lastObs){ out.innerHTML = '<span>開始日を選んでください。</span>'; box.innerHTML=""; return; }
+  if(start > S.lastObs){ out.innerHTML = '<span>開始日が最新の観測日（'+jd(S.lastObs)+'）より後です。</span>'; box.innerHTML=""; return; }
+  const c = cumThrough(start, S.lastObs);
+  let html = '<span>'+jd(start)+'〜'+jd(S.lastObs)+'（'+c.days+'日間）の積算 <b style="font-size:22px">'+fInt(c.cum)+'℃</b></span>';
+  if(c.missing.length) html += '<span style="color:var(--crit)">未取得の日が '+c.missing.length+' 日あります（合計に含めていません）</span>';
+  let rd = null;
+  if(target){
+    const pct = Math.min(100, c.cum/target*100);
+    html += '<div class="bar" role="img" aria-label="目標の'+Math.round(pct)+'%"><span style="width:'+pct+'%"></span></div>';
+    rd = reachDate(start, target);
+    if(c.cum >= target) html += '<span>目標 '+fInt(target)+'℃ には <b>'+jd(rd.date)+'</b> に到達しました。</span>';
+    else html += '<span>目標 '+fInt(target)+'℃ まで あと <b>'+fInt(target-c.cum)+'℃</b>。平年並みなら <b>'+(rd?jd(rd.date)+'頃':'—')+'</b> に到達します。</span>';
+  }
+  out.innerHTML = html;
+  // 小さな積算グラフ
+  const end = rd && rd.date > S.lastObs ? rd.date : S.lastObs;
+  const pts = []; let cum=0;
+  for(let d=start, g=0; d<=end && g<500; d=addDays(d,1), g++){ if(d<=S.lastObs){ const r=S.byDate[d]; if(isValid(r)) cum+=r.avg; pts.push({d,cum,act:true}); } else { cum+=forecastTemp(d); pts.push({d,cum,act:false}); } }
+  if(pts.length < 2){ box.innerHTML=""; return; }
+  const w = Math.max(280, box.clientWidth||400), h=170, L=44, R=10, T=10, B=24, total=Math.max(1,pts.length-1);
+  const yMax = Math.max(target||0, cum) * 1.08;
+  const x = i => L + (w-L-R)*i/total, y = v => T + (h-T-B)*(1-v/yMax);
+  const act = pts.map((q,i)=>({...q,i})).filter(q=>q.act), fut = pts.map((q,i)=>({...q,i})).filter(q=>!q.act);
+  const pth = arr => arr.map((q,j)=>(j?"L":"M")+x(q.i).toFixed(1)+","+y(q.cum).toFixed(1)).join("");
+  let s = '<svg viewBox="0 0 '+w+' '+h+'" height="'+h+'" data-w="'+w+'" data-h="'+h+'" role="img" aria-label="積算気温の推移">';
+  niceTicks(0,yMax,3).forEach(v => { s += '<line class="grid-line" x1="'+L+'" x2="'+(w-R)+'" y1="'+y(v)+'" y2="'+y(v)+'"/><text class="axis" x="'+(L-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+fInt(v)+'</text>'; });
+  if(target) s += '<line x1="'+L+'" x2="'+(w-R)+'" y1="'+y(target)+'" y2="'+y(target)+'" stroke="var(--crit)" stroke-dasharray="5 4"/><text class="axis" x="'+(w-R)+'" y="'+(y(target)-5)+'" text-anchor="end" style="fill:var(--crit)">目標 '+fInt(target)+'℃</text>';
+  s += '<path d="'+pth(act)+'" fill="none" stroke="var(--gold)" stroke-width="2.6"/>';
+  if(fut.length) s += '<path d="'+pth([act[act.length-1]].concat(fut))+'" fill="none" stroke="var(--gold)" stroke-width="2.2" stroke-dasharray="5 5"/>';
+  s += '<text class="axis" x="'+L+'" y="'+(h-6)+'">'+md(start)+'</text><text class="axis" x="'+(w-R)+'" y="'+(h-6)+'" text-anchor="end">'+md(end)+'</text></svg>';
+  box.innerHTML = s;
+}
+
+/* ================= 圃場 ================= */
+function renderPlots(){
+  const grid = $("plotGrid");
+  if(!S.connected){ grid.innerHTML = '<div class="empty">データベースに接続するとグループが表示されます</div>'; return; }
+  if(!S.plots.length){ grid.innerHTML = '<div class="empty">作付けグループがまだありません。「グループを追加」から登録してください。</div>'; return; }
+  grid.innerHTML = S.plots.map(p => {
+    const a = analyzePlot(p), cur = a.stages.find(s=>s.key===a.currentKey);
+    return '<article class="plot-card'+(p.id===S.activeId?" active":"")+'">' +
+      '<div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start"><h3>'+esc(p.name||"名称未設定")+'</h3>'+(cur?'<span class="pill '+cur.pill+'">'+esc(cur.label)+'</span>':'')+'</div>' +
+      '<dl><dt>品種</dt><dd>'+esc(p.variety||"—")+'</dd><dt>定植</dt><dd>'+(p.transplant?jd(p.transplant)+(p.transplantEnd?"〜"+md(p.transplantEnd):""):"未入力")+'</dd><dt>止め土寄せ</dt><dd>'+(p.tomeDate?jd(p.tomeDate):"未入力")+'</dd><dt>収穫開始</dt><dd>'+(a.harvest?jd(a.harvest.date)+(a.harvest.actual?"":"頃"):"—")+'</dd><dt>圃場数</dt><dd>'+S.fields.filter(f=>f.plotId===p.id).length+'（'+(S.fields.filter(f=>f.plotId===p.id).reduce((s,f)=>s+(f.m2||0),0)/100).toFixed(1)+'a）</dd></dl>' +
+      '<div class="plot-actions">'+(p.id===S.activeId?'<span class="pill info">表示中</span>':'<button class="btn small" type="button" data-show-plot="'+esc(p.id)+'">このグループを表示</button>')+
+      '<button class="btn ghost small" type="button" data-edit-plot="'+esc(p.id)+'">編集</button>'+
+      '<button class="btn ghost small" type="button" data-export-plot="'+esc(p.id)+'">バックアップ</button></div></article>';
+  }).join("");
+}
+function openPlotDialog(id){
+  const p = id ? S.plots.find(x=>x.id===id) : null;
+  S.editingPlotId = p ? p.id : null; S.deleteArmed = false;
+  $("plotDlgTitle").textContent = p ? "作付けグループを編集" : "作付けグループを追加";
+  $("pName").value = p ? p.name||"" : ""; $("pVariety").value = p ? p.variety||"" : "";
+  $("pTrans").value = p ? p.transplant||"" : ""; $("pTransEnd").value = p ? p.transplantEnd||"" : "";
+  $("pTome").value = p ? p.tomeDate||"" : ""; $("pHarv").value = p ? p.harvestStart||"" : "";
+  $("pTarget").value = p && p.harvestTarget ? p.harvestTarget : ""; $("pTomeT").value = p && p.tomeTarget ? p.tomeTarget : "";
+  const del = $("plotDelete"); del.hidden = !p; del.textContent = "このグループを削除";
+  $("plotDialog").showModal();
+}
+function setActive(id){
+  S.activeId = id; tryLS(()=>localStorage.setItem(LS_PLOT, id));
+  renderAll();
+}
+
+/* ================= DB 接続 ================= */
+async function connect(){
+  let db = null;
+  try{ db = await window.claude?.use?.("db"); }catch(e){ db = null; }
+  if(!db){ S.connected = false; renderAll(); return; }
+  S.db = db; S.connected = true; renderFreshness();
+  connectReports();
+
+  db.collection("readings").orderBy("date","asc").limit(1000).onSnapshot(snap => {
+    setReadings(snap.docs.map(d => normalizeReading(d.id, d.data())));
+    renderAll();
+  }, () => { S.connected = false; renderFreshness(); });
+
+  db.collection("plots").orderBy("order","asc").limit(200).onSnapshot(snap => {
+    S.plots = snap.docs.map(d => ({id:d.id, ...d.data()})); if(typeof renderFields === "function") renderFields();
+    if(!S.plots.find(p=>p.id===S.activeId)){
+      const saved = tryLS(()=>localStorage.getItem(LS_PLOT), null);
+      S.activeId = (S.plots.find(p=>p.id===saved) || S.plots[0] || {}).id || null;
+    }
+    renderAll();
+  }, () => {});
+
+  db.doc("settings/gdd").onSnapshot(snap => {
+    if(snap.exists){
+      const g = snap.data(); S.gdd = {startDate:g.startDate||"", targetTemp:g.targetTemp||null};
+      if(document.activeElement !== $("calcStart")) $("calcStart").value = S.gdd.startDate;
+      if(document.activeElement !== $("calcTarget")) $("calcTarget").value = S.gdd.targetTemp || "";
+      renderCalc();
+    }
+  }, () => {});
+}
+
+/* ================= イベント ================= */
+function selectTab(name){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.tab===name)));
+  document.querySelectorAll(".panel").forEach(p => p.hidden = p.id !== "panel-"+name);
+  tryLS(()=>localStorage.setItem(LS_TAB, name));
+  requestAnimationFrame(renderAll);
+}
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => selectTab(t.dataset.tab)));
+document.addEventListener("click", async e => {
+  const t = e.target.closest("button"); if(!t) return;
+  if(t.dataset.goto) selectTab(t.dataset.goto);
+  if(t.dataset.range){ S.range = t.dataset.range; document.querySelectorAll("[data-range]").forEach(b=>b.setAttribute("aria-pressed", String(b===t))); drawTempChart(analyzePlot(activePlot())); }
+  if(t.dataset.editDay) openDayDialog(t.dataset.editDay);
+  if(t.dataset.showPlot){ setActive(t.dataset.showPlot); toast("「"+(activePlot()||{}).name+"」を表示しています"); }
+  if(t.dataset.editPlot) openPlotDialog(t.dataset.editPlot);
+  if(t.dataset.exportPlot) exportPlot(t.dataset.exportPlot);
+  if(t.dataset.resetNote){
+    const p = activePlot(), key = t.dataset.resetNote;
+    try{ await S.db.doc("plots/"+p.id).update({notes:{[key]:""}}); toast("標準の内容に戻しました"); }catch(err){ toast("戻せませんでした。通信状態を確認してください"); }
+  }
+  if(t.hasAttribute("data-close")) t.closest("dialog").close();
+});
+$("plotSelect").addEventListener("change", e => setActive(e.target.value));
+$("stageList").addEventListener("input", e => { if(e.target.classList.contains("note")) onNoteInput(e.target); });
+$("stageList").addEventListener("focusout", () => setTimeout(() => { if(S.stagesDirty) renderStages(analyzePlot(activePlot())); }, 1200));
+$("moreRowsBtn").addEventListener("click", () => { S.rowLimit += 30; renderTable(); });
+
+let gddTimer;
+["calcStart","calcTarget"].forEach(id => $(id).addEventListener("input", () => {
+  renderCalc();
+  clearTimeout(gddTimer);
+  gddTimer = setTimeout(() => {
+    if(!S.db) return;
+    S.db.doc("settings/gdd").set({startDate:$("calcStart").value, targetTemp:numOrNull($("calcTarget").value)}).catch(()=>{});
+  }, 800);
+}));
+
+/* 日別データ */
+function openDayDialog(date){
+  const r = date ? S.byDate[date] : null;
+  $("fDate").value = date || addDays(todayStr(),-1); $("fDate").disabled = !!date;
+  [["fAvg","avg"],["fMax","max"],["fMin","min"],["fPrecip","precip"],["fWind","wind"],["fSun","sun"]].forEach(([id,k]) => $(id).value = r && r[k]!=null ? r[k] : "");
+  $("dayHint").textContent = r && r.source === "jma_soma_amedas" ? "気象庁の値を書き換えます。保存すると「手入力」になり、自動更新で上書きされません。" : "保存した日は「手入力」になり、自動更新で上書きされません。";
+  $("dayDialog").showModal();
+}
+$("addDayBtn").addEventListener("click", () => openDayDialog(null));
+$("dayForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const date = $("fDate").value, avg = numOrNull($("fAvg").value), max = numOrNull($("fMax").value), min = numOrNull($("fMin").value);
+  if(!date || avg==null || max==null || min==null){ toast("日付と平均・最高・最低気温を入力してください"); return; }
+  if(min > max){ toast("最低気温が最高気温より高くなっています"); return; }
+  const precip = numOrNull($("fPrecip").value) ?? 0, sun = numOrNull($("fSun").value);
+  const weather = precip >= 1 ? "雨" : (sun == null ? "" : sun >= 6 ? "晴れ" : sun >= 1 ? "晴れ時々曇り" : "曇り");
+  if(!S.db){ toast("データベースに接続できないため保存できません"); return; }
+  try{
+    await S.db.doc("readings/"+date).set({date, avg_temp:avg, max_temp:max, min_temp:min, precip, wind:numOrNull($("fWind").value), sunshine:sun, weather, source:"manual"});
+    $("dayDialog").close(); toast(jd(date)+" のデータを保存しました");
+  }catch(err){ toast("保存できませんでした。通信状態を確認してください"); }
+});
+
+/* 圃場 */
+$("addPlotBtn").addEventListener("click", () => openPlotDialog(null));
+$("plotForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("pName").value.trim(); if(!name){ toast("グループ名を入力してください"); return; }
+  const t = $("pTrans").value, te = $("pTransEnd").value, tm = $("pTome").value, hv = $("pHarv").value;
+  if(t && tm && tm < t){ toast("止め土寄せ日が定植日より前になっています"); return; }
+  if(t && hv && hv < t){ toast("収穫開始日が定植日より前になっています"); return; }
+  const body = {name, variety:$("pVariety").value.trim(), transplant:t, transplantEnd:te, tomeDate:tm, harvestStart:hv, harvestTarget:numOrNull($("pTarget").value), tomeTarget:numOrNull($("pTomeT").value), cropType:"長ネギ", sakugata:"春まき秋冬どり"};
+  if(!S.db){ toast("データベースに接続できないため保存できません"); return; }
+  try{
+    if(S.editingPlotId){ await S.db.doc("plots/"+S.editingPlotId).update(body); toast("「"+name+"」を保存しました"); }
+    else {
+      const order = S.plots.reduce((m,p)=>Math.max(m,p.order||0),0)+1;
+      const ref = S.db.collection("plots").doc();
+      await ref.set({...body, notes:{}, order}); S.activeId = ref.id; tryLS(()=>localStorage.setItem(LS_PLOT, ref.id));
+      toast("「"+name+"」を追加しました");
+    }
+    $("plotDialog").close();
+  }catch(err){ toast(err && err.code === "quota_exceeded" ? "保存できる件数の上限に達しています" : "保存できませんでした。通信状態を確認してください"); }
+});
+$("plotDelete").addEventListener("click", async () => {
+  const btn = $("plotDelete");
+  if(!S.deleteArmed){ S.deleteArmed = true; btn.textContent = "もう一度押すと削除します"; return; }
+  const p = S.plots.find(x=>x.id===S.editingPlotId); if(!p) return;
+  try{ await S.db.doc("plots/"+p.id).delete(); $("plotDialog").close(); toast("「"+(p.name||"")+"」を削除しました"); }
+  catch(err){ toast("削除できませんでした"); }
+});
+$("plotDialog").addEventListener("close", () => { S.deleteArmed = false; });
+
+async function exportPlot(id){
+  const p = S.plots.find(x=>x.id===id); if(!p) return;
+  let dl = null; try{ dl = await window.claude?.use?.("downloads"); }catch(err){ dl = null; }
+  if(!dl){ toast("この画面ではファイルを保存できません"); return; }
+  const json = JSON.stringify({formatVersion:1, app:"negi", exportedAt:todayStr(), plotName:p.name, variety:p.variety, transplantDate:p.transplant, transplantEndDate:p.transplantEnd, tomeDate:p.tomeDate, harvestStart:p.harvestStart, harvestTarget:p.harvestTarget, tomeTarget:p.tomeTarget, notes:p.notes||{}}, null, 2);
+  try{ await dl.save({filename:(p.name||"plot")+"_backup_"+todayStr()+".json", data:json}); toast("バックアップを書き出しました"); }
+  catch(err){ if(!err || err.code !== "declined") toast("書き出せませんでした"); }
+}
+$("importBtn").addEventListener("click", () => $("importFile").click());
+$("importFile").addEventListener("change", e => {
+  const file = e.target.files && e.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = async () => {
+    e.target.value = "";
+    let b; try{ b = JSON.parse(reader.result); }catch(err){ toast("このファイルは読み込めません（JSONではありません）"); return; }
+    if(!b || typeof b !== "object" || !("plotName" in b || "transplantDate" in b)){ toast("長ねぎ生育トラッカーのバックアップ形式ではありません"); return; }
+    const isDate = v => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "";
+    const notes = {}; if(b.notes && typeof b.notes === "object") Object.keys(b.notes).forEach(k => { if(typeof b.notes[k] === "string" && STAGES.some(s=>s.key===k)) notes[k] = b.notes[k].slice(0,4000); });
+    const name = String(b.plotName || "読み込んだグループ").slice(0,60);
+    if(!S.db){ toast("データベースに接続できないため読み込めません"); return; }
+    try{
+      const order = S.plots.reduce((m,p)=>Math.max(m,p.order||0),0)+1;
+      const ref = S.db.collection("plots").doc();
+      await ref.set({name, variety:String(b.variety||"").slice(0,40), transplant:isDate(b.transplantDate), transplantEnd:isDate(b.transplantEndDate), tomeDate:isDate(b.tomeDate), harvestStart:isDate(b.harvestStart), harvestTarget:numOrNull(b.harvestTarget), tomeTarget:numOrNull(b.tomeTarget), notes, order});
+      S.activeId = ref.id; tryLS(()=>localStorage.setItem(LS_PLOT, ref.id));
+      toast("「"+name+"」を読み込みました");
+    }catch(err){ toast("読み込めませんでした。通信状態を確認してください"); }
+  };
+  reader.readAsText(file);
+});
+
+$("csvBtn").addEventListener("click", async () => {
+  let dl = null; try{ dl = await window.claude?.use?.("downloads"); }catch(err){ dl = null; }
+  if(!dl){ toast("この画面ではファイルを保存できません"); return; }
+  const lines = ["date,weather,avg_temp_c,max_temp_c,min_temp_c,precip_mm,wind_ms,sunshine_h,source"];
+  S.readings.forEach(r => lines.push([r.date, r.weather, r.avg, r.max, r.min, r.precip, r.wind, r.sun, r.source].map(v => v==null?"":v).join(",")));
+  try{ await dl.save({filename:"soma_amedas_"+(S.readings[0]||{}).date+"_"+S.lastObs+".csv", data:lines.join("\n")}); toast("CSVを書き出しました"); }
+  catch(err){ if(!err || err.code !== "declined") toast("書き出せませんでした"); }
+});
+
+/* 画面サイズ変化（iPadの縦横回転）でグラフを描き直す */
+let resizeTimer, lastW = 0;
+new ResizeObserver(entries => {
+  const w = Math.round(entries[0].contentRect.width); if(w === lastW) return; lastW = w;
+  clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { const a = analyzePlot(activePlot()); drawHarvestChart(a); drawTempChart(a); renderCalc(); }, 120);
+}).observe(document.querySelector(".wrap"));
+
+
+/* ================= 現場レポート ================= */
+const RTYPES = {spray:"防除", top:"追肥", soil:"土寄せ", harvest:"収穫"};
+const FERT_TYPES = ["top"];
+const SPRAY_METHODS = ["乗用管理機","ブームスプレーヤ","動力噴霧器","背負い式","ドローン","粒剤散布","株元散布","その他"];
+const SOIL_ROUNDS = ["中耕・培土","土寄せ①","土寄せ②","土寄せ③","止め土寄せ"];
+const SOIL_MACHINES = ["管理機（ロータリー）","乗用管理機","ネギ用培土機","手作業","その他"];
+const GRADES = ["2L","L","M","S","B品","規格外"];
+const DEFAULT_TO = ["taoka.yoshiyasu@gmail.com"];
+const WORKER = "田岡義康";
+const newSpray = () => ({pid:"", name:"", ratio:"", amount:"100", unit:"L"});
+const newFert = () => ({name:"", amount:""});
+const newGrade = () => ({name:"L", amount:""});
+const R = {
+  type:"spray", photos:[],
+  items:{spray:[newSpray()], top:[newFert()], soil:[], harvest:[newGrade()]},
+  f:{}, to:DEFAULT_TO.slice(), history:[], pesticides:[], busy:false, rec:null, drawTimer:null, editPid:null
+};
+const LS_DRAFT = "negi.reportDraft1";
+
+function renderReportFields(){
+  const box = $("rFields"), t = R.type;
+  let html = '<legend>'+RTYPES[t]+'の内容</legend>';
+  if(t === "spray"){
+    html += '<label class="field" for="s_method">散布方法<select id="s_method" data-f="s_method"><option value="">選んでください</option>'+SPRAY_METHODS.map(o=>'<option>'+o+'</option>').join("")+'</select></label>';
+    html += '<div id="rItems"></div><div class="toolbar"><button class="btn ghost small" type="button" id="rAddItem">農薬を追加</button><span class="hint">農薬は下の「登録農薬」から選べます。選ぶと標準の希釈倍率が入ります。</span></div>';
+  } else if(t === "soil"){
+    html += '<div class="form-grid"><label class="field" for="so_round">土寄せの回<select id="so_round" data-f="so_round"><option value="">選んでください</option>'+SOIL_ROUNDS.map(o=>'<option>'+o+'</option>').join("")+'</select></label>';
+    html += '<label class="field" for="so_machine">作業機<select id="so_machine" data-f="so_machine"><option value="">選んでください</option>'+SOIL_MACHINES.map(o=>'<option>'+o+'</option>').join("")+'</select></label>';
+    html += '<label class="field" for="so_depth">寄せた高さの目安（cm）<input type="number" id="so_depth" data-f="so_depth" step="1" inputmode="numeric" placeholder="任意"></label>';
+    html += '<label class="field" for="so_soil">土の状態<select id="so_soil" data-f="so_soil"><option value="">選んでください</option><option>乾き気味</option><option>適湿</option><option>やや湿り</option></select></label></div>';
+    html += '<p class="hint" style="margin:0">止め土寄せを記録したら、「圃場」タブで作付けグループの止め土寄せ日も入れると収穫予測が切り替わります。</p>';
+  } else if(t === "harvest"){
+    html += '<div class="form-grid"><label class="field" for="hv_dest">出荷先<input type="text" id="hv_dest" data-f="hv_dest" placeholder="例：JA・市場名"></label>';
+    html += '<label class="field" for="hv_rows">収穫した長さ・本数など（任意）<input type="text" id="hv_rows" data-f="hv_rows" placeholder="例：20m×3畝"></label></div>';
+    html += '<div id="rItems"></div><div class="toolbar"><button class="btn ghost small" type="button" id="rAddItem">規格を追加</button></div>';
+  } else {
+    html += '<div id="rItems"></div><div class="toolbar"><button class="btn ghost small" type="button" id="rAddItem">肥料を追加</button></div>';
+  }
+  box.innerHTML = html;
+  box.querySelectorAll("[data-f]").forEach(el => { if(R.f[el.id] != null) el.value = R.f[el.id]; });
+  renderItems();
+}
+function renderItems(){
+  const box = $("rItems"); if(!box) return;
+  const t = R.type, list = R.items[t];
+  if(t === "spray"){
+    const opts = it => '<option value="">選んでください</option>' + R.pesticides.map(p => '<option value="'+esc(p.id)+'"'+(p.id===it.pid?" selected":"")+'>'+esc(p.name)+'</option>').join("") + '<option value="__other"'+(it.pid==="__other"?" selected":"")+'>登録外（手入力）</option>';
+    box.innerHTML = list.map((it,i) => '<div class="item-row spray-row" data-i="'+i+'">' +
+      '<label class="field">'+(i+1)+'. 農薬名<select data-item="pid">'+opts(it)+'</select>' + (it.pid==="__other" ? '<input type="text" data-item="name" value="'+esc(it.name)+'" placeholder="農薬名を入力" style="margin-top:6px">' : '') + '</label>' +
+      '<label class="field">希釈倍率（倍）<input type="number" data-item="ratio" value="'+esc(it.ratio)+'" step="1" inputmode="numeric" placeholder="不要なら空欄"></label>' +
+      '<label class="field">使用量（10aあたり）<span class="unit-pair"><input type="number" data-item="amount" value="'+esc(it.amount)+'" step="0.1" inputmode="decimal"><select data-item="unit">'+["L","mL","kg","g"].map(o=>'<option'+(o===it.unit?" selected":"")+'>'+o+'</option>').join("")+'</select><span class="per10a">/10a</span></span></label>' +
+      '<button class="icon-btn" type="button" data-del-item="'+i+'" aria-label="この行を削除"'+(list.length<2?" disabled":"")+'>×</button>' +
+    '</div>').join("");
+  } else if(t === "harvest"){
+    box.innerHTML = list.map((it,i) => '<div class="item-row fert-row" data-i="'+i+'">' +
+      '<label class="field">'+(i+1)+'. 規格<select data-item="name">'+GRADES.map(o=>'<option'+(o===it.name?" selected":"")+'>'+o+'</option>').join("")+'</select></label>' +
+      '<label class="field">ケース数<input type="number" data-item="amount" value="'+esc(it.amount)+'" step="1" inputmode="numeric"></label>' +
+      '<button class="icon-btn" type="button" data-del-item="'+i+'" aria-label="この行を削除"'+(list.length<2?" disabled":"")+'>×</button>' +
+    '</div>').join("");
+  } else {
+    box.innerHTML = list.map((it,i) => '<div class="item-row fert-row" data-i="'+i+'">' +
+      '<label class="field">'+(i+1)+'. 肥料名<input type="text" data-item="name" value="'+esc(it.name)+'" placeholder="例：NK化成"></label>' +
+      '<label class="field">使用量（kg）<input type="number" data-item="amount" value="'+esc(it.amount)+'" step="0.1" inputmode="decimal"></label>' +
+      '<button class="icon-btn" type="button" data-del-item="'+i+'" aria-label="この行を削除"'+(list.length<2?" disabled":"")+'>×</button>' +
+    '</div>').join("");
+  }
+}
+function renderPesticides(){
+  const box = $("pestList"); if(!box) return;
+  if(!R.pesticides.length){ box.innerHTML = '<div class="empty">まだ登録がありません。よく使う農薬を登録しておくと、防除の入力で選ぶだけになります。</div>'; }
+  else box.innerHTML = R.pesticides.map(p => '<div class="pest-row"><div><div class="t">'+esc(p.name)+'</div><div class="s">標準の希釈倍率 '+(p.ratio?Number(p.ratio).toLocaleString("ja-JP")+"倍":"なし")+'・単位 '+esc(p.unit||"L")+(p.note?"・"+esc(p.note):"")+'</div></div>' +
+    '<div class="toolbar"><button class="btn ghost small" type="button" data-pest-edit="'+esc(p.id)+'">編集</button><button class="btn danger small" type="button" data-pest-del="'+esc(p.id)+'">削除</button></div></div>').join("");
+}
+
+function renderPhotos(){
+  const box = $("rPhotos");
+  if(!R.photos.length){ box.innerHTML = '<div class="photo-empty">まだ写真がありません。「カメラで撮影」で撮るか、「写真を選ぶ」で追加してください。</div>'; }
+  else box.innerHTML = R.photos.map((p,i) => '<div class="photo"><img src="'+p.url+'" alt="写真'+(i+1)+'"><span class="no">'+(i+1)+'</span><span class="ctl">'+
+    (i>0?'<button type="button" data-mv="'+i+'" data-dir="-1" aria-label="前へ">←</button>':'')+(i<R.photos.length-1?'<button type="button" data-mv="'+i+'" data-dir="1" aria-label="後ろへ">→</button>':'')+
+    '<button type="button" data-rm="'+i+'" aria-label="削除">×</button></span></div>').join("");
+  const full = R.photos.length >= 4;
+  $("rCamera").disabled = full; $("rPick").disabled = full;
+  document.querySelectorAll('label[for="rCamera"],label[for="rPick"]').forEach(l => l.classList.toggle("disabled", full));
+  document.querySelectorAll('label[for="rCamera"],label[for="rPick"]').forEach(l => l.style.opacity = full ? .5 : 1);
+}
+function fieldLabel(f){ return (f.name||"") + "（" + (f.m2/100).toFixed(1) + "a）"; }
+const CROP_TYPES = ["長ネギ","ブロッコリー","水稲","その他"];
+const FIELD_STATUSES = ["準備中","定植済み","生育中","収穫中","収穫済み","休耕"];
+function cropTypeOf(f){
+  if(!f) return "その他"; if(f.cropType) return f.cropType;
+  const c = (f.crop||"");
+  if(/ネギ|ねぎ/.test(c)) return "長ネギ";
+  if(/天のつぶ|水稲|コシヒカリ|米/.test(c) || (f.type==="田んぼ" && !c)) return "水稲";
+  if(/ネギ|ねぎ/.test(c)) return "長ネギ";
+  if(/ブロッコリー/.test(c)) return "ブロッコリー";
+  return "その他";
+}
+function statusOf(f){ if(!f) return "—"; if(f.status) return f.status; if(/返却|生産不可/.test(f.crop||"")) return "休耕"; return f.crop ? "生育中" : "準備中"; }
+function isRiceField(f){ return cropTypeOf(f) === "長ネギ" && !!ricePlotOf(f); }
+function ricePlotOf(f){ return (f && S.plots.find(p => p.id === f.plotId)) || null; }
+function renderReportMeta(){
+  const sel = $("rPlot"); if(!sel) return;
+  const saved = tryLS(()=>localStorage.getItem("negi.reportField"), "");
+  const cur = sel.value || saved;
+  if(S.fields.length){
+    const groups = {}; S.fields.forEach(f => { (groups[f.area||"その他"] = groups[f.area||"その他"] || []).push(f); });
+    sel.innerHTML = '<option value="">圃場を選んでください</option>' + Object.keys(groups).map(g => '<optgroup label="'+esc(g)+'">'+groups[g].map(f => '<option value="'+esc(f.id)+'"'+(f.id===cur?" selected":"")+'>'+esc(fieldLabel(f))+'</option>').join("")+'</optgroup>').join("");
+  } else sel.innerHTML = '<option value="">農地一覧を読み込み中…</option>';
+  if(!$("rDate").value) $("rDate").value = todayStr();
+  $("rTo").textContent = "宛先 " + R.to.join("、");
+  const ctx = reportContext();
+  $("rAuto").textContent = ctx.field ? "自動で入る内容：面積 "+(ctx.field.m2/100).toFixed(1)+"a・"+cropTypeOf(ctx.field)+"（"+statusOf(ctx.field)+"）"+"／"+ctx.weatherLine+"／"+ctx.stageLine : "圃場を選ぶと、面積・作物・気温・生育ステージが自動で入ります";
+  renderHistory();
+  scheduleDraw();
+}
+function reportContext(){
+  const date = $("rDate").value || todayStr();
+  const field = S.fields.find(f => f.id === $("rPlot").value) || null;
+  const r = S.byDate[date];
+  let obsDate = date, obs = isValid(r) ? r : null;
+  if(!obs && S.lastObs && date > S.lastObs){ obs = S.byDate[S.lastObs]; obsDate = S.lastObs; }
+  const weatherLine = obs ? (obsDate!==date ? md(obsDate)+"観測 " : "") + (obs.weather||"") + " 平均"+f1(obs.avg)+"℃ 最高"+f1(obs.max)+"℃ 最低"+f1(obs.min)+"℃" + (obs.precip!=null?" 降水"+f1(obs.precip)+"mm":"") : "観測データなし";
+  let stageLine = field ? (field.crop || "—") : "—", cumT = null, cumH = null, rice = null;
+  if(isRiceField(field)){
+    rice = ricePlotOf(field);
+    const saved = S.lastObs; if(S.lastObs && date < S.lastObs) S.lastObs = date;
+    const a = analyzePlot(rice);
+    S.lastObs = saved;
+    const cur = a.stages.find(s => s.key === a.currentKey);
+    stageLine = cur ? cur.label : "—"; cumT = a.cumT; cumH = a.cumH;
+  }
+  return {date, field, rice, obs, obsDate, weatherLine, stageLine, cumT, cumH};
+}
+function collectReport(){
+  document.querySelectorAll("#panel-report [data-f]").forEach(el => R.f[el.id] = el.value);
+  let items = (R.items[R.type] || []).map(it => ({...it}));
+  if(R.type === "spray") items = items.map(it => { if(it.pid && it.pid !== "__other"){ const p = R.pesticides.find(x=>x.id===it.pid); if(p) it.name = p.name; } else if(it.pid !== "__other") it.name = ""; return it; });
+  items = items.filter(it => it.name && it.name.trim());
+  return {type:R.type, date:$("rDate").value||todayStr(), fieldId:$("rPlot").value, worker:WORKER, weatherNote:"",
+    comment:$("rComment").value.trim(), fields:{...R.f}, items};
+}
+function saveDraft(){
+  const d = collectReport();
+  tryLS(() => localStorage.setItem(LS_DRAFT, JSON.stringify({type:R.type, f:R.f, items:R.items, comment:d.comment})));
+}
+function loadDraft(){
+  const d = tryLS(() => JSON.parse(localStorage.getItem(LS_DRAFT)||"null"), null);
+  if(!d) return;
+  R.type = RTYPES[d.type] ? d.type : "spray"; R.f = d.f || {};
+  Object.keys(R.items).forEach(k => { if(d.items && Array.isArray(d.items[k]) && d.items[k].length) R.items[k] = d.items[k]; });
+  R.items.spray.forEach(it => { if(!it.unit || it.unit === "mL" || it.unit === "袋") it.unit = "L"; if(it.amount === "" || it.amount == null) it.amount = "100"; });
+  $("rComment").value = d.comment || "";
+}
+
+/* ---------- 写真の取り込み（縮小してJPEGに） ---------- */
+async function addPhotoFiles(files){
+  const room = 4 - R.photos.length;
+  const list = [...files].slice(0, room);
+  if(files.length > room) toast("写真は4枚までです。"+room+"枚だけ追加しました");
+  for(const file of list){
+    try{
+      const bmp = await loadImage(file);
+      const max = 1800, sc = Math.min(1, max / Math.max(bmp.width, bmp.height));
+      const cv = document.createElement("canvas"); cv.width = Math.round(bmp.width*sc); cv.height = Math.round(bmp.height*sc);
+      cv.getContext("2d").drawImage(bmp, 0, 0, cv.width, cv.height);
+      const blob = await new Promise(res => cv.toBlob(res, "image/jpeg", .86));
+      const img = await loadImage(blob);
+      R.photos.push({blob, url:URL.createObjectURL(blob), img, w:cv.width, h:cv.height});
+    }catch(e){ toast("写真を読み込めませんでした（"+(file.name||"画像")+"）"); }
+  }
+  renderPhotos(); scheduleDraw();
+}
+function loadImage(src){
+  return new Promise((res, rej) => {
+    const url = src instanceof Blob ? URL.createObjectURL(src) : src;
+    const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = url;
+  });
+}
+
+/* ---------- A4キャンバス描画（150dpi相当） ---------- */
+const PW = 1240, PH = 1754, M = 64;
+const PC = {ink:"#1b2436", sub:"#5a5546", muted:"#8a846f", rule:"#d9d2ba", soft:"#f4f1e4", indigo:"#2f6b45", gold:"#b9862c", paper:"#ffffff"};
+const FS = '"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif', FM = '"Shippori Mincho","Hiragino Mincho ProN",serif';
+
+function wrapLines(ctx, text, maxW){
+  const out = [];
+  String(text||"").split("\n").forEach(par => {
+    let line = "";
+    for(const ch of [...par]){
+      if(ctx.measureText(line+ch).width > maxW && line){ out.push(line); line = ch; } else line += ch;
+    }
+    out.push(line);
+  });
+  return out;
+}
+function fitText(ctx, text, maxW){ let t = String(text||""); if(ctx.measureText(t).width <= maxW) return t; while(t.length && ctx.measureText(t+"…").width > maxW) t = t.slice(0,-1); return t+"…"; }
+function fmtVal(v, unit){ return (v === "" || v == null) ? "—" : v + (unit||""); }
+
+function reportRows(d){
+  if(d.type === "spray") return {kv:[["散布方法", fmtVal(d.fields.s_method)]],
+    head:["農薬名","希釈倍率","使用量（10aあたり）"], widths:[.52,.2,.28],
+    rows:d.items.map(it => [it.name, it.ratio?Number(it.ratio).toLocaleString("ja-JP")+"倍":"—", it.amount?it.amount+" "+it.unit+"/10a":"—"])};
+  if(d.type === "soil") return {kv:[["土寄せの回", fmtVal(d.fields.so_round)], ["作業機", fmtVal(d.fields.so_machine)], ["高さの目安", fmtVal(d.fields.so_depth, " cm")], ["土の状態", fmtVal(d.fields.so_soil)]]};
+  if(d.type === "harvest"){ const tot = d.items.reduce((s,it)=>s+(+it.amount||0),0);
+    return {kv:[["出荷先", fmtVal(d.fields.hv_dest)], ["収穫量", tot ? tot+" ケース" : "—"], ["収穫範囲", fmtVal(d.fields.hv_rows)]],
+      head:["規格","ケース数"], widths:[.6,.4], rows:d.items.map(it => [it.name, it.amount?it.amount+" ケース":"—"])}; }
+  return {kv:[], head:["肥料名","使用量"], widths:[.7,.3], rows:d.items.map(it => [it.name, it.amount?it.amount+" kg":"—"])};
+}
+
+async function drawReport(canvas){
+  const d = collectReport(), ctx0 = reportContext();
+  const ctx = canvas.getContext("2d");
+  const texts = [RTYPES[d.type], d.comment, d.worker, d.weatherNote, ctx0.field&&ctx0.field.name, ctx0.field&&ctx0.field.crop, ctx0.field&&ctx0.field.chiban, ctx0.weatherLine, ctx0.stageLine, JSON.stringify(d.fields), JSON.stringify(d.items), "南相馬ねぎ出荷組合株式会社 圃場品種作業者土寄せ収穫規格ケース出荷先定植止め天候気温降水日照生育ステージ積算田植え後出穂後刈取予測写真コメント作成実り予想相馬アメダス観測値年月日曜頃℃—〜・（）"].join("");
+  try{ await Promise.all([document.fonts.load('500 20px "Zen Kaku Gothic New"', texts), document.fonts.load('700 20px "Zen Kaku Gothic New"', texts), document.fonts.load('700 20px "Shippori Mincho"', texts)]); }catch(e){}
+  ctx.fillStyle = PC.paper; ctx.fillRect(0,0,PW,PH);
+  ctx.textBaseline = "alphabetic";
+  const W = PW - M*2;
+  let y = M;
+
+  // ヘッダー
+  ctx.fillStyle = PC.gold; ctx.fillRect(M, y, 8, 74);
+  ctx.fillStyle = PC.muted; ctx.font = "700 20px "+FS; ctx.fillText("南相馬ねぎ出荷組合株式会社　圃場レポート", M+24, y+22);
+  ctx.fillStyle = PC.ink; ctx.font = "700 52px "+FM; ctx.fillText(RTYPES[d.type]+"記録", M+22, y+74);
+  const dt = d.date.split("-"), dateText = dt[0]+"年"+(+dt[1])+"月"+(+dt[2])+"日（"+wd(d.date)+"）";
+  ctx.textAlign = "right"; ctx.font = "700 34px "+FS; ctx.fillText(dateText, M+W, y+50);
+  ctx.font = "500 18px "+FS; ctx.fillStyle = PC.muted; ctx.fillText("No. "+d.date.replace(/-/g,"")+"-"+d.type.toUpperCase(), M+W, y+78);
+  ctx.textAlign = "left";
+  y += 100;
+  ctx.fillStyle = PC.ink; ctx.fillRect(M, y, W, 3); y += 18;
+
+  // 基本情報 4×2
+  const fld = ctx0.field || {};
+  const obs = ctx0.obs;
+  const info = [
+    ["圃場", fld.name || "—"], ["作型・状態", ctx0.field ? cropTypeOf(fld)+"・"+statusOf(fld) : "—"], ["面積", fld.m2 ? (fld.m2/100).toFixed(1)+" a（"+fInt(fld.m2)+"㎡）" : "—"], ["地番", [fld.gyosei, fld.chiban].filter(Boolean).join(" ") || "—"],
+    ["気温"+(ctx0.obsDate!==d.date&&obs?"（"+md(ctx0.obsDate)+"観測）":""), obs ? "平均"+f1(obs.avg)+" 最高"+f1(obs.max)+" 最低"+f1(obs.min)+"℃" : "—"],
+    ["天気・降水", obs ? (obs.weather||"—")+" ／ "+(obs.precip!=null?f1(obs.precip)+"mm":"—") : "—"],
+    [ctx0.rice ? "生育ステージ" : "作業者", ctx0.rice ? ctx0.stageLine : d.worker],
+    [ctx0.rice ? "積算気温" : "作型", ctx0.rice ? (ctx0.cumT?"定植後"+fInt(ctx0.cumT.cum)+"℃":"—")+(ctx0.rice.tomeDate?"・止め"+md(ctx0.rice.tomeDate):"") : (fld.type||"—")]
+  ];
+  const colW = [W*.22, W*.2, W*.22, W*.36], cellH = 74;
+  ctx.strokeStyle = PC.rule; ctx.lineWidth = 1.5;
+  for(let row=0; row<2; row++){
+    let x = M;
+    for(let c=0; c<4; c++){
+      const [k,v] = info[row*4+c]; let cw = colW[c];
+      if(row===1){ cw = [W*.3, W*.16, W*.18, W*.36][c]; }
+      ctx.strokeRect(x, y, cw, cellH);
+      ctx.fillStyle = PC.muted; ctx.font = "700 16px "+FS; ctx.fillText(fitText(ctx,k,cw-24), x+12, y+24);
+      ctx.fillStyle = PC.ink; ctx.font = (row===1?"700 20px ":"700 22px ")+FS; ctx.fillText(fitText(ctx,v,cw-24), x+12, y+58);
+      x += cw;
+    }
+    y += cellH;
+  }
+  y += 22;
+
+  // 種類別の表
+  const rows = reportRows(d);
+  const kvH = 50, kvCols = 2;
+  const kvRows = Math.ceil(rows.kv.length / kvCols);
+  ctx.fillStyle = PC.soft; ctx.fillRect(M, y, W, kvRows*kvH);
+  rows.kv.forEach((kv, i) => {
+    const cx = M + (W/kvCols)*(i%kvCols), cy = y + kvH*Math.floor(i/kvCols);
+    ctx.fillStyle = PC.muted; ctx.font = "700 16px "+FS; ctx.fillText(kv[0], cx+14, cy+31);
+    ctx.fillStyle = PC.ink; ctx.font = "700 21px "+FS; ctx.fillText(fitText(ctx, kv[1], W/kvCols - 150), cx+128, cy+32);
+  });
+  if(kvRows) y += kvRows*kvH + 14;
+  if(rows.head){
+    const rh = 46, tRows = Math.max(1, rows.rows.length);
+    ctx.fillStyle = PC.indigo; ctx.fillRect(M, y, W, rh);
+    let x = M; ctx.font = "700 18px "+FS; ctx.fillStyle = "#fff";
+    rows.head.forEach((hd,i) => { ctx.fillText(hd, x+12, y+30); x += W*rows.widths[i]; });
+    y += rh;
+    for(let r=0; r<tRows; r++){
+      const vals = rows.rows[r] || ["（未入力）"].concat(rows.head.slice(1).map(()=>"—"));
+      x = M; ctx.strokeStyle = PC.rule; ctx.strokeRect(M, y, W, rh+6);
+      vals.forEach((v,i) => { ctx.fillStyle = PC.ink; ctx.font = (i===0?"700 23px ":"700 22px ")+FS; ctx.fillText(fitText(ctx, v, W*rows.widths[i]-24), x+12, y+34); x += W*rows.widths[i]; });
+      y += rh+6;
+    }
+    y += 14;
+  }
+
+  // コメント（先に高さを確保）
+  const footerH = 40;
+  let cSize = 24; ctx.font = "500 "+cSize+"px "+FS;
+  let lines = wrapLines(ctx, d.comment || "（コメントなし）", W-32);
+  while(lines.length > 8 && cSize > 17){ cSize -= 1; ctx.font = "500 "+cSize+"px "+FS; lines = wrapLines(ctx, d.comment, W-32); }
+  const lh = Math.round(cSize*1.6), maxLines = 10;
+  if(lines.length > maxLines){ lines = lines.slice(0,maxLines); lines[maxLines-1] = fitText(ctx, lines[maxLines-1]+"……", W-32); }
+  const commentH = 44 + Math.max(2, lines.length)*lh + 16;
+
+  // 写真エリア
+  const photoTop = y, photoH = PH - M - footerH - commentH - 18 - photoTop;
+  drawPhotos(ctx, M, photoTop, W, photoH);
+  y = photoTop + photoH + 18;
+
+  ctx.strokeStyle = PC.rule; ctx.lineWidth = 1.5; ctx.strokeRect(M, y, W, commentH);
+  ctx.fillStyle = PC.muted; ctx.font = "700 16px "+FS; ctx.fillText("コメント", M+16, y+28);
+  ctx.fillStyle = PC.ink; ctx.font = "500 "+cSize+"px "+FS;
+  lines.forEach((ln,i) => ctx.fillText(ln, M+16, y+44+lh*(i+1)-lh*.3));
+  y += commentH;
+
+  // フッター
+  const now = new Date();
+  ctx.fillStyle = PC.muted; ctx.font = "500 15px "+FS;
+  ctx.fillText("作成 "+now.getFullYear()+"/"+(now.getMonth()+1)+"/"+now.getDate()+" "+pad(now.getHours())+":"+pad(now.getMinutes())+"　／　気温：気象庁 相馬アメダス　／　積算気温は日平均気温の単純合計", M, PH-M+6);
+  ctx.textAlign = "right"; ctx.fillText("南相馬ねぎ出荷組合 長ねぎ生育トラッカー", M+W, PH-M+6); ctx.textAlign = "left";
+}
+function drawPhotos(ctx, x, y, w, h){
+  const n = R.photos.length, gap = 12;
+  if(!n){
+    ctx.strokeStyle = PC.rule; ctx.setLineDash([10,8]); ctx.strokeRect(x, y, w, h); ctx.setLineDash([]);
+    ctx.fillStyle = PC.muted; ctx.font = "700 22px "+FS; ctx.textAlign = "center"; ctx.fillText("写真なし", x+w/2, y+h/2); ctx.textAlign = "left"; return;
+  }
+  let cells;
+  if(n === 1) cells = [[x,y,w,h]];
+  else if(n === 2) cells = [[x,y,(w-gap)/2,h],[x+(w+gap)/2,y,(w-gap)/2,h]];
+  else if(n === 3){ const top = (h-gap)*.6; cells = [[x,y,w,top],[x,y+top+gap,(w-gap)/2,h-top-gap],[x+(w+gap)/2,y+top+gap,(w-gap)/2,h-top-gap]]; }
+  else { const cw=(w-gap)/2, ch=(h-gap)/2; cells = [[x,y,cw,ch],[x+cw+gap,y,cw,ch],[x,y+ch+gap,cw,ch],[x+cw+gap,y+ch+gap,cw,ch]]; }
+  cells.forEach(([cx,cy,cw,ch], i) => {
+    const p = R.photos[i];
+    ctx.fillStyle = PC.soft; ctx.fillRect(cx,cy,cw,ch);
+    const sc = Math.min(cw/p.w, ch/p.h), dw = p.w*sc, dh = p.h*sc;
+    ctx.drawImage(p.img, cx+(cw-dw)/2, cy+(ch-dh)/2, dw, dh);
+    ctx.fillStyle = "rgba(27,36,54,.82)"; ctx.fillRect(cx+10, cy+10, 44, 30);
+    ctx.fillStyle = "#fff"; ctx.font = "700 18px "+FS; ctx.textAlign = "center"; ctx.fillText(String(i+1), cx+32, cy+32); ctx.textAlign = "left";
+  });
+}
+function scheduleDraw(){
+  if($("panel-report").hidden) return;
+  clearTimeout(R.drawTimer); R.drawTimer = setTimeout(() => drawReport($("rCanvas")), 250);
+}
+
+/* ---------- PDF ---------- */
+async function buildPdf(){
+  if(!window.PDFLib || !window.PDFLib.PDFDocument) throw {code:"nolib"};
+  const cv = document.createElement("canvas"); cv.width = PW; cv.height = PH;
+  await drawReport(cv);
+  const jpg = await new Promise(res => cv.toBlob(res, "image/jpeg", .9));
+  const doc = await window.PDFLib.PDFDocument.create();
+  const d = collectReport(), plot = S.fields.find(f=>f.id===d.fieldId) || {};
+  doc.setTitle(RTYPES[d.type]+"記録 "+d.date+" "+(plot.name||"")); doc.setCreator("南相馬ねぎ出荷組合 長ねぎ生育トラッカー"); doc.setProducer("長ねぎ生育トラッカー");
+  const img = await doc.embedJpg(new Uint8Array(await jpg.arrayBuffer()));
+  const page = doc.addPage([595.28, 841.89]);
+  page.drawImage(img, {x:0, y:0, width:595.28, height:841.89});
+  const bytes = await doc.save();
+  const buf = bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength);
+  const name = d.date.replace(/-/g,"")+"_"+RTYPES[d.type]+"記録_"+(plot.name||"圃場").replace(/[\\/:*?"<>|\s]/g,"")+".pdf";
+  return {buf, name, d, plot};
+}
+function b64(buf){
+  const bytes = new Uint8Array(buf); let bin = ""; const CH = 0x8000;
+  for(let i=0;i<bytes.length;i+=CH) bin += String.fromCharCode.apply(null, bytes.subarray(i,i+CH));
+  return btoa(bin);
+}
+function validateReport(){
+  const d = collectReport();
+  if(!d.fieldId){ toast("圃場を選んでください"); return false; }
+  if(d.type === "soil"){ if(!d.fields.so_round){ toast("土寄せの回を選んでください"); return false; } return true; }
+  if(!d.items.length){ toast(d.type==="spray" ? "農薬を1つ以上選んでください" : d.type==="harvest" ? "規格を1つ以上入れてください" : "肥料名を1つ以上入れてください"); return false; }
+  const bad = d.items.find(it => !it.amount);
+  if(bad){ toast("「"+bad.name+"」の"+(d.type==="harvest"?"ケース数":"使用量")+"が空欄です"); return false; }
+  if(d.type === "spray"){
+    if(!d.fields.s_method){ toast("散布方法を選んでください"); return false; }
+    const noRatio = d.items.find(it => !it.ratio);
+    if(noRatio && !/粒剤|水口/.test(d.fields.s_method) && !R.ratioWarned){ R.ratioWarned = true; toast("「"+noRatio.name+"」の希釈倍率が空欄です。不要なら、もう一度押してください"); return false; }
+  }
+  return true;
+}
+
+function setBusy(on, msg){
+  R.busy = on; ["rSend","rSavePdf"].forEach(id => $(id).disabled = on);
+  $("rStatus").textContent = msg || "";
+}
+async function savePdf(){
+  if(R.busy || !validateReport()) return;
+  setBusy(true, "PDFを作成しています…");
+  try{
+    const {buf, name} = await buildPdf();
+    let dl = null; try{ dl = await window.claude?.use?.("downloads"); }catch(e){}
+    if(!dl){ setBusy(false, "この画面ではファイルを保存できません。メール送信をお使いください。"); return; }
+    await dl.save({filename:name, data:new Blob([buf], {type:"application/pdf"})});
+    setBusy(false, ""); toast("PDFを保存しました");
+  }catch(err){
+    setBusy(false, err && err.code === "declined" ? "" : err && err.code === "nolib" ? "PDFの部品を読み込めませんでした。通信状態を確認して、ページを開き直してください。" : "PDFを保存できませんでした。");
+  }
+}
+async function sendReport(){
+  if(R.busy || !validateReport()) return;
+  setBusy(true, "PDFを作成しています…");
+  let pdf;
+  try{ pdf = await buildPdf(); }
+  catch(err){ setBusy(false, err && err.code === "nolib" ? "PDFの部品を読み込めませんでした。通信状態を確認して、ページを開き直してください。" : "PDFを作成できませんでした。"); return; }
+  let mcp = null; try{ mcp = await window.claude?.use?.("mcp"); }catch(e){}
+  if(!mcp){ setBusy(false, "デモ版ではメール送信は使えません。「PDFを保存」をお試しください。"); return; }
+  const {d, plot, name, buf} = pdf, ctx = reportContext();
+  const subject = "【"+RTYPES[d.type]+"記録】"+jd(d.date)+" "+(plot.name||"");
+  const lines = [RTYPES[d.type]+"の記録を送ります。", "", "日付："+jd(d.date)+"（"+wd(d.date)+"）", "圃場："+(plot.name||"—")+"（"+(plot.m2?(plot.m2/100).toFixed(1)+"a":"")+"・"+(plot.crop||"")+"）", (ctx.rice?"生育ステージ：":"作物：")+ctx.stageLine, "気象："+ctx.weatherLine];
+  reportRows(d).kv.forEach(kv => lines.push(kv[0]+"："+kv[1]));
+  d.items.forEach((it,i) => lines.push((i+1)+". "+it.name+(d.type==="harvest" ? "　"+(it.amount||"—")+" ケース" : d.type==="spray" ? "　希釈 "+(it.ratio?it.ratio+"倍":"—")+"　使用量 "+(it.amount?it.amount+" "+it.unit+"/10a":"—") : "　使用量 "+(it.amount?it.amount+" kg":"—"))));
+  lines.push("", "コメント：", d.comment || "（なし）", "", "写真 "+R.photos.length+"枚はPDFに掲載しています。", "— 南相馬ねぎ出荷組合 長ねぎ生育トラッカー");
+  setBusy(true, "メールを送信しています…");
+  try{
+    await mcp.callTool("Gmail", "send_message", {to:R.to, subject, body:lines.join("\n"), attachments:[{content:b64(buf), filename:name, mimeType:"application/pdf"}]});
+  }catch(err){
+    const c = err && err.code;
+    const msg = c === "needs_reauth" ? "Gmailの接続が切れています。claude.ai の設定 → コネクタ でGmailを再接続してください。"
+      : c === "server_not_connected" ? "Gmailがつながっていません。claude.ai の設定 → コネクタ でGmailを追加してください。"
+      : c === "not_in_manifest" ? "このページでのGmail使用が許可されていません。ページを開き直して、確認が出たら許可してください。"
+      : c === "blocked_by_policy" || c === "approval_required" ? "組織の設定でGmailの送信が制限されています。"
+      : c === "tool_error" ? "Gmailが送信を受け付けませんでした：" + (err.message||"")
+      : "送信できたか確認できませんでした。Gmailの送信済みを確認してから、必要なら送り直してください。";
+    setBusy(false, msg); return;
+  }
+  setBusy(true, "送信しました。記録を保存しています…");
+  await saveReportRecord(pdf, ctx);
+  setBusy(false, ""); toast("「"+subject+"」を送信しました");
+}
+async function saveReportRecord(pdf, ctx){
+  if(!S.db) return;
+  const {d, plot, buf, name} = pdf;
+  let pdfAsset = null;
+  try{ const as = await window.claude?.use?.("assets"); if(as) pdfAsset = await as.upload(new Blob([buf], {type:"application/pdf"})); }catch(e){ pdfAsset = null; }
+  try{
+    await S.db.collection("reports").doc().set({
+      type:d.type, typeLabel:RTYPES[d.type], date:d.date, fieldId:d.fieldId, plotName:plot.name||"", crop:plot.crop||"", areaA:plot.m2?Math.round(plot.m2)/100:null,
+      worker:d.worker, weatherNote:d.weatherNote, weatherLine:ctx.weatherLine, stage:ctx.stageLine,
+      cumT:ctx.cumT?Math.round(ctx.cumT.cum):null, cumH:ctx.cumH?Math.round(ctx.cumH.cum):null,
+      fields:d.fields, items:d.items, comment:d.comment, photoCount:R.photos.length,
+      pdfAssetId:pdfAsset?pdfAsset.id:"", pdfName:name, sentTo:R.to, sentAt:new Date().toISOString()
+    });
+  }catch(e){ toast("送信はできましたが、履歴の保存に失敗しました"); }
+}
+function renderHistory(){
+  const box = $("rHistory"); if(!box) return;
+  if(!R.history.length){ box.innerHTML = '<div class="empty">まだ送信したレポートはありません</div>'; return; }
+  box.innerHTML = R.history.map(h => '<div class="h-row"><span class="pill '+(h.type==="spray"?"warn":"good")+'">'+esc(h.typeLabel||RTYPES[h.type]||"")+'</span>' +
+    '<div><div class="t">'+jd(h.date)+'　'+esc(h.plotName||"")+'</div><div class="s">'+esc(h.stage||"")+(h.items&&h.items.length?"・"+esc(h.items.map(i=>i.name).join("、")):"")+'・写真'+(h.photoCount||0)+'枚・'+esc((h.sentTo||[]).join("、"))+'へ送信</div></div>' +
+    (h.pdfAssetId ? '<a href="/_blob/'+encodeURIComponent(h.pdfAssetId)+'" target="_blank" rel="noopener">PDFを開く</a>' : '<span class="s">PDF未保存</span>') + '</div>').join("");
+}
+
+/* ---------- 音声入力 ---------- */
+function setupMic(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = $("rMic"), hint = $("rMicHint");
+  if(!SR){ btn.addEventListener("click", () => { $("rComment").focus(); hint.innerHTML = "<b>このブラウザではマイクボタンが使えません。</b>キーボードのマイクボタンで話してください。"; }); return; }
+  btn.addEventListener("click", () => {
+    if(R.rec){ R.rec.stop(); return; }
+    const rec = new SR(); rec.lang = "ja-JP"; rec.continuous = true; rec.interimResults = true;
+    const ta = $("rComment"), base = ta.value ? ta.value.replace(/\s*$/,"") + "\n" : "";
+    let finalText = "";
+    rec.onresult = e => {
+      let interim = "";
+      for(let i=e.resultIndex;i<e.results.length;i++){ const t = e.results[i][0].transcript; if(e.results[i].isFinal) finalText += t + "。"; else interim += t; }
+      ta.value = base + finalText + interim; scheduleDraw();
+    };
+    rec.onerror = e => { if(e.error === "not-allowed" || e.error === "service-not-allowed" || e.error === "audio-capture"){ started = true; hint.innerHTML = "<b>この画面ではマイクが使えません。</b>コメント欄をタップして、キーボードのマイクボタンで話してください。"; ta.focus(); } else if(e.error !== "aborted") hint.textContent = "音声を聞き取れませんでした。もう一度押すか、キーボードのマイクボタンを使ってください。"; };
+    rec.onend = () => { R.rec = null; btn.setAttribute("aria-pressed","false"); btn.querySelector("span").textContent = "音声入力"; ta.value = ta.value.replace(/。。/g,"。"); saveDraft(); scheduleDraw(); };
+    const fallback = () => {
+      try{ rec.abort(); }catch(e){}
+      R.rec = null; btn.setAttribute("aria-pressed","false"); btn.querySelector("span").textContent = "音声入力";
+      hint.innerHTML = "<b>この画面ではマイクボタンが使えません。</b>コメント欄をタップして、キーボードのマイクボタンで話してください。";
+      ta.focus();
+    };
+    let started = false;
+    rec.onstart = () => { started = true; };
+    rec.onaudiostart = () => { started = true; };
+    try{
+      rec.start(); R.rec = rec; btn.setAttribute("aria-pressed","true"); btn.querySelector("span").textContent = "聞き取り中…押すと終了"; hint.textContent = "話し終わったらボタンを押してください。";
+      setTimeout(() => { if(!started && R.rec === rec) fallback(); }, 2500);
+    }catch(err){ fallback(); }
+  });
+}
+
+/* ---------- イベント ---------- */
+function setupReport(){
+  loadDraft();
+  document.querySelectorAll("[data-rtype]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.rtype===R.type)));
+  renderReportFields(); renderPhotos(); renderPesticides(); setupMic();
+  $("rTypes").addEventListener("click", e => { const b = e.target.closest("[data-rtype]"); if(!b) return;
+    document.querySelectorAll("#panel-report [data-f]").forEach(el => R.f[el.id] = el.value);
+    R.type = b.dataset.rtype; R.ratioWarned = false;
+    document.querySelectorAll("[data-rtype]").forEach(x => x.setAttribute("aria-pressed", String(x===b)));
+    renderReportFields(); saveDraft(); scheduleDraw(); });
+  const panel = $("panel-report");
+  const onItem = e => {
+    const key = e.target.dataset.item; if(!key) return false;
+    const i = +e.target.closest(".item-row").dataset.i, it = R.items[R.type][i];
+    it[key] = e.target.value; R.ratioWarned = false;
+    if(key === "pid"){
+      const p = R.pesticides.find(x => x.id === it.pid);
+      if(p){ it.name = p.name; it.ratio = p.ratio || ""; } else if(it.pid !== "__other") it.name = "";
+      renderItems();
+    }
+    return true;
+  };
+  panel.addEventListener("input", e => {
+    if(e.target.closest("#pestForm")) return;
+    if(e.target.tagName !== "SELECT") onItem(e);
+    saveDraft(); scheduleDraw();
+  });
+  panel.addEventListener("change", e => {
+    if(e.target.closest("#pestForm")) return;
+    if(e.target.tagName === "SELECT") onItem(e);
+    if(e.target.id === "rPlot"){ tryLS(()=>localStorage.setItem("negi.reportField", e.target.value)); }
+    if(e.target.id === "rPlot" || e.target.id === "rDate") renderReportMeta();
+    saveDraft(); scheduleDraw();
+  });
+  panel.addEventListener("click", async e => {
+    const b = e.target.closest("button"); if(!b) return;
+    if(b.id === "rAddItem"){ const list = R.items[R.type]; if(list.length >= 4){ toast("4行までです"); return; }
+      list.push(R.type==="spray" ? newSpray() : R.type==="harvest" ? newGrade() : newFert()); renderItems(); }
+    if(b.dataset.delItem != null){ R.items[R.type].splice(+b.dataset.delItem,1); renderItems(); saveDraft(); scheduleDraw(); }
+    if(b.dataset.rm != null){ const p = R.photos.splice(+b.dataset.rm,1)[0]; if(p) URL.revokeObjectURL(p.url); renderPhotos(); scheduleDraw(); }
+    if(b.dataset.mv != null){ const i = +b.dataset.mv, j = i + (+b.dataset.dir); [R.photos[i], R.photos[j]] = [R.photos[j], R.photos[i]]; renderPhotos(); scheduleDraw(); }
+    if(b.dataset.pestEdit){ const p = R.pesticides.find(x=>x.id===b.dataset.pestEdit); if(!p) return;
+      R.editPid = p.id; $("pestName").value = p.name; $("pestRatio").value = p.ratio||""; $("pestUnit").value = p.unit||"L"; $("pestNote").value = p.note||"";
+      $("pestSave").textContent = "更新"; $("pestCancel").hidden = false; $("pestName").focus(); }
+    if(b.dataset.pestDel){
+      if(b.dataset.armed !== "1"){ b.dataset.armed = "1"; b.textContent = "もう一度押すと削除"; setTimeout(()=>{ b.dataset.armed=""; b.textContent="削除"; }, 3000); return; }
+      try{ await S.db.doc("pesticides/"+b.dataset.pestDel).delete(); toast("削除しました"); }catch(err){ toast("削除できませんでした"); }
+    }
+  });
+  $("pestCancel").addEventListener("click", resetPestForm);
+  $("fieldFilter").addEventListener("input", renderFields);
+  $("typeFilter").addEventListener("click", e => { const b = e.target.closest("[data-ctype]"); if(!b) return; fieldTypeFilter = b.dataset.ctype; document.querySelectorAll("[data-ctype]").forEach(x => x.setAttribute("aria-pressed", String(x===b))); renderFields(); });
+  $("fieldRows").addEventListener("change", e => {
+    const el = e.target;
+    if(el.dataset.ftype){ const patch = {cropType:el.value}; /* 長ネギ以外にしてもグループ割当は保持 */ updateField(el.dataset.ftype, patch, "作型"); }
+    if(el.dataset.fstatus) updateField(el.dataset.fstatus, {status:el.value}, "状態");
+    if(el.dataset.fplot) updateField(el.dataset.fplot, {plotId:el.value}, "作付けグループ");
+  });
+  $("pestForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const name = $("pestName").value.trim(); if(!name){ toast("農薬名を入力してください"); return; }
+    if(!S.db){ toast("データベースに接続できないため登録できません"); return; }
+    const body = {name, ratio:numOrNull($("pestRatio").value), unit:$("pestUnit").value, note:$("pestNote").value.trim()};
+    try{
+      if(R.editPid){ await S.db.doc("pesticides/"+R.editPid).update(body); toast("「"+name+"」を更新しました"); }
+      else { if(R.pesticides.some(p=>p.name===name)){ toast("「"+name+"」はすでに登録されています"); return; }
+        await S.db.collection("pesticides").doc().set(body); toast("「"+name+"」を登録しました"); }
+      resetPestForm();
+    }catch(err){ toast("登録できませんでした。通信状態を確認してください"); }
+  });
+  ["rCamera","rPick"].forEach(id => $(id).addEventListener("change", e => { if(e.target.files && e.target.files.length) addPhotoFiles(e.target.files); e.target.value = ""; }));
+  $("rSavePdf").addEventListener("click", savePdf);
+  $("rSend").addEventListener("click", sendReport);
+  let clearArmed = false;
+  $("rClear").addEventListener("click", () => {
+    if(!clearArmed){ clearArmed = true; $("rClear").textContent = "もう一度押すとクリア"; setTimeout(() => { clearArmed = false; $("rClear").textContent = "入力をクリア"; }, 3000); return; }
+    clearArmed = false; $("rClear").textContent = "入力をクリア";
+    R.photos.forEach(p => URL.revokeObjectURL(p.url)); R.photos = []; R.f = {};
+    R.items = {spray:[newSpray()], top:[newFert()], soil:[], harvest:[newGrade()]};
+    $("rComment").value = ""; $("rDate").value = todayStr();
+    renderReportFields(); renderPhotos(); saveDraft(); scheduleDraw(); toast("入力をクリアしました");
+  });
+}
+let fieldTypeFilter = "長ネギ";
+function renderFields(){
+  const body = $("fieldRows"); if(!body) return;
+  // 作型ごとの集計
+  const agg = {}; CROP_TYPES.forEach(t => agg[t] = {n:0, m2:0, st:{}});
+  S.fields.forEach(f => { const a = agg[cropTypeOf(f)]; a.n++; a.m2 += f.m2||0; const st = statusOf(f); a.st[st] = (a.st[st]||0)+1; });
+  $("typeCards").innerHTML = CROP_TYPES.map(t => '<div class="type-card"><span class="n">'+t+'</span><span class="v">'+(agg[t].m2/10000).toFixed(2)+'<small>ha</small></span><span class="s">'+agg[t].n+'圃場'+(Object.keys(agg[t].st).length ? '・'+FIELD_STATUSES.filter(x=>agg[t].st[x]).map(x=>x+agg[t].st[x]).join(' ') : '')+'</span></div>').join("");
+  const q = ($("fieldFilter").value||"").trim();
+  const list = S.fields.filter(f => (!fieldTypeFilter || cropTypeOf(f) === fieldTypeFilter) && (!q || [f.name,f.area,f.crop,f.crop2,f.chiban,f.gyosei,f.type,statusOf(f)].join(" ").includes(q)));
+  const total = list.reduce((a,f)=>a+(f.m2||0),0);
+  $("fieldSum").textContent = list.length+"圃場・合計 "+(total/100).toLocaleString("ja-JP",{maximumFractionDigits:1})+" a（"+(total/10000).toFixed(2)+" ha）";
+  const sel = (attr, id, opts, cur) => '<select data-'+attr+'="'+esc(id)+'" aria-label="'+(attr==="ftype"?"作型":attr==="fstatus"?"状態":"作付けグループ")+'">'+opts.map(o => '<option value="'+esc(o[0])+'"'+(o[0]===cur?" selected":"")+'>'+esc(o[1])+'</option>').join("")+'</select>';
+  body.innerHTML = list.map(f => {
+    const t = cropTypeOf(f), plot = ricePlotOf(f);
+    return '<tr><td>'+f.no+'</td><td>'+esc(f.area)+'</td><td><b>'+esc(f.name)+'</b></td>' +
+      '<td>'+sel("ftype", f.id, CROP_TYPES.map(x=>[x,x]), t)+'</td>' +
+      '<td>'+sel("fstatus", f.id, FIELD_STATUSES.map(x=>[x,x]), statusOf(f))+'</td>' +
+      '<td>'+(t === "長ネギ" ? sel("fplot", f.id, [["","未割当"]].concat(S.plots.map(p=>[p.id, p.name||"名称未設定"])), plot ? plot.id : "") : '<span class="hint">—</span>')+'</td>' +
+      '<td>'+esc(f.crop)+(f.crop2?" ／ "+esc(f.crop2):"")+'</td><td>'+(f.m2/100).toFixed(1)+'</td></tr>';
+  }).join("") || '<tr><td colspan="8" class="empty">該当する圃場がありません</td></tr>';
+}
+async function updateField(id, patch, label){
+  if(!S.db){ toast("データベースに接続できないため保存できません"); return; }
+  const f = S.fields.find(x => x.id === id);
+  try{ await S.db.doc("fields/"+id).update(patch); toast("「"+(f?f.name:"")+"」の"+label+"を変更しました"); }
+  catch(err){ toast("変更できませんでした。通信状態を確認してください"); renderFields(); }
+}
+function resetPestForm(){ R.editPid = null; $("pestForm").reset(); $("pestSave").textContent = "登録"; $("pestCancel").hidden = true; }
+function connectReports(){
+  if(!S.db) return;
+  S.db.collection("reports").orderBy("sentAt","desc").limit(30).onSnapshot(snap => { R.history = snap.docs.map(d => ({id:d.id, ...d.data()})); renderHistory(); }, () => {});
+  S.db.collection("fields").orderBy("no","asc").limit(500).onSnapshot(snap => {
+    S.fields = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    renderFields(); renderReportMeta();
+  }, () => {});
+  S.db.collection("pesticides").orderBy("name","asc").limit(300).onSnapshot(snap => {
+    R.pesticides = snap.docs.map(d => ({id:d.id, ...d.data()}));
+    renderPesticides();
+    if(R.type === "spray" && !($("rItems") && $("rItems").contains(document.activeElement))) renderItems();
+    scheduleDraw();
+  }, () => {});
+  S.db.doc("settings/report").onSnapshot(snap => {
+    const to = snap.exists && Array.isArray(snap.data().to) && snap.data().to.length ? snap.data().to : DEFAULT_TO;
+    R.to = to.slice(0,10); if($("rTo")) $("rTo").textContent = "宛先 " + R.to.join("、");
+  }, () => {});
+}
+
+/* 起動 */
+setupReport();
+const savedTab = tryLS(()=>localStorage.getItem(LS_TAB), null);
+if(savedTab && $("panel-"+savedTab)) selectTab(savedTab); else renderAll();
+connect();
+})();
+</script>
+
+
+</body></html>
