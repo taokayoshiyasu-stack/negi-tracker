@@ -1,0 +1,33 @@
+name: 生育ステージ・作業時期について
+description: 積算気温の区切り、土寄せ・止め土寄せ・収穫開始の目安へのご意見
+title: "[生育ステージ] "
+labels: ["生育ステージ"]
+body:
+  - type: dropdown
+    id: stage
+    attributes:
+      label: 対象のステージ・作業
+      options:
+        - 定植・活着期
+        - 初期生育期（中耕・追肥①）
+        - 土寄せ①・追肥②
+        - 梅雨期（土寄せ②）
+        - 高温期（夏越し・土寄せ③）
+        - 止め土寄せ・肥大期
+        - 収穫開始期
+        - 収穫期（在圃・冬どり）
+        - 全体・その他
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 気になった点
+      description: 例）土寄せ①の700℃は早すぎる、止め土寄せ後650℃は秋には短い など
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 地域の目安・参考資料（分かる範囲で）
+      description: 日数や積算温度の目安、品種による違い、参考になる資料名など
