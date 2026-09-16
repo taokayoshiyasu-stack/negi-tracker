@@ -1,0 +1,35 @@
+name: 病害虫・気象リスクの判定について
+description: 発生しやすい気象条件の判定、対策の文章へのご意見
+title: "[病害虫] "
+labels: ["病害虫"]
+body:
+  - type: dropdown
+    id: pest
+    attributes:
+      label: 対象
+      options:
+        - さび病
+        - べと病
+        - 黒斑病・葉枯病
+        - 軟腐病
+        - 白絹病
+        - ネギアザミウマ
+        - ネギハモグリバエ
+        - 湿害・根傷み
+        - 高温障害
+        - 追加してほしい病害虫・障害
+    validations:
+      required: true
+  - type: textarea
+    id: condition
+    attributes:
+      label: 判定条件について
+      description: 例）さび病は平均気温15℃前後が中心なので22℃までは広い など
+  - type: textarea
+    id: action
+    attributes:
+      label: 対策・見回りの文章について
+  - type: input
+    id: source
+    attributes:
+      label: 参考資料（ネギ通信の号数など）
